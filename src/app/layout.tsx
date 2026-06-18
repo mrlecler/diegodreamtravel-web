@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { plusJakartaSans } from '@/lib/fonts';
+import { plusJakartaSans, skatynGator } from '@/lib/fonts';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`dark ${plusJakartaSans.variable}`}
+      className={`dark ${plusJakartaSans.variable} ${skatynGator.variable}`}
     >
       <body className="bg-[#0C1521] min-h-screen text-[#F0EDE8] antialiased">
         {children}

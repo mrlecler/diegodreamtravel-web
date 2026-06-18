@@ -1,0 +1,32 @@
+import { MessageCircle } from 'lucide-react';
+import GradientButton from '@/components/ui/GradientButton';
+
+const WA_URL = 'https://wa.me/5493624703040';
+
+export default function QuincePage() {
+  return (
+    <main className="min-h-screen bg-[#0C1521] flex flex-col items-center justify-center text-center px-6 gap-6">
+      <p className="text-xs font-medium tracking-widest uppercase text-[#F0EDE8]/40">
+        Diego Dream Travel
+      </p>
+      <h1
+        className="text-4xl sm:text-5xl md:text-6xl font-bold"
+        style={{
+          background: 'var(--grad-quince)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+        }}
+      >
+        Quinceañeras
+      </h1>
+      <p className="text-[#F0EDE8]/50 text-lg max-w-md">
+        La experiencia más especial de su vida está siendo diseñada. Próximamente.
+      </p>
+      <GradientButton href={WA_URL} className="mt-2">
+        <MessageCircle size={16} />
+        Consultá ahora por WhatsApp
+      </GradientButton>
+    </main>
+  );
+}

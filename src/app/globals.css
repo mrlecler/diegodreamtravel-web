@@ -1,26 +1,61 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ─── Tokens de marca DDT ─── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-brand-navy:   #0C1521;
+  --color-brand-orange: #FF5B00;
+  --color-brand-warm:   #F0EDE8;
+  --color-brand-coral:  #F47B45;
+  --color-brand-pink:   #E63957;
+  --color-brand-violet: #C44E92;
+  --color-brand-teal:   #42C2C2;
+
+  --color-quince-purple:  #7C3AED;
+  --color-quince-fuchsia: #C43E8A;
+  --color-quince-gold:    #F5C842;
+
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Variables CSS globales ─── */
+:root {
+  --navy:     #0C1521;
+  --orange:   #FF5B00;
+  --warm:     #F0EDE8;
+  --coral:    #F47B45;
+  --pink-ddt: #E63957;
+  --violet:   #C44E92;
+  --teal:     #42C2C2;
+
+  --grad-ddt:    linear-gradient(90deg, #F47B45 0%, #E63957 33%, #C44E92 66%, #42C2C2 100%);
+  --grad-quince: linear-gradient(135deg, #7C3AED 0%, #C43E8A 50%, #F5C842 100%);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+html, body {
+  background-color: var(--navy);
+  color: var(--warm);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ─── Utilidades custom ─── */
+.grad-ddt {
+  background: var(--grad-ddt);
+}
+
+.grad-quince {
+  background: var(--grad-quince);
+}
+
+.text-grad-ddt {
+  background: var(--grad-ddt);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-grad-quince {
+  background: var(--grad-quince);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

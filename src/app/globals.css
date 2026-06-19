@@ -59,3 +59,18 @@ html, body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* ─── Hover glows de redes sociales ─── */
+.glow-wa {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.glow-wa:hover {
+  box-shadow: 0 0 28px rgba(37,211,102,0.5);
+}
+
+.glow-ig {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.glow-ig:hover {
+  box-shadow: 0 0 24px rgba(225,48,108,0.45);
+}

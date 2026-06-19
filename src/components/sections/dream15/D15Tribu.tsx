@@ -53,19 +53,8 @@ export default function D15Tribu() {
                 maxWidth: '18ch',
               }}
             >
-              Te subís sin conocer a nadie. Bajás con{' '}
-              <em
-                style={{
-                  fontStyle: 'normal',
-                  background: 'var(--grad-d15-text)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                tu grupo
-              </em>{' '}
-              para siempre.
+              Te subís sin conocer a nadie. Bajás con tu grupo para{' '}
+              <em style={{ fontStyle: 'normal', color: '#E84393' }}>siempre</em>.
             </h2>
 
             <p
@@ -94,34 +83,55 @@ export default function D15Tribu() {
             </ul>
           </div>
 
-          {/* Visual placeholder */}
+          {/* Visual placeholder con tratamiento de diseño */}
           <div
-            className="rounded-3xl flex flex-col items-center justify-center gap-4 p-12 text-center"
+            className="relative rounded-3xl overflow-hidden flex flex-col items-end justify-end"
             style={{
-              background: '#1C0B1A',
+              minHeight: 380,
+              background: `
+                radial-gradient(60% 55% at 60% 30%, rgba(232,67,147,.45), transparent 60%),
+                radial-gradient(50% 45% at 25% 75%, rgba(148,42,142,.4), transparent 58%),
+                #1C0B1A
+              `,
               border: '1px solid rgba(240,237,232,.08)',
-              minHeight: 340,
             }}
           >
+            {/* Sparkle decorativo */}
             <div
-              className="text-[72px] leading-none"
-              style={{ fontFamily: 'var(--font-skatyn), serif', color: 'rgba(240,237,232,.12)' }}
+              className="absolute top-6 left-6 opacity-40"
+              style={{ color: '#F5C842', width: 28, height: 28, animation: 'qFloatPulse 6s ease-in-out infinite' }}
             >
-              ✦
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1.5c.4 5.2 5.3 10.1 10.5 10.5C17.3 12.4 12.4 17.3 12 22.5 11.6 17.3 6.7 12.4 1.5 12 6.7 11.6 11.6 6.7 12 1.5Z" />
+              </svg>
             </div>
-            <p
-              className="font-light"
+            <div
+              className="absolute top-10 right-10 opacity-30"
+              style={{ color: '#F472B6', width: 14, height: 14, animation: 'qStar 4.5s ease-in-out infinite 1s' }}
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1.5c.4 5.2 5.3 10.1 10.5 10.5C17.3 12.4 12.4 17.3 12 22.5 11.6 17.3 6.7 12.4 1.5 12 6.7 11.6 11.6 6.7 12 1.5Z" />
+              </svg>
+            </div>
+
+            {/* Caption */}
+            <div
+              className="m-5 rounded-2xl px-5 py-3.5"
               style={{
-                fontFamily: 'var(--font-skatyn), serif',
-                fontSize: 28,
-                color: 'rgba(240,237,232,.55)',
-                lineHeight: 1.15,
+                background: 'rgba(18,8,24,.72)',
+                backdropFilter: 'blur(12px)',
+                border: '1px solid rgba(240,237,232,.12)',
               }}
             >
-              Tu grupo.
-              <br />
-              Tu momento.
-            </p>
+              <p
+                className="text-[#F0EDE8] font-light"
+                style={{ fontFamily: 'var(--font-skatyn), serif', fontSize: 22, lineHeight: 1.15 }}
+              >
+                Tu grupo.
+                <br />
+                <span style={{ color: '#E84393' }}>Tu momento.</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>

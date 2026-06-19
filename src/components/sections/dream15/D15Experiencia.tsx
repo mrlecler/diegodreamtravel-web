@@ -1,4 +1,4 @@
-import { Sparkles, Ticket, Camera, Plane, UtensilsCrossed } from 'lucide-react';
+import { Sparkles, Ticket, Camera, Plane, UtensilsCrossed, Heart } from 'lucide-react';
 
 const CARDS = [
   {
@@ -74,17 +74,7 @@ export default function D15Experiencia() {
           }}
         >
           No es un viaje cualquiera. Es{' '}
-          <em
-            style={{
-              fontStyle: 'normal',
-              background: 'var(--grad-d15-text)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            el
-          </em>{' '}
+          <em style={{ fontStyle: 'normal', color: '#E84393' }}>el</em>{' '}
           viaje.
         </h2>
 
@@ -97,42 +87,64 @@ export default function D15Experiencia() {
           pieza.
         </p>
 
-        {/* Cards */}
+        {/* Cards — 5 en fila en desktop */}
         <div
           className="grid gap-3.5 mt-12"
-          style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(196px, 1fr))' }}
+          style={{
+            gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
+          }}
+        >
+          {/* Mobile: 2 cols, overridden by inline grid */}
+          <style>{`
+            @media (max-width: 767px) {
+              .exp-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            }
+            @media (min-width: 768px) and (max-width: 1023px) {
+              .exp-grid { grid-template-columns: repeat(3, 1fr) !important; }
+            }
+          `}</style>
+        </div>
+        <div
+          className="exp-grid grid gap-3.5 mt-12"
+          style={{
+            gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
+          }}
         >
           {CARDS.map(({ Icon, title, desc }) => (
             <div
               key={title}
-              className="rounded-[18px] p-[30px_26px] transition-all duration-[250ms] hover:-translate-y-1"
+              className="rounded-[18px] flex flex-col transition-all duration-[250ms] hover:-translate-y-1"
               style={{
                 background: '#1C0B1A',
                 border: '1px solid rgba(240,237,232,.08)',
+                padding: '24px 20px',
               }}
             >
               <div
-                className="w-12 h-12 rounded-[14px] flex items-center justify-center mb-5"
+                className="w-10 h-10 rounded-[12px] flex items-center justify-center mb-4 flex-shrink-0"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(232,67,147,.3), rgba(232,67,147,.22))',
+                  background: 'linear-gradient(135deg, rgba(232,67,147,.3), rgba(232,67,147,.18))',
                   color: '#E07AC4',
                 }}
               >
-                <Icon size={22} strokeWidth={1.8} />
+                <Icon size={19} strokeWidth={1.8} />
               </div>
-              <h3 className="text-[17px] font-bold text-[#F0EDE8] mb-2">{title}</h3>
-              <p className="text-[14px] font-light leading-[1.6] text-[rgba(240,237,232,.82)]">
+              <h3 className="text-[14px] font-bold text-[#F0EDE8] mb-1.5 leading-tight">{title}</h3>
+              <p className="text-[12.5px] font-light leading-[1.6] text-[rgba(240,237,232,.72)]">
                 {desc}
               </p>
             </div>
           ))}
         </div>
 
-        {/* Nota familia */}
+        {/* Nota familia add-on */}
         <div
-          className="mt-8 rounded-2xl px-6 py-5"
-          style={{ background: 'rgba(232,67,147,.08)', border: '1px solid rgba(232,67,147,.2)' }}
+          className="mt-8 rounded-2xl px-5 py-4 flex items-start gap-3"
+          style={{ background: 'rgba(232,67,147,.08)', border: '1px solid rgba(232,67,147,.22)' }}
         >
+          <div className="flex-shrink-0 mt-0.5" style={{ color: '#E84393' }}>
+            <Heart size={16} strokeWidth={2} fill="rgba(232,67,147,.3)" />
+          </div>
           <p className="text-[14px] font-light text-[rgba(240,237,232,.82)] leading-relaxed">
             <strong className="font-semibold text-[#F0EDE8]">
               ¿Querés que la familia te acompañe?

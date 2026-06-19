@@ -105,3 +105,29 @@ html, body {
 .glow-ig:hover {
   box-shadow: 0 0 24px rgba(225,48,108,0.45);
 }
+
+/* ─── Dream 15 · hover CTA (lift + glow) ─── */
+.d15-cta {
+  transition: transform .18s ease, box-shadow .2s ease;
+}
+.d15-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 42px -12px rgba(196,62,138,.88);
+}
+.d15-cta:active {
+  transform: scale(.97);
+}
+
+/* Nav link glass pill hover */
+.d15-nav-link {
+  border-radius: 999px;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  transition: background .2s, border-color .2s, backdrop-filter .2s;
+}
+.d15-nav-link:hover {
+  background: rgba(18,8,24,.35);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-color: rgba(240,237,232,.32);
+}

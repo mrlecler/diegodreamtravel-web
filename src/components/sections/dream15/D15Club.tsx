@@ -67,19 +67,8 @@ export default function D15Club() {
             maxWidth: '20ch',
           }}
         >
-          Reservás hoy. Pagás en cuotas. Viajás con{' '}
-          <em
-            style={{
-              fontStyle: 'normal',
-              background: 'var(--grad-d15-text)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            todo pago
-          </em>
-          .
+          Reservás hoy. Pagás en cuotas. Viajás con todo{' '}
+          <em style={{ fontStyle: 'normal', color: '#E84393' }}>pago</em>.
         </h2>
 
         <p
@@ -103,7 +92,7 @@ export default function D15Club() {
           {STEPS.map(({ n, title, desc }) => (
             <div
               key={n}
-              className="rounded-[18px] p-7 flex flex-col gap-3"
+              className="rounded-[18px] p-7 flex flex-col gap-3 transition-all duration-[250ms] hover:-translate-y-1"
               style={{
                 background: '#1C0B1A',
                 border: '1px solid rgba(240,237,232,.08)',
@@ -135,7 +124,7 @@ export default function D15Club() {
         <div className="mt-10 flex flex-wrap items-center gap-4">
           <a
             href="#form"
-            className="inline-flex items-center gap-2 text-white font-bold rounded-full no-underline"
+            className="d15-cta inline-flex items-center gap-2 text-white font-bold rounded-full no-underline"
             style={{
               fontSize: 14,
               padding: '14px 28px',

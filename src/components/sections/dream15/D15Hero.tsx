@@ -24,23 +24,22 @@ const ARROW = (
   </svg>
 );
 
-type Sp = { top: string; left?: string; right?: string; color: string; size: number; anim: string; delay?: string };
+type Sp = { top: string; left?: string; right?: string; color: string; size: number; anim: string };
 
 const SPARKLES: Sp[] = [
-  { top: '14%', left: '7%',  color: '#F5C842', size: 30, anim: 'qFloatPulse 5.5s ease-in-out infinite' },
+  { top: '14%', left: '7%',   color: '#F5C842', size: 30, anim: 'qFloatPulse 5.5s ease-in-out infinite' },
   { top: '10%', right: '18%', color: '#F472B6', size: 20, anim: 'qFloatPulse 6.8s ease-in-out infinite .4s' },
-  { top: '38%', left: '4%',  color: '#E84393', size: 14, anim: 'qFloatPulse 7s ease-in-out infinite 1.1s' },
-  { top: '28%', left: '52%', color: '#F9A8D4', size: 16, anim: 'qFloatPulse 8s ease-in-out infinite .7s' },
-  { top: '6%',  right: '9%', color: '#FDE68A', size: 12, anim: 'qStar 4.8s ease-in-out infinite 2s' },
-  { top: '54%', right: '8%', color: '#E84393', size: 22, anim: 'qFloatPulse 7s ease-in-out infinite .3s' },
-  { top: '68%', left: '14%', color: '#F472B6', size: 10, anim: 'qStar 9s ease-in-out infinite 1.6s' },
-  { top: '45%', right: '22%',color: '#F5C842', size: 13, anim: 'qStar 6s ease-in-out infinite 2.5s' },
-  // glitter
-  { top: '16%', left: '44%', color: '#FDE68A', size: 5,  anim: 'qGlitter 4.2s ease-in-out infinite 1.3s' },
-  { top: '24%', right: '31%',color: '#F472B6', size: 6,  anim: 'qGlitter 5s ease-in-out infinite .8s' },
-  { top: '40%', right: '36%',color: '#FDE68A', size: 4,  anim: 'qGlitter 4.5s ease-in-out infinite .5s' },
-  { top: '57%', right: '27%',color: '#E84393', size: 5,  anim: 'qGlitter 3.5s ease-in-out infinite 1.7s' },
-  { top: '73%', right: '42%',color: '#F9A8D4', size: 5,  anim: 'qGlitter 3.6s ease-in-out infinite 2.3s' },
+  { top: '38%', left: '4%',   color: '#E84393', size: 14, anim: 'qFloatPulse 7s ease-in-out infinite 1.1s' },
+  { top: '28%', left: '52%',  color: '#F9A8D4', size: 16, anim: 'qFloatPulse 8s ease-in-out infinite .7s' },
+  { top: '6%',  right: '9%',  color: '#FDE68A', size: 12, anim: 'qStar 4.8s ease-in-out infinite 2s' },
+  { top: '54%', right: '8%',  color: '#E84393', size: 22, anim: 'qFloatPulse 7s ease-in-out infinite .3s' },
+  { top: '68%', left: '14%',  color: '#F472B6', size: 10, anim: 'qStar 9s ease-in-out infinite 1.6s' },
+  { top: '45%', right: '22%', color: '#F5C842', size: 13, anim: 'qStar 6s ease-in-out infinite 2.5s' },
+  { top: '16%', left: '44%',  color: '#FDE68A', size: 5,  anim: 'qGlitter 4.2s ease-in-out infinite 1.3s' },
+  { top: '24%', right: '31%', color: '#F472B6', size: 6,  anim: 'qGlitter 5s ease-in-out infinite .8s' },
+  { top: '40%', right: '36%', color: '#FDE68A', size: 4,  anim: 'qGlitter 4.5s ease-in-out infinite .5s' },
+  { top: '57%', right: '27%', color: '#E84393', size: 5,  anim: 'qGlitter 3.5s ease-in-out infinite 1.7s' },
+  { top: '73%', right: '42%', color: '#F9A8D4', size: 5,  anim: 'qGlitter 3.6s ease-in-out infinite 2.3s' },
 ];
 
 export default function D15Hero() {
@@ -50,41 +49,38 @@ export default function D15Hero() {
       className="relative overflow-hidden flex flex-col"
       style={{ minHeight: '100svh' }}
     >
-      {/* Fondo con gradientes radiales (sin foto) */}
+      {/* Fondo radial rico — placeholder hasta la foto real */}
       <div
         className="absolute inset-0 z-0"
         style={{
           background: `
-            radial-gradient(62% 55% at 70% 22%, rgba(232,67,147,.62), transparent 60%),
-            radial-gradient(48% 45% at 18% 75%, rgba(196,62,138,.5), transparent 58%),
-            radial-gradient(55% 50% at 48% 48%, rgba(232,67,147,.22), transparent 62%),
-            radial-gradient(38% 38% at 88% 82%, rgba(232,67,147,.35), transparent 58%),
-            radial-gradient(30% 30% at 55% 92%, rgba(245,200,66,.22), transparent 55%),
+            radial-gradient(70% 60% at 72% 18%, rgba(232,67,147,.72), transparent 58%),
+            radial-gradient(52% 48% at 20% 78%, rgba(196,62,138,.55), transparent 55%),
+            radial-gradient(48% 44% at 48% 48%, rgba(232,67,147,.25), transparent 60%),
+            radial-gradient(35% 38% at 88% 82%, rgba(232,67,147,.38), transparent 58%),
+            radial-gradient(28% 30% at 55% 92%, rgba(245,200,66,.25), transparent 52%),
+            radial-gradient(60% 50% at 10% 10%, rgba(148,42,142,.35), transparent 60%),
             #120818
           `,
         }}
       />
-      {/* Overlay degradado bottom */}
+      {/* Overlay bottom fade */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            'linear-gradient(to bottom, rgba(18,8,24,.18) 0%, rgba(18,8,24,0) 30%, rgba(18,8,24,.35) 68%, rgba(18,8,24,.97) 100%)',
+            'linear-gradient(to bottom, rgba(18,8,24,.12) 0%, rgba(18,8,24,0) 28%, rgba(18,8,24,.4) 65%, rgba(18,8,24,.98) 100%)',
         }}
       />
 
-      {/* Brillitos flotantes */}
+      {/* Sparkles flotantes */}
       {SPARKLES.map((s, i) => (
         <div
           key={i}
           className="absolute z-[2] pointer-events-none"
           style={{
-            top: s.top,
-            left: s.left,
-            right: s.right,
-            color: s.color,
-            width: s.size,
-            height: s.size,
+            top: s.top, left: s.left, right: s.right,
+            color: s.color, width: s.size, height: s.size,
             animation: s.anim,
           }}
         >
@@ -92,13 +88,13 @@ export default function D15Hero() {
         </div>
       ))}
 
-      {/* Contenido hero */}
+      {/* Contenido */}
       <div
         className="relative z-[3] flex-1 flex flex-col justify-end w-full mx-auto px-6"
         style={{
           maxWidth: 'min(1080px, calc(100% - 48px))',
           paddingTop: 120,
-          paddingBottom: 64,
+          paddingBottom: 72,
         }}
       >
         <h1
@@ -109,22 +105,19 @@ export default function D15Hero() {
             fontSize: 'clamp(52px, 10.5vw, 138px)',
             lineHeight: 0.92,
             letterSpacing: 1,
-            textShadow: '0 2px 28px rgba(232,67,147,.22)',
+            textShadow: '0 2px 32px rgba(232,67,147,.28)',
             animation: 'qFadeUp .7s ease .12s both',
             maxWidth: '14ch',
           }}
         >
-          Tus 15 no se festejan.{' '}
+          Tus 15 no se festejan. Se{' '}
           <em
             style={{
               fontStyle: 'normal',
-              background: 'var(--grad-d15-text)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              color: '#E84393',
             }}
           >
-            Se viajan
+            viajan
           </em>
           .
         </h1>
@@ -151,14 +144,13 @@ export default function D15Hero() {
         >
           <a
             href="#form"
-            className="inline-flex items-center gap-2 text-white font-bold rounded-full no-underline"
+            className="d15-cta inline-flex items-center gap-2 text-white font-bold rounded-full no-underline"
             style={{
               fontSize: 14,
               letterSpacing: '.2px',
               padding: '16px 30px',
               background: 'var(--grad-d15)',
               boxShadow: '0 14px 34px -10px rgba(196,62,138,.8)',
-              transition: 'transform .18s, box-shadow .2s',
             }}
           >
             Quiero sumarme

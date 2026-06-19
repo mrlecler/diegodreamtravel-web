@@ -12,7 +12,7 @@ export default function D15CTAClose() {
       className="relative overflow-hidden"
       style={{
         background: `
-          radial-gradient(55% 50% at 50% 50%, rgba(232,67,147,.18), transparent 70%),
+          radial-gradient(55% 50% at 50% 50%, rgba(232,67,147,.2), transparent 70%),
           #120818
         `,
         padding: 'clamp(80px,12vw,140px) 0',
@@ -24,10 +24,10 @@ export default function D15CTAClose() {
           transition: box-shadow .2s ease, transform .18s ease;
         }
         .btn-wa-d15:hover {
-          box-shadow: 0 0 36px rgba(37,211,102,.55);
-          transform: translateY(-1px);
+          box-shadow: 0 0 36px rgba(37,211,102,.6);
+          transform: translateY(-2px);
         }
-        .btn-wa-d15:active { transform: scale(.98); }
+        .btn-wa-d15:active { transform: scale(.97); }
       `}</style>
 
       <div className="mx-auto px-6 text-center" style={{ maxWidth: 'min(680px, calc(100% - 48px))' }}>
@@ -42,24 +42,14 @@ export default function D15CTAClose() {
           }}
         >
           No vendo paquetes. Construyo{' '}
-          <em
-            style={{
-              fontStyle: 'normal',
-              background: 'var(--grad-d15-text)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            recuerdos
-          </em>{' '}
+          <em style={{ fontStyle: 'normal', color: '#E84393' }}>recuerdos</em>{' '}
           que duran para siempre.
         </h2>
 
         <div className="flex flex-wrap justify-center gap-4 mt-10">
           <a
             href="#form"
-            className="inline-flex items-center gap-2 rounded-full text-white font-bold no-underline"
+            className="d15-cta inline-flex items-center gap-2 rounded-full text-white font-bold no-underline"
             style={{
               fontSize: 14,
               padding: '16px 32px',

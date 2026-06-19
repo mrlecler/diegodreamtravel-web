@@ -40,6 +40,32 @@ const CARDS = [
 
 const EYEBROW_LINE = <span className="block w-7 h-[1.5px]" style={{ background: '#E84393' }} />;
 
+const CARD_STYLE = {
+  background: '#1C0B1A',
+  border: '1px solid rgba(240,237,232,.08)',
+};
+
+function Card({ Icon, title, desc }: { Icon: typeof Award; title: string; desc: string }) {
+  return (
+    <div
+      className="rounded-[18px] p-[26px_22px] transition-all duration-[250ms] hover:-translate-y-1"
+      style={CARD_STYLE}
+    >
+      <div
+        className="w-11 h-11 rounded-[12px] flex items-center justify-center mb-4"
+        style={{
+          background: 'linear-gradient(135deg, rgba(232,67,147,.3), rgba(232,67,147,.18))',
+          color: '#E07AC4',
+        }}
+      >
+        <Icon size={20} strokeWidth={1.8} />
+      </div>
+      <h3 className="text-[15px] font-bold text-[#F0EDE8] mb-1.5">{title}</h3>
+      <p className="text-[13px] font-light leading-[1.6] text-[rgba(240,237,232,.75)]">{desc}</p>
+    </div>
+  );
+}
+
 export default function D15Padres() {
   return (
     <section
@@ -83,18 +109,8 @@ export default function D15Padres() {
             maxWidth: '22ch',
           }}
         >
-          Ellos viven la aventura.{' '}
-          <em
-            style={{
-              fontStyle: 'normal',
-              background: 'var(--grad-d15-text)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            Vos te quedás tranquilo.
-          </em>
+          Ellos viven la aventura. Vos te quedás{' '}
+          <em style={{ fontStyle: 'normal', color: '#E84393' }}>tranquilo</em>.
         </h2>
 
         <p
@@ -106,54 +122,41 @@ export default function D15Padres() {
           disponible antes, durante y después.
         </p>
 
-        {/* Cards */}
-        <div
-          className="grid gap-3.5 mt-12"
-          style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}
-        >
-          {CARDS.map(({ Icon, title, desc }) => (
-            <div
-              key={title}
-              className="rounded-[18px] p-[28px_24px] transition-all duration-[250ms] hover:-translate-y-1"
-              style={{
-                background: '#1C0B1A',
-                border: '1px solid rgba(240,237,232,.08)',
-              }}
-            >
-              <div
-                className="w-11 h-11 rounded-[12px] flex items-center justify-center mb-4"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(232,67,147,.3), rgba(232,67,147,.22))',
-                  color: '#E07AC4',
-                }}
-              >
-                <Icon size={20} strokeWidth={1.8} />
-              </div>
-              <h3 className="text-[16px] font-bold text-[#F0EDE8] mb-2">{title}</h3>
-              <p className="text-[13.5px] font-light leading-[1.6] text-[rgba(240,237,232,.82)]">
-                {desc}
-              </p>
-            </div>
-          ))}
+        {/* Cards: 4 arriba + 3 centradas abajo */}
+        <div className="mt-12 flex flex-col gap-3.5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
+            {CARDS.slice(0, 4).map(({ Icon, title, desc }) => (
+              <Card key={title} Icon={Icon} title={title} desc={desc} />
+            ))}
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3.5 md:max-w-[75%] md:mx-auto w-full">
+            {CARDS.slice(4).map(({ Icon, title, desc }) => (
+              <Card key={title} Icon={Icon} title={title} desc={desc} />
+            ))}
+          </div>
         </div>
 
         {/* Trabajo junto a */}
         <div className="mt-10 flex items-center gap-4 flex-wrap">
-          <span className="text-[12px] font-medium text-[rgba(240,237,232,.4)] uppercase tracking-[2px]">
+          <span className="text-[11.5px] font-semibold text-[rgba(240,237,232,.35)] uppercase tracking-[2.5px]">
             Trabajo junto a
           </span>
-          <div className="flex gap-4 flex-wrap">
-            {['Team Livi Travel', 'Disney College of Knowledge', 'Universal Preferred'].map((l) => (
+          <div className="flex gap-3 flex-wrap items-center">
+            {[
+              { label: 'Walt Disney World', color: 'rgba(0,107,182,.7)' },
+              { label: 'Universal Orlando', color: 'rgba(0,130,57,.6)' },
+              { label: 'PAX', color: 'rgba(232,67,147,.5)' },
+            ].map((l) => (
               <span
-                key={l}
-                className="text-[12px] font-semibold px-3 py-1.5 rounded-full"
+                key={l.label}
+                className="text-[12px] font-semibold px-3.5 py-1.5 rounded-full"
                 style={{
-                  background: 'rgba(240,237,232,.06)',
-                  border: '1px solid rgba(240,237,232,.12)',
-                  color: 'rgba(240,237,232,.55)',
+                  background: 'rgba(240,237,232,.05)',
+                  border: `1px solid ${l.color}`,
+                  color: 'rgba(240,237,232,.65)',
                 }}
               >
-                {l}
+                {l.label}
               </span>
             ))}
           </div>

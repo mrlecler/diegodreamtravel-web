@@ -6,12 +6,18 @@ import { Menu, X } from 'lucide-react';
 const WA = 'https://wa.me/5493624703040?text=Hola%20Diego!%20Quiero%20info%20del%20viaje%20de%20quince.';
 const IG = 'https://instagram.com/diego.dreamtravel';
 
-const LINKS = [
-  { href: '#experiencia', label: 'La experiencia' },
-  { href: '#tribu',       label: 'Tu tribu' },
-  { href: '#padres',      label: 'Para mamá y papá' },
-  { href: '#club',        label: 'Club Dream 15' },
-];
+const LOGO_MARK = (
+  <svg viewBox="0 0 28 28" width="24" height="24" aria-hidden="true">
+    <defs>
+      <linearGradient id="ddt-nav-g" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#F472B6" /><stop offset=".5" stopColor="#E84393" /><stop offset="1" stopColor="#F5C842" />
+      </linearGradient>
+    </defs>
+    <path d="M14 1 L27 14 L14 27 L1 14 Z" fill="url(#ddt-nav-g)" />
+    <path d="M14 7 L21 14 L14 21 L7 14 Z" fill="rgba(18,8,24,.78)" />
+    <path d="M14 11 L17 14 L14 17 L11 14 Z" fill="url(#ddt-nav-g)" />
+  </svg>
+);
 
 const WA_ICON = (
   <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor">
@@ -25,6 +31,13 @@ const IG_ICON = (
   </svg>
 );
 
+const LINKS = [
+  { href: '#experiencia', label: 'La experiencia' },
+  { href: '#tribu',       label: 'Tu tribu' },
+  { href: '#padres',      label: 'Para mamá y papá' },
+  { href: '#club',        label: 'Club Dream 15' },
+];
+
 export default function D15Nav() {
   const [open, setOpen] = useState(false);
 
@@ -32,28 +45,30 @@ export default function D15Nav() {
     <>
       <div className="fixed top-0 left-1/2 -translate-x-1/2 z-[120] w-[min(1080px,calc(100%-32px))] mt-3.5">
         <nav
-          className="flex items-center gap-4 rounded-full px-6 py-2.5"
+          className="flex items-center gap-3 rounded-full px-5 py-2"
           style={{
             background: 'rgba(30,6,22,.82)',
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
-            border: '1px solid rgba(232,67,147,.38)',
-            boxShadow: '0 18px 50px -20px rgba(232,67,147,.72)',
+            border: '1px solid rgba(240,237,232,.32)',
+            boxShadow: '0 18px 50px -20px rgba(232,67,147,.55)',
           }}
         >
-          {/* Logo */}
-          <a href="#top" className="flex-shrink-0 text-[#F0EDE8] no-underline leading-none">
-            <span style={{ fontFamily: 'var(--font-skatyn), serif', fontSize: 20 }}>DDT</span>
+          {/* Logo isotipo + nombre */}
+          <a href="#top" className="flex-shrink-0 flex items-center gap-2 no-underline leading-none">
+            {LOGO_MARK}
+            <span className="text-[#F0EDE8]" style={{ fontFamily: 'var(--font-skatyn), serif', fontSize: 16 }}>
+              Diego
+            </span>
           </a>
 
           {/* Desktop links */}
-          <div className="hidden md:flex flex-1 justify-center items-center gap-0.5">
+          <div className="hidden md:flex flex-1 justify-center items-center">
             {LINKS.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className="text-[#F0EDE8] text-[13.5px] font-medium px-3.5 py-2 rounded-full transition-colors no-underline hover:text-[#F5C842]"
-                style={{ transition: 'color .2s, background .2s' }}
+                className="d15-nav-link text-[#F0EDE8] text-[13px] font-medium no-underline"
               >
                 {l.label}
               </a>
@@ -67,7 +82,7 @@ export default function D15Nav() {
               target="_blank"
               rel="noopener"
               aria-label="WhatsApp"
-              className="hidden md:flex w-9 h-9 items-center justify-center rounded-full text-[#F0EDE8] transition-all no-underline glow-wa"
+              className="hidden md:flex w-8 h-8 items-center justify-center rounded-full text-[#F0EDE8] no-underline glow-wa"
             >
               {WA_ICON}
             </a>
@@ -76,13 +91,13 @@ export default function D15Nav() {
               target="_blank"
               rel="noopener"
               aria-label="Instagram"
-              className="hidden md:flex w-9 h-9 items-center justify-center rounded-full text-[#F0EDE8] transition-all no-underline glow-ig"
+              className="hidden md:flex w-8 h-8 items-center justify-center rounded-full text-[#F0EDE8] no-underline glow-ig"
             >
               {IG_ICON}
             </a>
             <a
               href="#form"
-              className="hidden md:flex items-center text-white text-[12.5px] font-bold px-5 py-2.5 rounded-full no-underline"
+              className="hidden md:flex items-center text-white text-[12.5px] font-bold px-5 py-2.5 rounded-full no-underline d15-cta"
               style={{
                 background: 'var(--grad-d15)',
                 boxShadow: '0 8px 22px -8px rgba(196,62,138,.7)',
@@ -133,7 +148,7 @@ export default function D15Nav() {
           <a
             href="#form"
             onClick={() => setOpen(false)}
-            className="mt-4 text-white text-[13px] font-bold px-8 py-3.5 rounded-full no-underline"
+            className="mt-4 text-white text-[13px] font-bold px-8 py-3.5 rounded-full no-underline d15-cta"
             style={{ background: 'var(--grad-d15)', boxShadow: '0 10px 26px -8px rgba(196,62,138,.7)' }}
           >
             Quiero sumarme

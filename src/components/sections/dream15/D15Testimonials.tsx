@@ -68,18 +68,8 @@ export default function D15Testimonials() {
             maxWidth: '22ch',
           }}
         >
-          No lo decimos nosotros. Lo dicen{' '}
-          <em
-            style={{
-              fontStyle: 'normal',
-              background: 'var(--grad-d15-text)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            quienes viajaron
-          </em>{' '}
+          No lo decimos nosotros. Lo dicen quienes{' '}
+          <em style={{ fontStyle: 'normal', color: '#E84393' }}>viajaron</em>{' '}
           con Diego.
         </h2>
 

@@ -69,7 +69,7 @@ export default function D15Testimonials() {
           }}
         >
           No lo decimos nosotros. Lo dicen quienes{' '}
-          <em style={{ fontStyle: 'normal', color: '#E84393' }}>viajaron</em>{' '}
+          <em className="d15-accent" style={{ fontStyle: 'normal' }}>viajaron</em>{' '}
           con Diego.
         </h2>
 

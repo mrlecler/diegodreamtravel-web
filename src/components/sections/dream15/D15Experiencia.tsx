@@ -74,7 +74,7 @@ export default function D15Experiencia() {
           }}
         >
           No es un viaje cualquiera. Es{' '}
-          <em style={{ fontStyle: 'normal', color: '#E84393' }}>el</em>{' '}
+          <em className="d15-accent" style={{ fontStyle: 'normal' }}>el</em>{' '}
           viaje.
         </h2>
 

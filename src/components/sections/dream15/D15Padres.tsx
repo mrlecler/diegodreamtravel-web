@@ -110,7 +110,7 @@ export default function D15Padres() {
           }}
         >
           Ellos viven la aventura. Vos te quedás{' '}
-          <em style={{ fontStyle: 'normal', color: '#E84393' }}>tranquilo</em>.
+          <em className="d15-accent" style={{ fontStyle: 'normal' }}>tranquilo</em>.
         </h2>
 
         <p

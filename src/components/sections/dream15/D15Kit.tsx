@@ -42,7 +42,7 @@ export default function D15Kit() {
             }}
           >
             Arrancás con todo{' '}
-            <em style={{ fontStyle: 'normal', color: '#E84393' }}>puesto</em>.
+            <em className="d15-accent" style={{ fontStyle: 'normal' }}>puesto</em>.
           </h2>
 
           <p

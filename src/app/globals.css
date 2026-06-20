@@ -131,3 +131,22 @@ html, body {
   backdrop-filter: blur(6px);
   border-color: rgba(240,237,232,.32);
 }
+/* Nav links — globo glass en hover */
+.d15-nav-link { padding: 9px 16px; border-radius: 999px; border: 1px solid transparent; transition: all .2s ease; }
+.d15-nav-link:hover {
+  background: rgba(18,8,24,.35);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  border-color: rgba(240,237,232,.32);
+}
+/* CTAs — lift en hover */
+.d15-cta { transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease; }
+.d15-cta:hover { transform: translateY(-2px); box-shadow: 0 14px 32px -8px rgba(196,62,138,.85); }
+
+/* Palabra acentuada con degradé quince */
+.d15-accent {
+  background: var(--grad-d15);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}

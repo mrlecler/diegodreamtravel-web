@@ -54,7 +54,7 @@ export default function D15Tribu() {
               }}
             >
               Te subís sin conocer a nadie. Bajás con tu grupo para{' '}
-              <em style={{ fontStyle: 'normal', color: '#E84393' }}>siempre</em>.
+              <em className="d15-accent" style={{ fontStyle: 'normal' }}>siempre</em>.
             </h2>
 
             <p

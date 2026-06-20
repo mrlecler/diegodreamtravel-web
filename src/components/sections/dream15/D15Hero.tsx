@@ -111,12 +111,7 @@ export default function D15Hero() {
           }}
         >
           Tus 15 no se festejan. Se{' '}
-          <em
-            style={{
-              fontStyle: 'normal',
-              color: '#E84393',
-            }}
-          >
+          <em className="d15-accent" style={{ fontStyle: 'normal' }}>
             viajan
           </em>
           .

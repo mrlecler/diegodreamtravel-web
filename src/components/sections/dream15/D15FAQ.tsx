@@ -76,13 +76,8 @@ export default function D15FAQ() {
         >
           Lo que más nos{' '}
           <em
-            style={{
-              fontStyle: 'normal',
-              background: 'var(--grad-d15-text)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
+            className="d15-accent"
+            style={{ fontStyle: 'normal' }}
           >
             preguntan
           </em>

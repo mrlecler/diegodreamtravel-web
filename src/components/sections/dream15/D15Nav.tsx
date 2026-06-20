@@ -6,18 +6,6 @@ import { Menu, X } from 'lucide-react';
 const WA = 'https://wa.me/5493624703040?text=Hola%20Diego!%20Quiero%20info%20del%20viaje%20de%20quince.';
 const IG = 'https://instagram.com/diego.dreamtravel';
 
-const LOGO_MARK = (
-  <svg viewBox="0 0 28 28" width="24" height="24" aria-hidden="true">
-    <defs>
-      <linearGradient id="ddt-nav-g" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#F472B6" /><stop offset=".5" stopColor="#E84393" /><stop offset="1" stopColor="#F5C842" />
-      </linearGradient>
-    </defs>
-    <path d="M14 1 L27 14 L14 27 L1 14 Z" fill="url(#ddt-nav-g)" />
-    <path d="M14 7 L21 14 L14 21 L7 14 Z" fill="rgba(18,8,24,.78)" />
-    <path d="M14 11 L17 14 L14 17 L11 14 Z" fill="url(#ddt-nav-g)" />
-  </svg>
-);
 
 const WA_ICON = (
   <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor">
@@ -54,12 +42,10 @@ export default function D15Nav() {
             boxShadow: '0 18px 50px -20px rgba(232,67,147,.55)',
           }}
         >
-          {/* Logo isotipo + nombre */}
-          <a href="#top" className="flex-shrink-0 flex items-center gap-2 no-underline leading-none">
-            {LOGO_MARK}
-            <span className="text-[#F0EDE8]" style={{ fontFamily: 'var(--font-skatyn), serif', fontSize: 16 }}>
-              Diego
-            </span>
+          {/* Logo */}
+          <a href="#top" className="flex-shrink-0 flex items-center no-underline leading-none">
+            <img src="/logo-ddt-20.svg" alt="Diego Dream Travel" className="hidden md:block" style={{ height: 30, width: 'auto' }} />
+            <img src="/logo-ddt-22.svg" alt="Diego Dream Travel" className="block md:hidden" style={{ height: 26, width: 'auto' }} />
           </a>
 
           {/* Desktop links */}

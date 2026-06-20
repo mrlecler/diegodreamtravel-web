@@ -32,6 +32,7 @@ export const metadata: Metadata = {
     description:
       'El viaje grupal a Orlando para los que cumplen 15. Disney, Universal y tu grupo.',
   },
+  icons: { icon: '/favicon.png' },
 };
 
 export default function Dream15Page() {

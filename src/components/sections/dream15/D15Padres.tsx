@@ -141,24 +141,10 @@ export default function D15Padres() {
           <span className="text-[11.5px] font-semibold text-[rgba(240,237,232,.35)] uppercase tracking-[2.5px]">
             Trabajo junto a
           </span>
-          <div className="flex gap-3 flex-wrap items-center">
-            {[
-              { label: 'Walt Disney World', color: 'rgba(0,107,182,.7)' },
-              { label: 'Universal Orlando', color: 'rgba(0,130,57,.6)' },
-              { label: 'PAX', color: 'rgba(232,67,147,.5)' },
-            ].map((l) => (
-              <span
-                key={l.label}
-                className="text-[12px] font-semibold px-3.5 py-1.5 rounded-full"
-                style={{
-                  background: 'rgba(240,237,232,.05)',
-                  border: `1px solid ${l.color}`,
-                  color: 'rgba(240,237,232,.65)',
-                }}
-              >
-                {l.label}
-              </span>
-            ))}
+          <div className="flex gap-8 md:gap-10 flex-wrap items-center">
+            <img src="/disney-wdw.png" alt="Walt Disney World" style={{ height: 36, width: 'auto', opacity: .8, filter: 'brightness(0) invert(1)' }} />
+            <img src="/universal-orlando.png" alt="Universal Orlando" style={{ height: 32, width: 'auto', opacity: .8, filter: 'brightness(0) invert(1)' }} />
+            <img src="/pax.png" alt="PAX Asistencia al viajero" style={{ height: 28, width: 'auto', opacity: .8, filter: 'brightness(0) invert(1)' }} />
           </div>
         </div>
       </div>

@@ -1,8 +1,8 @@
-import { Sparkles, Ticket, Camera, Plane, UtensilsCrossed, Heart } from 'lucide-react';
+import { MagicWand, Ticket, Camera, AirplaneTilt, ForkKnife, Heart } from '@phosphor-icons/react/dist/ssr';
 
 const CARDS = [
   {
-    Icon: Sparkles,
+    Icon: MagicWand,
     title: 'Disney & Universal',
     desc: 'Los parques completos, los shows, los castillos y cada personaje. El escenario más mágico del mundo.',
   },
@@ -17,12 +17,12 @@ const CARDS = [
     desc: 'El momento, tu grupo y mil historias entrando. Recuerdos que vas a mirar el resto de tu vida.',
   },
   {
-    Icon: Plane,
+    Icon: AirplaneTilt,
     title: 'De punta a punta',
     desc: 'Vuelos, hotel, traslados y cada detalle coordinado. Salís de casa y ya está todo pensado.',
   },
   {
-    Icon: UtensilsCrossed,
+    Icon: ForkKnife,
     title: 'Cena de bienvenida',
     desc: 'El viaje arranca con una cena especial en un lugar icónico. Hard Rock o Planet Hollywood. El grupo se conoce y todo empieza a lo grande.',
   },
@@ -121,13 +121,20 @@ export default function D15Experiencia() {
               }}
             >
               <div
-                className="w-12 h-12 rounded-[14px] flex items-center justify-center mb-4 flex-shrink-0"
+                className="mb-4 flex-shrink-0"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(232,67,147,.3), rgba(232,67,147,.18))',
-                  color: '#E07AC4',
+                  width: 48, height: 48, borderRadius: 14,
+                  background: 'var(--grad-d15)',
+                  padding: 1.5,
+                  boxShadow: '0 10px 26px -12px rgba(196,62,138,.55)',
                 }}
               >
-                <Icon size={19} strokeWidth={1.8} />
+                <div
+                  className="w-full h-full flex items-center justify-center"
+                  style={{ borderRadius: 12.5, background: '#150813', color: '#E879C0' }}
+                >
+                  <Icon size={23} weight="duotone" />
+                </div>
               </div>
               <h3 className="text-[14px] font-bold text-[#F0EDE8] mb-1.5 leading-tight">{title}</h3>
               <p className="text-[12.5px] font-light leading-[1.6] text-[rgba(240,237,232,.72)]">
@@ -143,7 +150,7 @@ export default function D15Experiencia() {
           style={{ background: 'rgba(245,200,66,.07)', border: '1px solid rgba(245,200,66,.22)' }}
         >
           <div className="flex-shrink-0 mt-0.5" style={{ color: '#F5C842' }}>
-            <Heart size={16} strokeWidth={2} fill="rgba(245,200,66,.3)" />
+            <Heart size={18} weight="duotone" />
           </div>
           <p className="text-[14px] font-light text-[rgba(245,200,66,.85)] leading-relaxed">
             <strong className="font-semibold text-[rgba(245,200,66,.95)]">

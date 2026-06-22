@@ -83,19 +83,34 @@ export default function D15Tribu() {
             </ul>
           </div>
 
-          {/* Visual placeholder con tratamiento de diseño */}
+          {/* Visual — fotos del grupo con crossfade */}
           <div
             className="relative rounded-3xl overflow-hidden flex flex-col items-end justify-end"
             style={{
               minHeight: 380,
-              background: `
-                radial-gradient(60% 55% at 60% 30%, rgba(232,67,147,.45), transparent 60%),
-                radial-gradient(50% 45% at 25% 75%, rgba(148,42,142,.4), transparent 58%),
-                #1C0B1A
-              `,
+              background: '#1C0B1A',
               border: '1px solid rgba(240,237,232,.08)',
             }}
           >
+            {/* Fotos del grupo — crossfade entre las 4 (Disney + Universal) */}
+            {['/wdw03.webp', '/uor01.avif', '/wdw04.webp', '/uor02.avif'].map((src, i) => (
+              <img key={src} src={src} alt="" aria-hidden
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ opacity: 0, animation: 'd15TribuFade 28s ease-in-out infinite', animationDelay: `${i * 7}s` }} />
+            ))}
+            {/* Oscurecido para que el caption se lea */}
+            <div className="absolute inset-0 pointer-events-none" style={{
+              background: 'linear-gradient(to top, rgba(18,8,24,.72) 0%, rgba(18,8,24,.06) 45%, rgba(18,8,24,.12) 100%)',
+            }} />
+            <style>{`
+              @keyframes d15TribuFade {
+                0% { opacity: 0; }
+                6% { opacity: 1; }
+                25% { opacity: 1; }
+                31% { opacity: 0; }
+                100% { opacity: 0; }
+              }
+            `}</style>
             {/* Sparkle decorativo */}
             <div
               className="absolute top-6 left-6 opacity-40"

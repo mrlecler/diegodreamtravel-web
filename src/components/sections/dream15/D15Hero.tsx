@@ -49,29 +49,27 @@ export default function D15Hero() {
       className="relative overflow-hidden flex flex-col"
       style={{ minHeight: '100svh' }}
     >
-      {/* Fondo radial rico — placeholder hasta la foto real */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          background: `
-            radial-gradient(70% 60% at 72% 18%, rgba(232,67,147,.72), transparent 58%),
-            radial-gradient(52% 48% at 20% 78%, rgba(196,62,138,.55), transparent 55%),
-            radial-gradient(48% 44% at 48% 48%, rgba(232,67,147,.25), transparent 60%),
-            radial-gradient(35% 38% at 88% 82%, rgba(232,67,147,.38), transparent 58%),
-            radial-gradient(28% 30% at 55% 92%, rgba(245,200,66,.25), transparent 52%),
-            radial-gradient(60% 50% at 10% 10%, rgba(148,42,142,.35), transparent 60%),
-            #120818
-          `,
-        }}
-      />
-      {/* Overlay bottom fade */}
-      <div
-        className="absolute inset-0 z-[1] pointer-events-none"
-        style={{
-          background:
-            'linear-gradient(to bottom, rgba(18,8,24,.12) 0%, rgba(18,8,24,0) 28%, rgba(18,8,24,.4) 65%, rgba(18,8,24,.98) 100%)',
-        }}
-      />
+      {/* Fotos de fondo con crossfade lento (wdw01 <-> wdw02) */}
+      <div className="absolute inset-0 z-0" style={{ background: '#120818' }}>
+        <img src="/wdw01.jpg" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
+        <img src="/wdw02.webp" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover"
+          style={{ animation: 'd15HeroFade 16s ease-in-out infinite' }} />
+      </div>
+      {/* Tinte de marca + oscurecido para legibilidad del texto */}
+      <div className="absolute inset-0 z-[1] pointer-events-none" style={{
+        background: `
+          radial-gradient(70% 60% at 72% 18%, rgba(232,67,147,.34), transparent 60%),
+          radial-gradient(55% 50% at 12% 88%, rgba(148,42,142,.30), transparent 60%),
+          linear-gradient(to bottom, rgba(18,8,24,.40) 0%, rgba(18,8,24,.12) 26%, rgba(18,8,24,.52) 60%, rgba(18,8,24,.97) 100%)
+        `,
+      }} />
+      <style>{`
+        @keyframes d15HeroFade {
+          0%, 44% { opacity: 0; }
+          54%, 94% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+      `}</style>
 
       {/* Sparkles flotantes */}
       {SPARKLES.map((s, i) => (

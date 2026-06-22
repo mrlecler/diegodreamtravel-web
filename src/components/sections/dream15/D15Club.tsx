@@ -1,4 +1,5 @@
-import { Wallet, CalendarCheck, BadgeCheck, Sparkles, ArrowRight } from 'lucide-react';
+import { Wallet, CalendarCheck, SealCheck, Sparkle, ArrowRight } from '@phosphor-icons/react/dist/ssr';
+import IconBadge from '@/components/ui/IconBadge';
 
 const STEPS = [
   {
@@ -15,13 +16,13 @@ const STEPS = [
   },
   {
     n: '03',
-    Icon: BadgeCheck,
+    Icon: SealCheck,
     title: 'Cuidás el precio',
     desc: 'Anclás temprano y te cubrís de los aumentos. Empezar antes siempre juega a favor de tu bolsillo.',
   },
   {
     n: '04',
-    Icon: Sparkles,
+    Icon: Sparkle,
     title: 'Viajás con todo pago',
     desc: 'Cuando llega la fecha, el viaje ya está saldado. Solo te queda disfrutar.',
   },
@@ -118,12 +119,7 @@ export default function D15Club() {
                 >
                   {n}
                 </span>
-                <div
-                  className="w-9 h-9 rounded-[10px] flex items-center justify-center"
-                  style={{ background: 'rgba(232,67,147,.15)', color: '#E84393' }}
-                >
-                  <Icon size={17} strokeWidth={1.8} />
-                </div>
+                <IconBadge Icon={Icon} ring="var(--grad-d15)" iconColor="#E879C0" size={36} iconSize={19} radius={10} />
               </div>
               <h3 className="text-[16px] font-bold text-[#F0EDE8]">{title}</h3>
               <p className="text-[14px] font-light leading-[1.6] text-[rgba(240,237,232,.82)]">
@@ -146,7 +142,7 @@ export default function D15Club() {
             }}
           >
             Sumate al Club
-            <ArrowRight size={15} strokeWidth={2.2} />
+            <ArrowRight size={16} weight="bold" />
           </a>
           <span
             className="inline-flex items-center gap-2 text-[13px] font-medium rounded-full px-4 py-2"

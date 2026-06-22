@@ -1,9 +1,10 @@
-import { Users, Video, UsersRound, Camera } from 'lucide-react';
+import { Users, VideoCamera, UsersThree, Camera } from '@phosphor-icons/react/dist/ssr';
+import IconBadge from '@/components/ui/IconBadge';
 
 const BULLETS = [
   { Icon: Users,       text: 'Grupo reducido y exclusivo, no un viaje masivo de cientos' },
-  { Icon: Video,       text: 'Se conocen antes de viajar: videollamada de bienvenida y grupo de WhatsApp del viaje' },
-  { Icon: UsersRound,  text: 'Chicos y chicas, todos cumpliendo 15 al mismo tiempo' },
+  { Icon: VideoCamera,       text: 'Se conocen antes de viajar: videollamada de bienvenida y grupo de WhatsApp del viaje' },
+  { Icon: UsersThree,  text: 'Chicos y chicas, todos cumpliendo 15 al mismo tiempo' },
   { Icon: Camera,      text: 'Las fotos, las historias y los amigos que te llevás para siempre' },
 ];
 
@@ -69,12 +70,9 @@ export default function D15Tribu() {
             <ul className="mt-8 flex flex-col gap-4">
               {BULLETS.map(({ Icon, text }) => (
                 <li key={text} className="flex items-start gap-3">
-                  <span
-                    className="flex-shrink-0 w-8 h-8 rounded-[10px] flex items-center justify-center mt-0.5"
-                    style={{ background: 'rgba(232,67,147,.18)', color: '#E84393' }}
-                  >
-                    <Icon size={15} strokeWidth={1.8} />
-                  </span>
+                  <div className="flex-shrink-0 mt-0.5">
+                    <IconBadge Icon={Icon} ring="var(--grad-d15)" iconColor="#E879C0" size={34} iconSize={18} radius={11} />
+                  </div>
                   <span className="text-[15px] font-light text-[rgba(240,237,232,.92)] leading-snug">
                     {text}
                   </span>

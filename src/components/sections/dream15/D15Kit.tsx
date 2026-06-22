@@ -1,9 +1,10 @@
-import { Backpack, Shirt, Droplets, Gift } from 'lucide-react';
+import { Backpack, TShirt, Drop, Gift } from '@phosphor-icons/react/dist/ssr';
+import IconBadge from '@/components/ui/IconBadge';
 
 const KIT_ITEMS = [
   { Icon: Backpack, label: 'Mochila DDT' },
-  { Icon: Shirt,    label: 'Remera del viaje' },
-  { Icon: Droplets, label: 'Botella recargable' },
+  { Icon: TShirt,    label: 'Remera del viaje' },
+  { Icon: Drop, label: 'Botella recargable' },
   { Icon: Gift,     label: 'Regalos sorpresa' },
 ];
 
@@ -63,15 +64,15 @@ export default function D15Kit() {
                 border: '1px solid rgba(232,67,147,.2)',
               }}
             >
-              <div
-                className="w-14 h-14 rounded-2xl flex items-center justify-center"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(232,67,147,.28), rgba(245,200,66,.18))',
-                  color: '#F472B6',
-                }}
-              >
-                <Icon size={24} strokeWidth={1.6} />
-              </div>
+              <IconBadge
+                Icon={Icon}
+                ring="linear-gradient(135deg, #E84393, #F5C842)"
+                iconColor="#F49ACB"
+                glow="rgba(245,200,66,.4)"
+                size={56}
+                iconSize={27}
+                radius={16}
+              />
               <span className="text-[14px] font-semibold text-[#F0EDE8] leading-tight">{label}</span>
             </div>
           ))}

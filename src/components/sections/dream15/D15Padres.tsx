@@ -1,13 +1,14 @@
-import { Award, Users, ShieldCheck, Eye, ClipboardList, Phone, FileCheck } from 'lucide-react';
+import { SealCheck, UsersThree, ShieldCheck, Eye, ClipboardText, Phone, IdentificationCard } from '@phosphor-icons/react/dist/ssr';
+import IconBadge from '@/components/ui/IconBadge';
 
 const CARDS = [
   {
-    Icon: Award,
+    Icon: SealCheck,
     title: 'Agente certificado',
     desc: 'Certificación oficial Disney (College of Disney Knowledge) y Universal (Preferred Travel Agent), bajo Team Livi Travel. Real y verificable.',
   },
   {
-    Icon: Users,
+    Icon: UsersThree,
     title: 'Grupo reducido y acompañado',
     desc: 'Un coordinador y una coordinadora cada 10 chicos y chicas, las 24 horas. Grupos más chicos que el promedio: atención real, no masa.',
   },
@@ -22,7 +23,7 @@ const CARDS = [
     desc: 'Fotos y video del grupo todos los días. Ves a tu hijo o hija disfrutando en cada jornada del viaje.',
   },
   {
-    Icon: ClipboardList,
+    Icon: ClipboardText,
     title: 'Todo organizado',
     desc: 'Vuelos, hotel, traslados, entradas y cada detalle, resueltos y por escrito. Nada librado al azar.',
   },
@@ -32,7 +33,7 @@ const CARDS = [
     desc: 'Una persona real del otro lado. Antes, durante y después del viaje. Comunicación directa con las familias.',
   },
   {
-    Icon: FileCheck,
+    Icon: IdentificationCard,
     title: 'Visa y documentación',
     desc: 'Te asistimos con el trámite de visa o ESTA y con el permiso de viaje para menores. La documentación migratoria, acompañada de principio a fin.',
   },
@@ -45,20 +46,22 @@ const CARD_STYLE = {
   border: '1px solid rgba(66,194,194,.18)',
 };
 
-function Card({ Icon, title, desc }: { Icon: typeof Award; title: string; desc: string }) {
+function Card({ Icon, title, desc }: { Icon: typeof SealCheck; title: string; desc: string }) {
   return (
     <div
       className="rounded-[18px] p-[26px_22px] transition-all duration-[250ms] hover:-translate-y-1"
       style={CARD_STYLE}
     >
-      <div
-        className="w-11 h-11 rounded-[12px] flex items-center justify-center mb-4"
-        style={{
-          background: 'rgba(66,194,194,.12)',
-          color: '#42C2C2',
-        }}
-      >
-        <Icon size={20} strokeWidth={1.8} />
+      <div className="mb-4">
+        <IconBadge
+          Icon={Icon}
+          ring="linear-gradient(135deg, #5BD3D3, #2E8C8C)"
+          iconColor="#6FDCDC"
+          glow="rgba(66,194,194,.4)"
+          size={44}
+          iconSize={22}
+          radius={12}
+        />
       </div>
       <h3 className="text-[15px] font-bold text-[#F0EDE8] mb-1.5">{title}</h3>
       <p className="text-[13px] font-light leading-[1.6] text-[rgba(240,237,232,.75)]">{desc}</p>

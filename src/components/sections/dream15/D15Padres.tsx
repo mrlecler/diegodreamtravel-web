@@ -5,7 +5,7 @@ const CARDS = [
   {
     Icon: SealCheck,
     title: 'Agente certificado',
-    desc: 'Soy agente oficial y certificado oficial por Disney y Universal (Preferred Travel Agent), y pertenezco al Team Livi Travel. Real y verificable.',
+    desc: 'Soy agente oficial y certificado por Disney y Universal (Preferred Travel Agent), y pertenezco al Team Livi Travel. Real y verificable.',
   },
   {
     Icon: UsersThree,

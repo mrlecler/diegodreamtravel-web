@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Loader2 } from 'lucide-react';
+import { CircleNotch } from '@phosphor-icons/react/dist/ssr';
 
 const WA_URL = `https://wa.me/5493624703040?text=${encodeURIComponent('Hola Diego! Completé el formulario Dream 15 y me gustaría saber más.')}`;
 
@@ -272,7 +272,7 @@ export default function D15Form() {
       >
         {status === 'loading' ? (
           <>
-            <Loader2 size={16} className="animate-spin" />
+            <CircleNotch size={16} weight="bold" className="animate-spin" />
             Enviando...
           </>
         ) : (

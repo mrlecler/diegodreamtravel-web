@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { List, X } from '@phosphor-icons/react/dist/ssr';
 
 const WA = 'https://wa.me/5493624703040?text=Hola%20Diego!%20Quiero%20info%20del%20viaje%20de%20quince.';
 const IG = 'https://instagram.com/diego.dreamtravel';
@@ -100,7 +100,7 @@ export default function D15Nav() {
                 border: '1px solid rgba(245,200,66,.25)',
               }}
             >
-              <Menu size={20} />
+              <List size={20} weight="bold" />
             </button>
           </div>
         </nav>
@@ -118,7 +118,7 @@ export default function D15Nav() {
             className="absolute top-6 right-6 w-11 h-11 flex items-center justify-center rounded-full text-[#F5C842] cursor-pointer"
             style={{ background: 'rgba(245,200,66,.1)', border: '1px solid rgba(245,200,66,.25)' }}
           >
-            <X size={22} />
+            <X size={22} weight="bold" />
           </button>
           {LINKS.map((l) => (
             <a

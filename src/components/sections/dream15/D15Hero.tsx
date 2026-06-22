@@ -116,11 +116,11 @@ export default function D15Hero() {
         </h1>
 
         <p
-          className="text-[rgba(240,237,232,.82)] font-light"
+          className="text-[rgba(240,237,232,.92)] font-light"
           style={{
             marginTop: 26,
             maxWidth: 560,
-            fontSize: 'clamp(15px, 1.7vw, 18px)',
+            fontSize: 'clamp(16px, 1.7vw, 18px)',
             lineHeight: 1.65,
             animation: 'qFadeUp .7s ease .26s both',
           }}

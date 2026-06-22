@@ -4,7 +4,7 @@ export default function D15FormSection() {
   return (
     <section
       id="form"
-      style={{ background: '#120818', padding: 'clamp(72px,10vw,128px) 0' }}
+      style={{ background: '#120818', padding: 'clamp(52px,7vw,88px) 0' }}
     >
       <div
         className="mx-auto px-6 max-w-xl"

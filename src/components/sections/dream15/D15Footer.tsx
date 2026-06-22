@@ -27,6 +27,7 @@ export default function D15Footer() {
       >
         {/* Logo + tagline */}
         <div className="mb-8">
+          <img src="/logo-ddt-20.svg" alt="Diego Dream Travel" style={{ height: 38, width: 'auto', marginBottom: 14 }} />
           <p
             style={{
               fontFamily: 'var(--font-skatyn), serif',

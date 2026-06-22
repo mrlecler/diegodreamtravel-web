@@ -15,7 +15,7 @@ export default function D15CTAClose() {
           radial-gradient(55% 50% at 50% 50%, rgba(232,67,147,.2), transparent 70%),
           #120818
         `,
-        padding: 'clamp(80px,12vw,140px) 0',
+        padding: 'clamp(60px,9vw,100px) 0',
       }}
     >
       <style>{`

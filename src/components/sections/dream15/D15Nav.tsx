@@ -38,14 +38,14 @@ export default function D15Nav() {
             background: 'rgba(30,6,22,.82)',
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
-            border: '1px solid rgba(240,237,232,.32)',
-            boxShadow: '0 18px 50px -20px rgba(232,67,147,.55)',
+            border: '1px solid rgba(232,67,147,.38)',
+            boxShadow: '0 18px 50px -20px rgba(232,67,147,.72), 0 0 0 1px rgba(232,67,147,.16)',
           }}
         >
           {/* Logo */}
           <a href="#top" className="flex-shrink-0 flex items-center no-underline leading-none">
-            <img src="/logo-ddt-20.svg" alt="Diego Dream Travel" className="hidden md:block" style={{ height: 30, width: 'auto' }} />
-            <img src="/logo-ddt-22.svg" alt="Diego Dream Travel" className="block md:hidden" style={{ height: 26, width: 'auto' }} />
+            <img src="/logo-ddt-20.svg" alt="Diego Dream Travel" className="hidden md:block" style={{ height: 44, width: 'auto' }} />
+            <img src="/logo-ddt-22.svg" alt="Diego Dream Travel" className="block md:hidden" style={{ height: 36, width: 'auto' }} />
           </a>
 
           {/* Desktop links */}

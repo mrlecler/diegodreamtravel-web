@@ -1,10 +1,10 @@
-import { Check } from 'lucide-react';
+import { Users, Video, UsersRound, Camera } from 'lucide-react';
 
 const BULLETS = [
-  'Grupo reducido y exclusivo, no un viaje masivo de cientos',
-  'Se conocen antes de viajar: videollamada de bienvenida y grupo de WhatsApp del viaje',
-  'Chicos y chicas, todos cumpliendo 15 al mismo tiempo',
-  'Las fotos, las historias y los amigos que te llevás para siempre',
+  { Icon: Users,       text: 'Grupo reducido y exclusivo, no un viaje masivo de cientos' },
+  { Icon: Video,       text: 'Se conocen antes de viajar: videollamada de bienvenida y grupo de WhatsApp del viaje' },
+  { Icon: UsersRound,  text: 'Chicos y chicas, todos cumpliendo 15 al mismo tiempo' },
+  { Icon: Camera,      text: 'Las fotos, las historias y los amigos que te llevás para siempre' },
 ];
 
 const EYEBROW_LINE = <span className="block w-7 h-[1.5px]" style={{ background: '#E84393' }} />;
@@ -14,7 +14,7 @@ export default function D15Tribu() {
     <section
       id="tribu"
       className="relative overflow-hidden"
-      style={{ background: '#120818', padding: 'clamp(72px,10vw,128px) 0' }}
+      style={{ background: '#120818', padding: 'clamp(52px,7vw,88px) 0' }}
     >
       {/* Glow izquierdo */}
       <div
@@ -58,7 +58,7 @@ export default function D15Tribu() {
             </h2>
 
             <p
-              className="text-[rgba(240,237,232,.82)] font-light"
+              className="text-[rgba(240,237,232,.92)] font-light"
               style={{ marginTop: 24, fontSize: 16, lineHeight: 1.75 }}
             >
               No es un viaje familiar. Es tu momento, con los de tu edad. Un grupo mixto de chicos y
@@ -67,16 +67,16 @@ export default function D15Tribu() {
             </p>
 
             <ul className="mt-8 flex flex-col gap-4">
-              {BULLETS.map((b) => (
-                <li key={b} className="flex items-start gap-3">
+              {BULLETS.map(({ Icon, text }) => (
+                <li key={text} className="flex items-start gap-3">
                   <span
-                    className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5"
-                    style={{ background: 'rgba(232,67,147,.2)' }}
+                    className="flex-shrink-0 w-8 h-8 rounded-[10px] flex items-center justify-center mt-0.5"
+                    style={{ background: 'rgba(232,67,147,.18)', color: '#E84393' }}
                   >
-                    <Check size={11} style={{ color: '#E84393' }} />
+                    <Icon size={15} strokeWidth={1.8} />
                   </span>
-                  <span className="text-[15px] font-light text-[rgba(240,237,232,.82)] leading-snug">
-                    {b}
+                  <span className="text-[15px] font-light text-[rgba(240,237,232,.92)] leading-snug">
+                    {text}
                   </span>
                 </li>
               ))}
@@ -87,7 +87,7 @@ export default function D15Tribu() {
           <div
             className="relative rounded-3xl overflow-hidden flex flex-col items-end justify-end"
             style={{
-              minHeight: 380,
+              minHeight: 500,
               background: '#1C0B1A',
               border: '1px solid rgba(240,237,232,.08)',
             }}

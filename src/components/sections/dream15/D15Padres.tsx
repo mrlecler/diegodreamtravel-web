@@ -42,7 +42,7 @@ const EYEBROW_LINE = <span className="block w-7 h-[1.5px]" style={{ background: 
 
 const CARD_STYLE = {
   background: '#1C0B1A',
-  border: '1px solid rgba(240,237,232,.08)',
+  border: '1px solid rgba(66,194,194,.18)',
 };
 
 function Card({ Icon, title, desc }: { Icon: typeof Award; title: string; desc: string }) {
@@ -54,8 +54,8 @@ function Card({ Icon, title, desc }: { Icon: typeof Award; title: string; desc: 
       <div
         className="w-11 h-11 rounded-[12px] flex items-center justify-center mb-4"
         style={{
-          background: 'linear-gradient(135deg, rgba(232,67,147,.3), rgba(232,67,147,.18))',
-          color: '#E07AC4',
+          background: 'rgba(66,194,194,.12)',
+          color: '#42C2C2',
         }}
       >
         <Icon size={20} strokeWidth={1.8} />
@@ -71,7 +71,7 @@ export default function D15Padres() {
     <section
       id="padres"
       className="relative overflow-hidden"
-      style={{ background: '#120818', padding: 'clamp(72px,10vw,128px) 0' }}
+      style={{ background: '#120818', padding: 'clamp(52px,7vw,88px) 0' }}
     >
       {/* Glow fondo */}
       <div
@@ -114,7 +114,7 @@ export default function D15Padres() {
         </h2>
 
         <p
-          className="text-[rgba(240,237,232,.82)] font-light"
+          className="text-[rgba(240,237,232,.92)] font-light"
           style={{ marginTop: 24, maxWidth: 620, fontSize: 16, lineHeight: 1.75 }}
         >
           Detrás de la magia hay un agente de viajes certificado y una operación seria. No es un

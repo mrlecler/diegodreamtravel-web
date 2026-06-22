@@ -12,7 +12,7 @@ const EYEBROW_LINE = <span className="block w-7 h-[1.5px]" style={{ background: 
 export default function D15Kit() {
   return (
     <section
-      style={{ background: '#120818', padding: 'clamp(56px,8vw,100px) 0' }}
+      style={{ background: '#120818', padding: 'clamp(48px,6vw,80px) 0' }}
     >
       <div
         className="mx-auto px-6"

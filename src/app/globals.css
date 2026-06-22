@@ -118,29 +118,22 @@ html, body {
   transform: scale(.97);
 }
 
-/* Nav link glass pill hover */
+/* Nav link — glass pill, fucsia tint on hover */
 .d15-nav-link {
   border-radius: 999px;
-  padding: 8px 16px;
+  padding: 9px 16px;
   border: 1px solid transparent;
-  transition: background .2s, border-color .2s, backdrop-filter .2s;
+  color: rgba(240,237,232,.82);
+  transition: all .2s ease;
 }
 .d15-nav-link:hover {
-  background: rgba(18,8,24,.35);
+  background: rgba(232,67,147,.16);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-  border-color: rgba(240,237,232,.32);
+  border-color: rgba(232,67,147,.32);
+  color: #F0EDE8;
+  box-shadow: 0 0 18px rgba(232,67,147,.35);
 }
-/* Nav links — globo glass en hover */
-.d15-nav-link { padding: 9px 16px; border-radius: 999px; border: 1px solid transparent; transition: all .2s ease; }
-.d15-nav-link:hover {
-  background: rgba(18,8,24,.35);
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-  border-color: rgba(240,237,232,.32);
-}
-/* CTAs — lift en hover */
-.d15-cta { transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease; }
-.d15-cta:hover { transform: translateY(-2px); box-shadow: 0 14px 32px -8px rgba(196,62,138,.85); }
 
 /* Palabra acentuada con degradé quince */
 .d15-accent {

@@ -35,7 +35,7 @@ export default function D15Experiencia() {
     <section
       id="experiencia"
       className="relative overflow-hidden"
-      style={{ background: '#120818', padding: 'clamp(72px,10vw,128px) 0' }}
+      style={{ background: '#120818', padding: 'clamp(52px,7vw,88px) 0' }}
     >
       {/* Glow fondo derecho */}
       <div
@@ -79,7 +79,7 @@ export default function D15Experiencia() {
         </h2>
 
         <p
-          className="text-[rgba(240,237,232,.82)] font-light"
+          className="text-[rgba(240,237,232,.92)] font-light"
           style={{ marginTop: 24, maxWidth: 620, fontSize: 16, lineHeight: 1.75 }}
         >
           El escenario es Orlando: Disney, Universal, los parques y todos los personajes que viste
@@ -117,11 +117,11 @@ export default function D15Experiencia() {
               style={{
                 background: '#1C0B1A',
                 border: '1px solid rgba(240,237,232,.08)',
-                padding: '24px 20px',
+                padding: '28px 24px',
               }}
             >
               <div
-                className="w-10 h-10 rounded-[12px] flex items-center justify-center mb-4 flex-shrink-0"
+                className="w-12 h-12 rounded-[14px] flex items-center justify-center mb-4 flex-shrink-0"
                 style={{
                   background: 'linear-gradient(135deg, rgba(232,67,147,.3), rgba(232,67,147,.18))',
                   color: '#E07AC4',
@@ -140,14 +140,14 @@ export default function D15Experiencia() {
         {/* Nota familia add-on */}
         <div
           className="mt-8 rounded-2xl px-5 py-4 flex items-start gap-3"
-          style={{ background: 'rgba(232,67,147,.08)', border: '1px solid rgba(232,67,147,.22)' }}
+          style={{ background: 'rgba(245,200,66,.07)', border: '1px solid rgba(245,200,66,.22)' }}
         >
-          <div className="flex-shrink-0 mt-0.5" style={{ color: '#E84393' }}>
-            <Heart size={16} strokeWidth={2} fill="rgba(232,67,147,.3)" />
+          <div className="flex-shrink-0 mt-0.5" style={{ color: '#F5C842' }}>
+            <Heart size={16} strokeWidth={2} fill="rgba(245,200,66,.3)" />
           </div>
-          <p className="text-[14px] font-light text-[rgba(240,237,232,.82)] leading-relaxed">
-            <strong className="font-semibold text-[#F0EDE8]">
-              ¿Querés que la familia te acompañe?
+          <p className="text-[14px] font-light text-[rgba(245,200,66,.85)] leading-relaxed">
+            <strong className="font-semibold text-[rgba(245,200,66,.95)]">
+              ¿Querés que tu familia te acompañe?
             </strong>{' '}
             Es un add-on opcional. Si mamá, papá o quien quieras suma su lugar, lo agregamos sin que
             cambie tu plan.

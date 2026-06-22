@@ -30,7 +30,7 @@ export default function D15Testimonials() {
     <section
       id="testimonios"
       className="relative overflow-hidden"
-      style={{ background: '#120818', padding: 'clamp(72px,10vw,128px) 0' }}
+      style={{ background: '#120818', padding: 'clamp(52px,7vw,88px) 0' }}
     >
       {/* Glow fondo */}
       <div

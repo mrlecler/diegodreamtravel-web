@@ -27,17 +27,7 @@ export default function D15Footer() {
       >
         {/* Logo + tagline */}
         <div className="mb-8">
-          <img src="/logo-ddt-20.svg" alt="Diego Dream Travel" style={{ height: 38, width: 'auto', marginBottom: 14 }} />
-          <p
-            style={{
-              fontFamily: 'var(--font-skatyn), serif',
-              fontSize: 22,
-              color: '#F0EDE8',
-              marginBottom: 6,
-            }}
-          >
-            Diego Dream Travel
-          </p>
+          <img src="/logo-ddt-20.svg" alt="Diego Dream Travel" style={{ height: 56, width: 'auto', marginBottom: 16 }} />
           <p className="text-[12px] text-[rgba(240,237,232,.4)] leading-relaxed">
             Agente de viajes certificado · Disney &amp; Universal · Viajes grupales de 15 · Orlando
             · Armado a medida

@@ -70,14 +70,14 @@ export default function D15Testimonials() {
         >
           No lo decimos nosotros. Lo dicen quienes{' '}
           <em className="d15-accent" style={{ fontStyle: 'normal' }}>viajaron</em>{' '}
-          con Diego.
+          con Diego Dream Travel.
         </h2>
 
         <p
           className="text-[rgba(240,237,232,.7)] font-light"
           style={{ marginTop: 16, fontSize: 15, lineHeight: 1.7 }}
         >
-          Opiniones reales de viajeros y familias que ya confiaron en Diego, verificadas en
+          Opiniones reales de viajeros y familias que ya confiaron en Diego Dream Travel, verificadas en
           Trustpilot.
         </p>
 

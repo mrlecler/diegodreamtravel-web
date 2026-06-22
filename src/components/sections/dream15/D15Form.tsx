@@ -246,7 +246,6 @@ export default function D15Form() {
           style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }}
         >
           <option value="">Cuándo viajarían</option>
-          <option value="2026">2026</option>
           <option value="2027">2027</option>
           <option value="2028">2028</option>
           <option value="no se">Todavía no sé</option>

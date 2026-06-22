@@ -188,7 +188,7 @@ export default function D15Hero() {
             style={{ width: 1, height: 12, background: 'rgba(240,237,232,.22)' }}
           />
           <span className="text-[12px] text-[rgba(240,237,232,.72)] tracking-[.3px]">
-            Agente oficial certificado Disney &amp; Universal · Operación seria de principio a fin
+            Soy Agente oficial certificado Disney &amp; Universal · Operación seria de principio a fin
           </span>
         </div>
       </div>

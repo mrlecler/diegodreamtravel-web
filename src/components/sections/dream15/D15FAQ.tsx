@@ -5,19 +5,19 @@ import { useState } from 'react';
 const FAQS = [
   {
     q: '¿Qué incluye el viaje?',
-    a: 'Todo lo importante, ya resuelto: vuelos, hoteles, entradas a los parques de Disney y a Universal con Park to Park, Memory Maker, comidas, traslados, días de compras, 2 noches en Miami, una cena especial de bienvenida, tu kit de viaje, seguimiento diario, asistencia al viajero y regalos sorpresa. Salís de casa y el resto ya está pensado.',
+    a: 'Todo lo importante, ya resuelto: vuelos, hoteles, entradas a los parques de Disney y a Universal con Park to Park, Memory Maker, comidas, traslados, días de compras, una cena especial de bienvenida, tu kit de viaje, seguimiento diario, asistencia al viajero y regalos sorpresa. Salís de casa y el resto ya está pensado.',
   },
   {
     q: '¿Cuánto dura el viaje?',
-    a: '15 días viviéndolo a pleno, entre Orlando y Miami.',
+    a: '15 días viviéndolo a pleno, en Orlando.',
   },
   {
     q: '¿Qué edad tienen que tener?',
-    a: 'Es para chicos y chicas de 14 a 16 años que cumplen (o cumplieron) sus 15.',
+    a: 'Es para chicos y chicas de 14 a 17 años que cumplen (o cumplieron) sus 15.',
   },
   {
     q: '¿Quiénes acompañan al grupo?',
-    a: 'Un coordinador y una coordinadora cada 10 chicos y chicas (grupos más chicos que el promedio), las 24 horas, con respaldo médico en destino. Atención de verdad, de la mañana a la noche.',
+    a: 'Un coordinador o una coordinadora cada 10 chicos y chicas (grupos más chicos que el promedio), las 24 horas, con respaldo médico en destino. Atención de verdad, de la mañana a la noche.',
   },
   {
     q: '¿Mi hijo o hija no conoce a nadie, va a estar bien?',

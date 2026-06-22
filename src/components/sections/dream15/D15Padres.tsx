@@ -5,12 +5,12 @@ const CARDS = [
   {
     Icon: SealCheck,
     title: 'Agente certificado',
-    desc: 'Certificación oficial Disney (College of Disney Knowledge) y Universal (Preferred Travel Agent), bajo Team Livi Travel. Real y verificable.',
+    desc: 'Soy agente oficial y certificado oficial por Disney y Universal (Preferred Travel Agent), y pertenezco al Team Livi Travel. Real y verificable.',
   },
   {
     Icon: UsersThree,
     title: 'Grupo reducido y acompañado',
-    desc: 'Un coordinador y una coordinadora cada 10 chicos y chicas, las 24 horas. Grupos más chicos que el promedio: atención real, no masa.',
+    desc: 'Coordinadores cada 10 chicos y chicas, las 24 horas. Grupos más chicos que el promedio: atención real, no masa.',
   },
   {
     Icon: ShieldCheck,
@@ -39,7 +39,7 @@ const CARDS = [
   },
 ];
 
-const EYEBROW_LINE = <span className="block w-7 h-[1.5px]" style={{ background: '#E84393' }} />;
+const EYEBROW_LINE = <span className="block w-7 h-[1.5px]" style={{ background: '#42C2C2' }} />;
 
 const CARD_STYLE = {
   background: '#1C0B1A',
@@ -94,7 +94,7 @@ export default function D15Padres() {
           {EYEBROW_LINE}
           <span
             className="text-[11px] font-semibold tracking-[3px] uppercase"
-            style={{ color: '#E07AC4' }}
+            style={{ color: '#42C2C2' }}
           >
             Para mamá y papá
           </span>

@@ -18,9 +18,9 @@ export default function D15Kit() {
         className="mx-auto px-6"
         style={{ maxWidth: 'min(1080px, calc(100% - 48px))' }}
       >
-        {/* Eyebrow + título centrado */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-3 mb-5">
+        {/* Eyebrow + título izquierda */}
+        <div className="mb-10">
+          <div className="flex items-center gap-3 mb-5">
             {EYEBROW_LINE}
             <span
               className="text-[11px] font-semibold tracking-[3px] uppercase"
@@ -28,7 +28,6 @@ export default function D15Kit() {
             >
               Tu kit de viaje
             </span>
-            {EYEBROW_LINE}
           </div>
 
           <h2
@@ -46,7 +45,7 @@ export default function D15Kit() {
           </h2>
 
           <p
-            className="text-[rgba(240,237,232,.72)] font-light mt-4 mx-auto"
+            className="text-[rgba(240,237,232,.72)] font-light mt-4"
             style={{ maxWidth: 440, fontSize: 15, lineHeight: 1.7 }}
           >
             Desde el primer día tenés tu kit DDT. Y un regalo premium que elegís vos.
@@ -58,7 +57,7 @@ export default function D15Kit() {
           {KIT_ITEMS.map(({ Icon, label }) => (
             <div
               key={label}
-              className="flex flex-col items-center gap-4 rounded-2xl py-8 px-4 text-center transition-all duration-[250ms] hover:-translate-y-1"
+              className="flex flex-col items-start gap-4 rounded-2xl py-8 px-6 transition-all duration-[250ms] hover:-translate-y-1"
               style={{
                 background: 'linear-gradient(145deg, rgba(232,67,147,.12) 0%, rgba(245,200,66,.06) 100%), #1C0B1A',
                 border: '1px solid rgba(232,67,147,.2)',
@@ -80,7 +79,7 @@ export default function D15Kit() {
 
         {/* Nota inferior */}
         <p
-          className="text-center text-[13px] font-light mt-6"
+          className="text-[13px] font-light mt-6"
           style={{ color: 'rgba(240,237,232,.4)' }}
         >
           El kit es tuyo desde antes de subir al avión.

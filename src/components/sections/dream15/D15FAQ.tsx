@@ -84,9 +84,9 @@ export default function D15FAQ() {
           .
         </h2>
 
-        <div className="flex flex-col divide-y" style={{ borderColor: 'rgba(240,237,232,.08)' }}>
+        <div className="flex flex-col">
           {FAQS.map((faq, i) => (
-            <div key={i}>
+            <div key={i} style={{ borderBottom: '1px solid rgba(240,237,232,.06)' }}>
               <button
                 className="w-full flex items-center justify-between gap-4 py-5 text-left cursor-pointer"
                 onClick={() => setOpen(open === i ? -1 : i)}

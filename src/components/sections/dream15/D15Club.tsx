@@ -1,21 +1,27 @@
+import { Wallet, CalendarCheck, BadgeCheck, Sparkles, ArrowRight } from 'lucide-react';
+
 const STEPS = [
   {
     n: '01',
+    Icon: Wallet,
     title: 'Reservás tu lugar',
     desc: 'Asegurás el cupo en el grupo desde el día uno, al precio de hoy.',
   },
   {
     n: '02',
+    Icon: CalendarCheck,
     title: 'Pagás en cuotas',
     desc: 'Armás un plan mensual a tu medida. El viaje deja de ser un golpe y pasa a ser un plan.',
   },
   {
     n: '03',
+    Icon: BadgeCheck,
     title: 'Cuidás el precio',
     desc: 'Anclás temprano y te cubrís de los aumentos. Empezar antes siempre juega a favor de tu bolsillo.',
   },
   {
     n: '04',
+    Icon: Sparkles,
     title: 'Viajás con todo pago',
     desc: 'Cuando llega la fecha, el viaje ya está saldado. Solo te queda disfrutar.',
   },
@@ -30,13 +36,12 @@ export default function D15Club() {
       className="relative overflow-hidden"
       style={{ background: '#120818', padding: 'clamp(52px,7vw,88px) 0' }}
     >
-      {/* Glow central */}
+      {/* Glow fondo */}
       <div
-        className="absolute pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          top: '20%', left: '50%', transform: 'translateX(-50%)',
-          width: '70%', height: '60%', zIndex: 0,
-          background: 'radial-gradient(circle at 50% 50%, rgba(245,200,66,.08), transparent 70%)',
+          zIndex: 0,
+          background: 'radial-gradient(60% 50% at 50% 30%, rgba(232,67,147,.16), transparent 65%)',
         }}
       />
 
@@ -89,7 +94,7 @@ export default function D15Club() {
 
         {/* Steps */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
-          {STEPS.map(({ n, title, desc }) => (
+          {STEPS.map(({ n, Icon, title, desc }) => (
             <div
               key={n}
               className="rounded-[18px] p-7 flex flex-col gap-3 transition-all duration-[250ms] hover:-translate-y-1"
@@ -98,20 +103,28 @@ export default function D15Club() {
                 border: '1px solid rgba(240,237,232,.08)',
               }}
             >
-              <span
-                className="font-bold"
-                style={{
-                  fontFamily: 'var(--font-skatyn), serif',
-                  fontSize: 36,
-                  lineHeight: 1,
-                  background: 'var(--grad-d15-text)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                {n}
-              </span>
+              <div className="flex items-center justify-between">
+                <span
+                  className="font-bold"
+                  style={{
+                    fontFamily: 'var(--font-skatyn), serif',
+                    fontSize: 36,
+                    lineHeight: 1,
+                    background: 'var(--grad-d15-text)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  {n}
+                </span>
+                <div
+                  className="w-9 h-9 rounded-[10px] flex items-center justify-center"
+                  style={{ background: 'rgba(232,67,147,.15)', color: '#E84393' }}
+                >
+                  <Icon size={17} strokeWidth={1.8} />
+                </div>
+              </div>
               <h3 className="text-[16px] font-bold text-[#F0EDE8]">{title}</h3>
               <p className="text-[14px] font-light leading-[1.6] text-[rgba(240,237,232,.82)]">
                 {desc}
@@ -133,8 +146,16 @@ export default function D15Club() {
             }}
           >
             Sumate al Club
+            <ArrowRight size={15} strokeWidth={2.2} />
           </a>
-          <span className="text-[13px] font-medium text-[rgba(240,237,232,.45)]">
+          <span
+            className="inline-flex items-center gap-2 text-[13px] font-medium rounded-full px-4 py-2"
+            style={{
+              color: '#F5C842',
+              border: '1px solid rgba(245,200,66,.4)',
+              boxShadow: '0 0 18px rgba(245,200,66,.25)',
+            }}
+          >
             Cupos limitados por grupo
           </span>
         </div>

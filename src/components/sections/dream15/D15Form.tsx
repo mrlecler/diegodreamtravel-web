@@ -24,7 +24,7 @@ const WA_ICON = (
 
 export default function D15Form() {
   const [form, setForm] = useState<FormData>({
-    tipo: '',
+    tipo: 'quinceanero',
     nombre_apellido: '',
     whatsapp: '',
     edad: '',

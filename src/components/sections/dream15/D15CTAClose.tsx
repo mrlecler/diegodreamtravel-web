@@ -30,13 +30,13 @@ export default function D15CTAClose() {
         .btn-wa-d15:active { transform: scale(.97); }
       `}</style>
 
-      <div className="mx-auto px-6 text-center" style={{ maxWidth: 'min(680px, calc(100% - 48px))' }}>
+      <div className="mx-auto px-6 text-center" style={{ maxWidth: 'min(820px, calc(100% - 48px))' }}>
         <h2
           className="text-[#F0EDE8]"
           style={{
             fontFamily: 'var(--font-skatyn), serif',
             fontWeight: 400,
-            fontSize: 'clamp(36px, 5.8vw, 72px)',
+            fontSize: 'clamp(34px, 5.4vw, 66px)',
             lineHeight: 0.96,
             letterSpacing: '.5px',
           }}

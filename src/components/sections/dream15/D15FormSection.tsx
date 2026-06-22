@@ -4,10 +4,20 @@ export default function D15FormSection() {
   return (
     <section
       id="form"
+      className="relative overflow-hidden"
       style={{ background: '#120818', padding: 'clamp(52px,7vw,88px) 0' }}
     >
+      {/* Glow arriba */}
       <div
-        className="mx-auto px-6 max-w-xl"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(55% 45% at 50% 0%, rgba(232,67,147,.18), transparent 65%)',
+          zIndex: 0,
+        }}
+      />
+      <div
+        className="relative z-[1] mx-auto px-6"
+        style={{ maxWidth: 'min(660px, calc(100% - 48px))' }}
       >
         {/* Header */}
         <div className="text-center mb-10">
@@ -36,10 +46,11 @@ export default function D15FormSection() {
 
         {/* Formulario */}
         <div
-          className="rounded-3xl p-6 sm:p-8"
+          className="rounded-3xl p-7 sm:p-10"
           style={{
             background: '#1C0B1A',
-            border: '1px solid rgba(240,237,232,.08)',
+            border: '1px solid rgba(232,67,147,.2)',
+            boxShadow: '0 30px 90px -30px rgba(232,67,147,.45)',
           }}
         >
           <D15Form />

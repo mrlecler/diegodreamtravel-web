@@ -137,14 +137,14 @@ export default function D15Padres() {
         </div>
 
         {/* Trabajo junto a */}
-        <div className="mt-10 flex items-center gap-4 flex-wrap">
-          <span className="text-[11.5px] font-semibold text-[rgba(240,237,232,.35)] uppercase tracking-[2.5px]">
+        <div className="mt-10 flex flex-col items-center gap-5">
+          <span className="text-[11px] font-semibold text-[rgba(240,237,232,.35)] uppercase tracking-[2.5px]">
             Trabajo junto a
           </span>
-          <div className="flex gap-8 md:gap-10 flex-wrap items-center">
-            <img src="/disney-wdw.png" alt="Walt Disney World" style={{ height: 36, width: 'auto', opacity: .8, filter: 'brightness(0) invert(1)' }} />
-            <img src="/universal-orlando.png" alt="Universal Orlando" style={{ height: 32, width: 'auto', opacity: .8, filter: 'brightness(0) invert(1)' }} />
-            <img src="/pax.png" alt="PAX Asistencia al viajero" style={{ height: 28, width: 'auto', opacity: .8, filter: 'brightness(0) invert(1)' }} />
+          <div className="flex gap-10 md:gap-14 flex-wrap justify-center items-center">
+            <img src="/disney-wdw.png" alt="Walt Disney World" style={{ height: 30, width: 'auto', opacity: .8, filter: 'brightness(0) invert(1)' }} />
+            <img src="/universal-orlando.png" alt="Universal Orlando" style={{ height: 46, width: 'auto', opacity: .8, filter: 'brightness(0) invert(1)' }} />
+            <img src="/pax.png" alt="PAX Asistencia al viajero" style={{ height: 26, width: 'auto', opacity: .8, filter: 'brightness(0) invert(1)' }} />
           </div>
         </div>
       </div>

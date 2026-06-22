@@ -81,6 +81,15 @@ export default function D15Testimonials() {
           Trustpilot.
         </p>
 
+        {/* Glow detrás de cards */}
+        <div
+          className="relative"
+          style={{
+            background: 'radial-gradient(60% 50% at 50% 20%, rgba(232,67,147,.18), transparent 65%)',
+            marginLeft: -24, marginRight: -24, paddingLeft: 24, paddingRight: 24, paddingTop: 8,
+          }}
+        >
+
         {/* Cards */}
         <div
           className="grid gap-4 mt-10"
@@ -108,6 +117,7 @@ export default function D15Testimonials() {
             </div>
           ))}
         </div>
+        </div>{/* /glow wrapper */}
 
         {/* Link Trustpilot */}
         <div className="mt-8 flex items-center justify-center gap-3">
@@ -120,8 +130,8 @@ export default function D15Testimonials() {
             href="https://www.trustpilot.com/review/diegodreamtravel.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[13.5px] font-semibold no-underline transition-colors"
-            style={{ color: 'rgba(240,237,232,.72)' }}
+            className="text-[13.5px] font-semibold no-underline transition-colors hover:opacity-80"
+            style={{ color: '#00B67A' }}
           >
             Ver todas las opiniones en Trustpilot →
           </a>

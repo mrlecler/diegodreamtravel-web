@@ -139,7 +139,7 @@ export default function D15Form() {
           ].map((opt) => (
             <label
               key={opt.value}
-              className="relative z-[1] flex-1 flex items-center justify-center py-2.5 text-[13px] cursor-pointer rounded-lg transition-colors"
+              className="relative z-[1] flex-1 flex items-center justify-center text-center leading-tight py-2.5 text-[13px] cursor-pointer rounded-lg transition-colors"
               style={{
                 color:
                   form.tipo === opt.value ? '#FFFFFF' : 'rgba(240,237,232,.55)',
@@ -199,7 +199,7 @@ export default function D15Form() {
       </div>
 
       {/* Edad + Ciudad */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label htmlFor="edad" className={`${labelCls} text-[rgba(240,237,232,.65)]`}>
             Edad de quien cumple 15

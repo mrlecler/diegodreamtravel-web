@@ -85,7 +85,7 @@ export default function D15Tribu() {
           <div
             className="relative rounded-3xl overflow-hidden flex flex-col items-end justify-end"
             style={{
-              minHeight: 500,
+              minHeight: 'clamp(340px, 62vw, 500px)',
               background: '#1C0B1A',
               border: '1px solid rgba(240,237,232,.08)',
             }}
@@ -94,7 +94,7 @@ export default function D15Tribu() {
             {['/wdw03.webp', '/uor01.avif', '/wdw04.webp', '/uor02.avif'].map((src, i) => (
               <img key={src} src={src} alt="" aria-hidden
                 className="absolute inset-0 w-full h-full object-cover"
-                style={{ opacity: 0, animation: 'd15TribuFade 28s ease-in-out infinite', animationDelay: `${i * 7}s` }} />
+                style={{ opacity: 0, objectPosition: 'center 30%', animation: 'd15TribuFade 28s ease-in-out infinite', animationDelay: `${i * 7}s` }} />
             ))}
             {/* Oscurecido para que el caption se lea */}
             <div className="absolute inset-0 pointer-events-none" style={{

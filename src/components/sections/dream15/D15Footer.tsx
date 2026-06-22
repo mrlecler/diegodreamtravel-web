@@ -45,7 +45,7 @@ export default function D15Footer() {
         </div>
 
         {/* Grid: contacto + secciones */}
-        <div className="grid sm:grid-cols-2 gap-8 mb-8">
+        <div className="grid sm:grid-cols-3 gap-8 mb-8">
           <div>
             <p className="text-[11px] font-semibold tracking-[2px] uppercase text-[rgba(240,237,232,.35)] mb-3">
               Contacto
@@ -96,6 +96,25 @@ export default function D15Footer() {
               ))}
             </div>
           </div>
+
+          {/* Certificaciones */}
+          <div>
+            <p className="text-[11px] font-semibold tracking-[2px] uppercase text-[rgba(240,237,232,.35)] mb-3">
+              Certificaciones
+            </p>
+            <div className="flex flex-col gap-4 items-start">
+              <img
+                src="/cert-disney-avp.png"
+                alt="Authorized Disney Vacation Planner"
+                style={{ height: 60, width: 'auto', opacity: 0.9 }}
+              />
+              <img
+                src="/cert-universal-pta.png"
+                alt="Universal Preferred Travel Agency"
+                style={{ height: 28, width: 'auto', opacity: 0.9 }}
+              />
+            </div>
+          </div>
         </div>
 
         {/* Divider */}
@@ -105,9 +124,8 @@ export default function D15Footer() {
         />
 
         {/* Copyright */}
-        <div className="flex flex-col sm:flex-row justify-between gap-2 text-[11.5px] text-[rgba(240,237,232,.3)]">
+        <div className="text-[11.5px] text-[rgba(240,237,232,.3)]">
           <p>© {YEAR} Diego Dream Travel · Livi Travel Agency</p>
-          <p>Authorized Disney Vacation Planner · Universal Preferred Travel Agent</p>
         </div>
       </div>
     </footer>

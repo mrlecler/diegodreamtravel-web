@@ -45,7 +45,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-28 pb-20 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-start justify-center text-left px-6 sm:px-10 lg:px-20 pt-28 pb-20 overflow-hidden"
       style={{ backgroundColor: 'var(--navy)' }}
     >
       <style>{`
@@ -98,7 +98,7 @@ export default function Hero() {
       />
 
       {/* Contenido */}
-      <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-6">
+      <div className="relative z-10 w-full max-w-3xl flex flex-col items-start gap-6">
         {/* Eyebrow */}
         <span className="inline-flex items-center gap-2 text-xs font-medium px-4 py-1.5 rounded-full border border-white/15 bg-white/10 backdrop-blur-sm text-[#F0EDE8]/80 tracking-wide">
           {t.hero.eyebrow}
@@ -116,7 +116,7 @@ export default function Hero() {
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-2">
           <a
             href={WA_URL}
             target="_blank"
@@ -139,7 +139,7 @@ export default function Hero() {
         </div>
 
         {/* Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mt-2">
+        <div className="flex flex-wrap items-center justify-start gap-3 mt-2">
           <span className="text-xs text-[#F0EDE8]/70 border border-white/15 bg-white/5 backdrop-blur-sm rounded-full px-3 py-1.5">
             {t.hero.badgeCert}
           </span>

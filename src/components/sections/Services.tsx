@@ -8,10 +8,10 @@ const WA_BASE = 'https://wa.me/5493624703040';
 
 // Diseño (no traducible). El texto sale del diccionario por índice.
 const design = [
-  { color: '#42C2C2', gradFrom: '#0e3030', gradTo: '#42C2C2', external: true, href: '' },
-  { color: '#C44E92', gradFrom: '#2a0a20', gradTo: '#C44E92', external: false, href: '/dream15' },
-  { color: '#F47B45', gradFrom: '#3a1800', gradTo: '#F47B45', external: true, href: '' },
-  { color: '#E63957', gradFrom: '#2a0010', gradTo: '#E63957', external: true, href: '' },
+  { color: '#42C2C2', image: '/wdw01.jpg',  external: true,  href: '' },
+  { color: '#C44E92', image: '/wdw02.webp', external: false, href: '/dream15' },
+  { color: '#F47B45', image: '/wdw03.webp', external: true,  href: '' },
+  { color: '#E63957', image: '/wdw04.webp', external: true,  href: '' },
 ];
 
 export default function Services() {
@@ -50,28 +50,29 @@ export default function Services() {
             return (
               <div
                 key={w.title}
-                className="group relative rounded-3xl overflow-hidden min-h-[280px] flex flex-col justify-end cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
+                className="group relative rounded-3xl overflow-hidden min-h-[300px] flex flex-col justify-end cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
                 style={{
-                  /* TODO: reemplazar por foto real en /public */
-                  background: `linear-gradient(135deg, ${d.gradFrom} 0%, ${d.color} 100%)`,
+                  backgroundImage: `url(${d.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
                 }}
               >
-                {/* Dark overlay — se aclara en hover */}
-                <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-all duration-300" />
+                {/* Degradé para legibilidad — se aclara en hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/15 group-hover:from-black/80 group-hover:via-black/35 transition-all duration-300" />
 
                 {/* Content */}
                 <div className="relative z-10 p-7 flex flex-col gap-3">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-white/50 tracking-widest">{num}</span>
+                    <span className="text-xs font-bold text-white/60 tracking-widest">{num}</span>
                     <span
-                      className="text-xs font-semibold px-2 py-0.5 rounded-full"
-                      style={{ backgroundColor: `${d.color}33`, color: d.color }}
+                      className="text-xs font-semibold px-2 py-0.5 rounded-full backdrop-blur-sm"
+                      style={{ backgroundColor: `${d.color}40`, color: '#fff' }}
                     >
                       {w.category}
                     </span>
                   </div>
                   <h3 className="font-display text-2xl text-white">{w.title}</h3>
-                  <p className="text-sm text-white/75 leading-relaxed">{w.desc}</p>
+                  <p className="text-sm text-white/85 leading-relaxed">{w.desc}</p>
 
                   {d.external ? (
                     <a
@@ -87,7 +88,7 @@ export default function Services() {
                   ) : (
                     <Link
                       href={href}
-                      className="mt-2 inline-flex items-center gap-1.5 self-start rounded-full px-4 py-2 text-xs font-semibold text-white border border-white/30 hover:bg-white/10 transition-all"
+                      className="mt-2 inline-flex items-center gap-1.5 self-start rounded-full px-4 py-2 text-xs font-semibold text-white border border-white/40 hover:bg-white/10 transition-all backdrop-blur-sm"
                     >
                       {w.cta}
                     </Link>

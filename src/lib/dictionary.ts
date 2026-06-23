@@ -1,0 +1,385 @@
+// Diccionario de textos del home institucional DDT.
+// Default: español neutro. Segundo idioma: inglés.
+// Única fuente de verdad para el copy traducible. Editá acá.
+
+export type Lang = 'es' | 'en';
+
+const es = {
+  nav: {
+    about: 'Quién soy',
+    services: 'Servicios',
+    why: 'Por qué conmigo',
+    testimonials: 'Testimonios',
+    dream15: 'Dream 15',
+    dream15Full: 'Dream 15 · Viaje de 15',
+    whatsapp: 'WhatsApp',
+    openMenu: 'Abrir menú',
+    closeMenu: 'Cerrar menú',
+  },
+  hero: {
+    eyebrow: 'Diego Dream Travel · Florida, USA',
+    titleA: 'No vendo paquetes. Construyo recuerdos que duran ',
+    titleHighlight: 'para siempre.',
+    sub: 'Agente oficial certificado Disney & Universal. Tu viaje, diseñado por una persona real, desde la primera consulta hasta el regreso.',
+    ctaWhatsapp: 'Hablemos por WhatsApp',
+    ctaDream15: 'Dream 15 · Viaje de 15',
+    badgeCert: 'Certificado Disney & Universal',
+    badgeTrust: '★★★★★ Excelente en Trustpilot',
+  },
+  trustBar: [
+    'Walt Disney World',
+    'Universal Studios',
+    'Dream 15',
+    'Viaje de 15',
+    'Caribe',
+    'Cancún',
+    'Europa',
+    'Grupos',
+    'Conciertos',
+  ],
+  about: {
+    eyebrow: 'Sobre mí',
+    titleA: 'Hola, soy ',
+    titleHighlight: 'Diego.',
+    body: 'Certificado por Disney y Universal bajo Team Livi Travel (Florida, USA). El servicio no tiene costo extra: las operadoras me pagan cuando confirmas el viaje. Cada viaje empieza con una conversación, no con un formulario — me cuentas qué quieres vivir y yo diseño cada detalle.',
+    cta: 'Cuéntame de tu viaje',
+    partnersLabel: 'Trabajo junto a',
+    partners: ['Disney', 'Universal', 'Livi Travel'],
+    stats: [
+      { value: '$0', label: 'Costo del servicio' },
+      { value: '24 hs', label: 'Cotización sin cargo' },
+      { value: '2', label: 'Certificaciones oficiales' },
+      { value: '100%', label: 'Coordinación incluida' },
+    ],
+    certs: [
+      {
+        title: 'Authorized Vacation Planner',
+        sub: 'College of Disney Knowledge · Walt Disney Company',
+      },
+      {
+        title: 'Preferred Travel Agent',
+        sub: 'Universal Parks & Resorts · Certificación oficial',
+      },
+      {
+        title: 'Team Livi Travel',
+        sub: 'Agencia autorizada · Florida, USA · Respaldo operativo en EE. UU.',
+      },
+    ],
+  },
+  services: {
+    eyebrow: '02 · Qué hago',
+    titleA: 'Lo imaginas tú. ',
+    titleHighlight: 'Lo armo yo.',
+    sub: 'Cuatro formas de viajar, una sola persona que las arma. Elige tu mundo y desde ahí lo construimos juntos.',
+    hint: 'Pasa el cursor sobre cada uno.',
+    footerLine: 'Todo a medida · sin costo extra · una sola persona de principio a fin',
+    worlds: [
+      {
+        category: 'Parques',
+        title: 'Disney & Universal',
+        desc: 'En familia, sin perder un detalle. Parques, hoteles, dining y experiencias VIP.',
+        cta: 'Consultar por WhatsApp',
+        wa: 'Hola Diego, quiero consultar por Disney y Universal',
+      },
+      {
+        category: 'Quinceañeras',
+        title: 'Dream 15',
+        desc: 'El viaje de sus 15, premium. Grupo reducido y curado, no el modelo masivo.',
+        cta: 'Conoce el programa',
+        wa: '',
+      },
+      {
+        category: 'Grupos & amigos',
+        title: 'En grupo',
+        desc: 'Caribe, Cancún, Europa, Vegas. Tú eliges el destino, yo armo el itinerario.',
+        cta: 'Consultar por WhatsApp',
+        wa: 'Hola Diego, quiero consultar por un viaje en grupo',
+      },
+      {
+        category: 'Conciertos & eventos',
+        title: 'En vivo',
+        desc: 'The Sphere, shows y deportes. El evento de tu vida con el viaje armado alrededor.',
+        cta: 'Consultar por WhatsApp',
+        wa: 'Hola Diego, quiero consultar por un concierto o evento',
+      },
+    ],
+  },
+  why: {
+    eyebrow: '03 · Por qué conmigo',
+    titleA: 'Tres cosas que casi ',
+    titleHighlight: 'ningún agente',
+    titleB: ' combina junto.',
+    sub: 'Una cara real, certificación verificable y plataforma propia. No un call center.',
+    cards: [
+      {
+        title: 'Certificación oficial verificable',
+        desc: 'Authorized Vacation Planner (Disney) y Preferred Travel Agent (Universal). No autoproclamado: verificable.',
+        badge: '',
+      },
+      {
+        title: 'Una sola persona, siempre',
+        desc: 'El mismo Diego antes, durante y después del viaje. Sin ser transferido a otro operador cuando más lo necesitas.',
+        badge: '',
+      },
+      {
+        title: 'Portal del pasajero propio',
+        desc: 'Plataforma propia (PWA) donde ves tu itinerario, documentos y actualizaciones en tiempo real. Casi ningún agente lo ofrece.',
+        badge: 'Exclusivo DDT',
+      },
+      {
+        title: 'Cuotas o pago seguro en USA',
+        desc: 'Financiación en cuotas para Argentina y Latam. Pago seguro con tarjeta en USA vía Square (Livi Travel).',
+        badge: '',
+      },
+      {
+        title: 'Asistencia antes, durante y después',
+        desc: 'Si hay un retraso, un cambio o un problema, te aviso y lo resuelvo. El viaje no termina cuando se cierra el itinerario.',
+        badge: '',
+      },
+    ],
+  },
+  testimonials: {
+    eyebrow: '04 · Testimonios',
+    titleA: 'Lo que dicen quienes ',
+    titleHighlight: 'viajaron.',
+    reviewTag: 'Reseña verificada · Trustpilot',
+    trustLine: '★★★★★ Excelente · Trustpilot · Reseñas verificadas',
+    seeAll: 'Ver todas las reseñas',
+    items: [
+      {
+        initials: 'MV',
+        name: 'María Virginia Munaretto',
+        text: 'Diego organizó nuestro viaje a Disney World con un nivel de detalle que no esperaba. Hoteles, reservas de restaurantes dentro del parque, entradas. Cuando nuestro vuelo sufrió un retraso, él nos avisó antes que la propia aerolínea.',
+      },
+      {
+        initials: 'HM',
+        name: 'Hugo Martínez',
+        text: 'Primera vez en Universal Studios y no perdimos ni una atracción. Diego coordinó hotel, Express Pass, traslados. El servicio no tiene costo y eso se nota en el compromiso. Resolvió cualquier consulta en menos de una hora.',
+      },
+      {
+        initials: 'ME',
+        name: 'María Eugenia Munaretto',
+        text: 'El viaje de 15 de mi hija fue perfecto. Diego manejó todo: el grupo, los vuelos, el hotel en Disney, cada experiencia especial. Nos acompañó desde el primer mensaje hasta que volvimos. No hay palabras para describir lo que vivieron.',
+      },
+    ],
+  },
+  ctaClose: {
+    titleA: '¿Cuándo ',
+    titleHighlight: 'planeamos?',
+    line1: 'No vendo paquetes. Construyo recuerdos que duran para siempre.',
+    line2: 'Sin cargo, sin compromiso. Cuéntame qué tienes en mente y armamos juntos el viaje de tu familia.',
+    cta: 'Hablemos por WhatsApp',
+  },
+  footer: {
+    brandLine: 'No vendo paquetes. Construyo recuerdos que duran para siempre.',
+    sectionsHeading: 'Secciones',
+    contactHeading: 'Contacto',
+    certsHeading: 'Certificaciones',
+    bottomLeft: '© 2026 Diego Dream Travel · Livi Travel Agency',
+    bottomRight: 'Argentina · Latam · USA',
+    links: {
+      about: 'Quién soy',
+      services: 'Servicios',
+      why: 'Por qué conmigo',
+      testimonials: 'Testimonios',
+      dream15: 'Dream 15 · Viaje de 15',
+    },
+    certs: [
+      'Authorized Vacation Planner',
+      'Preferred Travel Agent',
+      'Team Livi Travel · Florida, USA',
+    ],
+  },
+};
+
+export type Dict = typeof es;
+
+const en: Dict = {
+  nav: {
+    about: 'About',
+    services: 'Services',
+    why: 'Why me',
+    testimonials: 'Reviews',
+    dream15: 'Dream 15',
+    dream15Full: 'Dream 15 · Sweet 15 Trip',
+    whatsapp: 'WhatsApp',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+  },
+  hero: {
+    eyebrow: 'Diego Dream Travel · Florida, USA',
+    titleA: "I don't sell packages. I build memories that last ",
+    titleHighlight: 'forever.',
+    sub: 'Official certified Disney & Universal agent. Your trip, designed by a real person, from the first conversation to your return.',
+    ctaWhatsapp: "Let's talk on WhatsApp",
+    ctaDream15: 'Dream 15 · Sweet 15 Trip',
+    badgeCert: 'Disney & Universal Certified',
+    badgeTrust: '★★★★★ Excellent on Trustpilot',
+  },
+  trustBar: [
+    'Walt Disney World',
+    'Universal Studios',
+    'Dream 15',
+    'Sweet 15 Trip',
+    'Caribbean',
+    'Cancún',
+    'Europe',
+    'Groups',
+    'Concerts',
+  ],
+  about: {
+    eyebrow: 'About me',
+    titleA: "Hi, I'm ",
+    titleHighlight: 'Diego.',
+    body: 'Certified by Disney and Universal under Team Livi Travel (Florida, USA). My service has no extra cost: the operators pay me when you confirm your trip. Every trip starts with a conversation, not a form — you tell me what you want to experience and I design every detail.',
+    cta: 'Tell me about your trip',
+    partnersLabel: 'I work with',
+    partners: ['Disney', 'Universal', 'Livi Travel'],
+    stats: [
+      { value: '$0', label: 'Service cost' },
+      { value: '24 hrs', label: 'Free quote' },
+      { value: '2', label: 'Official certifications' },
+      { value: '100%', label: 'Coordination included' },
+    ],
+    certs: [
+      {
+        title: 'Authorized Vacation Planner',
+        sub: 'College of Disney Knowledge · Walt Disney Company',
+      },
+      {
+        title: 'Preferred Travel Agent',
+        sub: 'Universal Parks & Resorts · Official certification',
+      },
+      {
+        title: 'Team Livi Travel',
+        sub: 'Authorized agency · Florida, USA · US operational backing',
+      },
+    ],
+  },
+  services: {
+    eyebrow: '02 · What I do',
+    titleA: 'You dream it. ',
+    titleHighlight: 'I build it.',
+    sub: 'Four ways to travel, one person who builds them all. Choose your world and we build it together from there.',
+    hint: 'Hover over each one.',
+    footerLine: 'Fully custom · no extra cost · one person from start to finish',
+    worlds: [
+      {
+        category: 'Parks',
+        title: 'Disney & Universal',
+        desc: 'For the whole family, without missing a detail. Parks, hotels, dining and VIP experiences.',
+        cta: 'Ask on WhatsApp',
+        wa: "Hi Diego, I'd like to ask about Disney and Universal",
+      },
+      {
+        category: 'Quinceañeras',
+        title: 'Dream 15',
+        desc: 'Her Sweet 15 trip, premium. A small, curated group — not the mass-market model.',
+        cta: 'See the program',
+        wa: '',
+      },
+      {
+        category: 'Groups & friends',
+        title: 'In a group',
+        desc: 'Caribbean, Cancún, Europe, Vegas. You choose the destination, I build the itinerary.',
+        cta: 'Ask on WhatsApp',
+        wa: "Hi Diego, I'd like to ask about a group trip",
+      },
+      {
+        category: 'Concerts & events',
+        title: 'Live',
+        desc: 'The Sphere, shows and sports. The event of your life with the whole trip built around it.',
+        cta: 'Ask on WhatsApp',
+        wa: "Hi Diego, I'd like to ask about a concert or event",
+      },
+    ],
+  },
+  why: {
+    eyebrow: '03 · Why me',
+    titleA: 'Three things almost ',
+    titleHighlight: 'no agent',
+    titleB: ' combines together.',
+    sub: 'A real face, verifiable certification and my own platform. Not a call center.',
+    cards: [
+      {
+        title: 'Verifiable official certification',
+        desc: 'Authorized Vacation Planner (Disney) and Preferred Travel Agent (Universal). Not self-proclaimed: verifiable.',
+        badge: '',
+      },
+      {
+        title: 'One person, always',
+        desc: 'The same Diego before, during and after the trip. Never handed off to another operator when you need it most.',
+        badge: '',
+      },
+      {
+        title: 'Your own traveler portal',
+        desc: 'My own platform (PWA) where you see your itinerary, documents and updates in real time. Almost no agent offers this.',
+        badge: 'DDT Exclusive',
+      },
+      {
+        title: 'Installments or secure US payment',
+        desc: 'Installment financing for Argentina and Latam. Secure card payment in the US via Square (Livi Travel).',
+        badge: '',
+      },
+      {
+        title: 'Support before, during and after',
+        desc: "If there's a delay, a change or a problem, I let you know and I solve it. The trip doesn't end when the itinerary is set.",
+        badge: '',
+      },
+    ],
+  },
+  testimonials: {
+    eyebrow: '04 · Reviews',
+    titleA: 'What travelers ',
+    titleHighlight: 'are saying.',
+    reviewTag: 'Verified review · Trustpilot',
+    trustLine: '★★★★★ Excellent · Trustpilot · Verified reviews',
+    seeAll: 'See all reviews',
+    items: [
+      {
+        initials: 'MV',
+        name: 'María Virginia Munaretto',
+        text: 'Diego organized our trip to Disney World with a level of detail I did not expect. Hotels, in-park restaurant reservations, tickets. When our flight was delayed, he let us know before the airline did.',
+      },
+      {
+        initials: 'HM',
+        name: 'Hugo Martínez',
+        text: "First time at Universal Studios and we didn't miss a single attraction. Diego coordinated the hotel, Express Pass and transfers. The service has no cost and you can tell in the commitment. He answered every question in under an hour.",
+      },
+      {
+        initials: 'ME',
+        name: 'María Eugenia Munaretto',
+        text: "My daughter's Sweet 15 trip was perfect. Diego handled everything: the group, the flights, the hotel at Disney, every special experience. He was with us from the first message until we got back. There are no words for what they experienced.",
+      },
+    ],
+  },
+  ctaClose: {
+    titleA: 'When do we ',
+    titleHighlight: 'start planning?',
+    line1: "I don't sell packages. I build memories that last forever.",
+    line2: "No cost, no commitment. Tell me what you have in mind and we'll build your family's trip together.",
+    cta: "Let's talk on WhatsApp",
+  },
+  footer: {
+    brandLine: "I don't sell packages. I build memories that last forever.",
+    sectionsHeading: 'Sections',
+    contactHeading: 'Contact',
+    certsHeading: 'Certifications',
+    bottomLeft: '© 2026 Diego Dream Travel · Livi Travel Agency',
+    bottomRight: 'Argentina · Latam · USA',
+    links: {
+      about: 'About',
+      services: 'Services',
+      why: 'Why me',
+      testimonials: 'Reviews',
+      dream15: 'Dream 15 · Sweet 15 Trip',
+    },
+    certs: [
+      'Authorized Vacation Planner',
+      'Preferred Travel Agent',
+      'Team Livi Travel · Florida, USA',
+    ],
+  },
+};
+
+export const dictionary: Record<Lang, Dict> = { es, en };

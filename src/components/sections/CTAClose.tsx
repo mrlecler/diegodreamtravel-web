@@ -1,8 +1,13 @@
-import { WhatsappLogo } from '@phosphor-icons/react/dist/ssr';
+'use client';
+
+import { WhatsappLogo } from '@phosphor-icons/react';
+import { useLang } from '@/lib/language';
 
 const WA_URL = 'https://wa.me/5493624703040';
 
 export default function CTAClose() {
+  const { t } = useLang();
+
   return (
     <section
       className="relative py-24 px-6 overflow-hidden"
@@ -27,16 +32,11 @@ export default function CTAClose() {
 
       <div className="relative z-10 max-w-2xl mx-auto text-center flex flex-col items-center gap-6">
         <h2 className="text-3xl sm:text-4xl font-bold text-[#F0EDE8] leading-tight">
-          ¿Cuándo{' '}
-          <span className="text-grad-ddt">planeamos?</span>
+          {t.ctaClose.titleA}
+          <span className="text-grad-ddt">{t.ctaClose.titleHighlight}</span>
         </h2>
-        <p className="text-[#F0EDE8]/60 text-lg leading-relaxed">
-          No vendo paquetes. Construyo recuerdos que duran para siempre.
-        </p>
-        <p className="text-[#F0EDE8]/45 max-w-md leading-relaxed">
-          Sin cargo, sin compromiso. Contame qué tienen en mente y armamos juntos el viaje
-          de su familia.
-        </p>
+        <p className="text-[#F0EDE8]/60 text-lg leading-relaxed">{t.ctaClose.line1}</p>
+        <p className="text-[#F0EDE8]/45 max-w-md leading-relaxed">{t.ctaClose.line2}</p>
 
         <a
           href={WA_URL}
@@ -49,7 +49,7 @@ export default function CTAClose() {
           }}
         >
           <WhatsappLogo size={20} weight="fill" />
-          Hablemos por WhatsApp
+          {t.ctaClose.cta}
         </a>
 
         <a

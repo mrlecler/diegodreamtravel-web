@@ -1,17 +1,10 @@
-const items = [
-  'Walt Disney World',
-  'Universal Studios',
-  'Dream 15',
-  'Viaje de 15',
-  'Caribe',
-  'Cancún',
-  'Europa',
-  'Grupos',
-  'Conciertos',
-];
+'use client';
+
+import { useLang } from '@/lib/language';
 
 export default function TrustBar() {
-  const doubled = [...items, ...items];
+  const { t } = useLang();
+  const doubled = [...t.trustBar, ...t.trustBar];
 
   return (
     <section style={{ backgroundColor: 'var(--warm)' }} className="py-5 overflow-hidden">

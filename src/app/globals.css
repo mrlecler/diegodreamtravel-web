@@ -14,7 +14,7 @@
   --color-quince-fuchsia: #C43E8A;
   --color-quince-gold:    #F5C842;
 
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-sans: var(--font-jakarta), 'Plus Jakarta Sans', sans-serif;
 }
 
 /* ─── Variables CSS globales ─── */
@@ -34,7 +34,7 @@
 html, body {
   background-color: var(--navy);
   color: var(--warm);
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-jakarta), 'Plus Jakarta Sans', sans-serif;
 }
 
 /* ─── Utilidades custom ─── */

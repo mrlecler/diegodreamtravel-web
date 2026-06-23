@@ -1,8 +1,13 @@
-import { WhatsappLogo } from '@phosphor-icons/react/dist/ssr';
+'use client';
+
+import { WhatsappLogo } from '@phosphor-icons/react';
+import { useLang } from '@/lib/language';
 
 const WA_URL = 'https://wa.me/5493624703040';
 
 export default function Hero() {
+  const { t } = useLang();
+
   return (
     <section
       className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-28 pb-20 overflow-hidden"
@@ -28,19 +33,18 @@ export default function Hero() {
       <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-6">
         {/* Eyebrow */}
         <span className="inline-flex items-center gap-2 text-xs font-medium px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[#F0EDE8]/70 tracking-wide">
-          Diego Dream Travel · Florida, USA
+          {t.hero.eyebrow}
         </span>
 
         {/* H1 */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#F0EDE8] leading-tight">
-          No vendo paquetes. Construyo recuerdos que duran{' '}
-          <span className="text-grad-ddt">para siempre.</span>
+          {t.hero.titleA}
+          <span className="text-grad-ddt">{t.hero.titleHighlight}</span>
         </h1>
 
         {/* Sub */}
         <p className="text-lg sm:text-xl text-[#F0EDE8]/60 max-w-xl leading-relaxed">
-          Agente oficial certificado Disney &amp; Universal. Tu viaje, armado por una persona
-          real, desde la primera consulta hasta el regreso.
+          {t.hero.sub}
         </p>
 
         {/* CTAs */}
@@ -56,23 +60,23 @@ export default function Hero() {
             }}
           >
             <WhatsappLogo size={20} weight="fill" />
-            Hablemos por WhatsApp
+            {t.hero.ctaWhatsapp}
           </a>
           <a
             href="/dream15"
             className="inline-flex items-center gap-2 rounded-full px-6 py-4 text-base font-medium text-[#F0EDE8]/75 border border-white/15 hover:border-white/35 hover:text-[#F0EDE8] transition-all"
           >
-            Dream 15 · Viaje de 15
+            {t.hero.ctaDream15}
           </a>
         </div>
 
         {/* Badges */}
         <div className="flex flex-wrap items-center justify-center gap-3 mt-2">
           <span className="text-xs text-[#F0EDE8]/55 border border-white/10 rounded-full px-3 py-1.5">
-            Certificado Disney &amp; Universal
+            {t.hero.badgeCert}
           </span>
           <span className="text-xs text-[#F0EDE8]/55 border border-white/10 rounded-full px-3 py-1.5">
-            ★★★★★ Excelente en Trustpilot
+            {t.hero.badgeTrust}
           </span>
         </div>
       </div>

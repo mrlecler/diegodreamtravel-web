@@ -3,22 +3,24 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { List, X, WhatsappLogo, Sparkle } from '@phosphor-icons/react';
+import { useLang } from '@/lib/language';
 
 const WA_URL = 'https://wa.me/5493624703040';
 
 const navLinks = [
-  { label: 'Quién soy', href: '#quien-soy', id: 'quien-soy' },
-  { label: 'Servicios', href: '#servicios', id: 'servicios' },
-  { label: 'Por qué conmigo', href: '#por-que', id: 'por-que' },
-  { label: 'Testimonios', href: '#testimonios', id: 'testimonios' },
-];
+  { key: 'about', href: '#quien-soy', id: 'quien-soy' },
+  { key: 'services', href: '#servicios', id: 'servicios' },
+  { key: 'why', href: '#por-que', id: 'por-que' },
+  { key: 'testimonials', href: '#testimonios', id: 'testimonios' },
+] as const;
 
 export default function NavIsland() {
+  const { t, lang, setLang } = useLang();
+
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(true);
   const [activeId, setActiveId] = useState('');
   const [hoverId, setHoverId] = useState<string | null>(null);
-  const [showTooltip, setShowTooltip] = useState(false);
   const [reduce, setReduce] = useState(false);
 
   const listRef = useRef<HTMLUListElement>(null);
@@ -83,7 +85,7 @@ export default function NavIsland() {
   );
   useEffect(() => {
     moveBlob(hoverId);
-  }, [hoverId, activeId, dark, moveBlob]);
+  }, [hoverId, activeId, dark, lang, moveBlob]);
 
   // smooth scroll + cerrar mobile
   const onNavClick = (e: React.MouseEvent, href: string) => {
@@ -107,6 +109,10 @@ export default function NavIsland() {
 
   const txt = dark ? '#F0EDE8' : '#0C1521';
   const litId = hoverId ?? activeId;
+
+  // estilos del toggle de idioma (desktop)
+  const langInactive = dark ? 'rgba(240,237,232,0.45)' : 'rgba(12,21,33,0.45)';
+  const langActiveBg = dark ? 'rgba(255,255,255,0.10)' : 'rgba(12,21,33,0.08)';
 
   return (
     <>
@@ -184,7 +190,7 @@ export default function NavIsland() {
                     className="relative z-10 block px-3.5 py-1.5 text-sm font-medium transition-colors duration-200"
                     style={{ color: lit ? '#fff' : dark ? 'rgba(240,237,232,0.75)' : 'rgba(12,21,33,0.75)' }}
                   >
-                    {link.label}
+                    {t.nav[link.key]}
                   </a>
                 </li>
               );
@@ -199,32 +205,30 @@ export default function NavIsland() {
               style={{ background: 'var(--grad-ddt)' }}
             >
               <Sparkle size={12} weight="fill" />
-              Dream 15
+              {t.nav.dream15}
             </Link>
 
             <div className="hidden sm:flex items-center gap-0.5 text-xs font-medium">
               <button
+                onClick={() => setLang('es')}
                 className="px-2 py-1 rounded-md transition-colors"
-                style={{ color: txt, background: dark ? 'rgba(255,255,255,0.10)' : 'rgba(12,21,33,0.08)' }}
+                style={{
+                  color: lang === 'es' ? txt : langInactive,
+                  background: lang === 'es' ? langActiveBg : 'transparent',
+                }}
               >
                 ES
               </button>
-              <div className="relative">
-                <button
-                  disabled
-                  className="px-2 py-1 rounded-md cursor-not-allowed select-none"
-                  style={{ color: dark ? 'rgba(240,237,232,0.30)' : 'rgba(12,21,33,0.30)' }}
-                  onMouseEnter={() => setShowTooltip(true)}
-                  onMouseLeave={() => setShowTooltip(false)}
-                >
-                  EN
-                </button>
-                {showTooltip && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-[#0C1521] border border-white/10 rounded-lg px-3 py-2 text-xs text-[#F0EDE8]/70 whitespace-nowrap shadow-xl z-50">
-                    Versión en inglés · Próximamente
-                  </div>
-                )}
-              </div>
+              <button
+                onClick={() => setLang('en')}
+                className="px-2 py-1 rounded-md transition-colors"
+                style={{
+                  color: lang === 'en' ? txt : langInactive,
+                  background: lang === 'en' ? langActiveBg : 'transparent',
+                }}
+              >
+                EN
+              </button>
             </div>
 
             <a
@@ -235,14 +239,14 @@ export default function NavIsland() {
               style={{ backgroundColor: '#FF5B00', boxShadow: '0 6px 18px rgba(255,91,0,0.35)' }}
             >
               <WhatsappLogo size={14} weight="fill" />
-              <span className="hidden sm:inline">WhatsApp</span>
+              <span className="hidden sm:inline">{t.nav.whatsapp}</span>
             </a>
 
             <button
               className="md:hidden p-1 transition-colors"
               style={{ color: txt }}
               onClick={() => setOpen(true)}
-              aria-label="Abrir menú"
+              aria-label={t.nav.openMenu}
             >
               <List size={22} />
             </button>
@@ -286,7 +290,7 @@ export default function NavIsland() {
                 className="w-10 h-10 rounded-full flex items-center justify-center text-[#F0EDE8]"
                 style={{ background: 'rgba(255,255,255,0.08)' }}
                 onClick={() => setOpen(false)}
-                aria-label="Cerrar menú"
+                aria-label={t.nav.closeMenu}
               >
                 <X size={20} />
               </button>
@@ -309,7 +313,7 @@ export default function NavIsland() {
                       className="block py-3 pl-4 text-2xl font-bold transition-colors"
                       style={{ color: active ? '#F0EDE8' : 'rgba(240,237,232,0.55)' }}
                     >
-                      {link.label}
+                      {t.nav[link.key]}
                     </a>
                   </li>
                 );
@@ -324,7 +328,7 @@ export default function NavIsland() {
                 style={{ background: 'var(--grad-ddt)' }}
               >
                 <Sparkle size={18} weight="fill" />
-                Dream 15 · Viaje de 15
+                {t.nav.dream15Full}
               </Link>
 
               <div className="flex items-center gap-3 mt-3">
@@ -336,12 +340,22 @@ export default function NavIsland() {
                   style={{ backgroundColor: '#FF5B00', boxShadow: '0 6px 18px rgba(255,91,0,0.35)' }}
                 >
                   <WhatsappLogo size={18} weight="fill" />
-                  WhatsApp
+                  {t.nav.whatsapp}
                 </a>
                 <div className="flex items-center gap-1 text-sm font-semibold px-2">
-                  <span className="text-[#F0EDE8]">ES</span>
+                  <button
+                    onClick={() => setLang('es')}
+                    style={{ color: lang === 'es' ? '#F0EDE8' : 'rgba(240,237,232,0.30)' }}
+                  >
+                    ES
+                  </button>
                   <span className="text-[#F0EDE8]/30">/</span>
-                  <span className="text-[#F0EDE8]/30">EN</span>
+                  <button
+                    onClick={() => setLang('en')}
+                    style={{ color: lang === 'en' ? '#F0EDE8' : 'rgba(240,237,232,0.30)' }}
+                  >
+                    EN
+                  </button>
                 </div>
               </div>
             </div>

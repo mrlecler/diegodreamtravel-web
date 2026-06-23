@@ -17,7 +17,7 @@ export default function Testimonials() {
           <p className="text-xs font-semibold tracking-widest text-[#475066] uppercase">
             {t.testimonials.eyebrow}
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#0C1521] leading-tight">
+          <h2 className="font-display text-4xl sm:text-5xl text-[#0C1521] leading-tight">
             {t.testimonials.titleA}
             <span className="text-grad-ddt">{t.testimonials.titleHighlight}</span>
           </h2>

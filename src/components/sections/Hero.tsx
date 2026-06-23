@@ -37,7 +37,7 @@ export default function Hero() {
         </span>
 
         {/* H1 */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#F0EDE8] leading-tight">
+        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl text-[#F0EDE8] leading-[1.05]">
           {t.hero.titleA}
           <span className="text-grad-ddt">{t.hero.titleHighlight}</span>
         </h1>

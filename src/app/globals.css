@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+/* ─── Fuente display de marca (títulos) ─── */
+@font-face {
+  font-family: 'Skatyn Gator';
+  src: url('/fonts/Skatyn-Gator-BF68ee10754a67a.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ─── Tokens de marca DDT ─── */
 @theme inline {
   --color-brand-navy:   #0C1521;
@@ -38,6 +47,11 @@ html, body {
 }
 
 /* ─── Utilidades custom ─── */
+.font-display {
+  font-family: 'Skatyn Gator', 'Plus Jakarta Sans', sans-serif;
+  font-weight: 400;
+}
+
 .grad-ddt {
   background: var(--grad-ddt);
 }

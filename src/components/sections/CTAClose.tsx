@@ -31,7 +31,7 @@ export default function CTAClose() {
       />
 
       <div className="relative z-10 max-w-2xl mx-auto text-center flex flex-col items-center gap-6">
-        <h2 className="text-3xl sm:text-4xl font-bold text-[#F0EDE8] leading-tight">
+        <h2 className="font-display text-4xl sm:text-5xl text-[#F0EDE8] leading-tight">
           {t.ctaClose.titleA}
           <span className="text-grad-ddt">{t.ctaClose.titleHighlight}</span>
         </h2>

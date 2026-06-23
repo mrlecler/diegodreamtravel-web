@@ -19,7 +19,7 @@ export default function AboutDiego() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           {t.about.stats.map((s) => (
             <div key={s.label} className="text-center">
-              <p className="text-3xl sm:text-4xl font-bold text-[#0C1521]">{s.value}</p>
+              <p className="font-display text-4xl sm:text-5xl text-[#0C1521]">{s.value}</p>
               <p className="text-sm text-[#475066] mt-1">{s.label}</p>
             </div>
           ))}
@@ -31,7 +31,7 @@ export default function AboutDiego() {
             <p className="text-xs font-semibold tracking-widest text-[#475066] uppercase">
               {t.about.eyebrow}
             </p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#0C1521] leading-tight">
+            <h2 className="font-display text-4xl sm:text-5xl text-[#0C1521] leading-tight">
               {t.about.titleA}
               <span className="text-grad-ddt">{t.about.titleHighlight}</span>
             </h2>

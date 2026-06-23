@@ -1,30 +1,44 @@
-import SectionDivider from '@/components/ui/SectionDivider';
-
 const items = [
-  { label: 'Agente certificado Disney' },
-  { label: 'Agente certificado Universal' },
-  { label: '+500 viajes organizados' },
-  { label: 'Atención 100% personalizada' },
-  { label: '★★★★★ Trustpilot' },
+  'Walt Disney World',
+  'Universal Studios',
+  'Dream 15',
+  'Viaje de 15',
+  'Caribe',
+  'Cancún',
+  'Europa',
+  'Grupos',
+  'Conciertos',
 ];
 
 export default function TrustBar() {
+  const doubled = [...items, ...items];
+
   return (
-    <section className="py-6 px-6">
-      <SectionDivider className="mb-6" />
-      <div className="max-w-5xl mx-auto overflow-hidden">
-        <ul className="flex flex-wrap justify-center gap-x-8 gap-y-3">
-          {items.map((item) => (
-            <li
-              key={item.label}
-              className="text-sm text-[#F0EDE8]/50 font-medium tracking-wide"
+    <section style={{ backgroundColor: 'var(--warm)' }} className="py-5 overflow-hidden">
+      <style>{`
+        @keyframes trustMarquee {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+        .animate-trust-marquee {
+          animation: trustMarquee 28s linear infinite;
+          will-change: transform;
+        }
+      `}</style>
+
+      <div className="flex">
+        <div className="animate-trust-marquee flex shrink-0 items-center gap-0">
+          {doubled.map((item, i) => (
+            <span
+              key={i}
+              className="inline-flex items-center gap-5 whitespace-nowrap px-6 text-sm font-semibold tracking-wide text-[#0C1521]/50"
             >
-              {item.label}
-            </li>
+              {item}
+              <span className="text-[#0C1521]/20 text-base">·</span>
+            </span>
           ))}
-        </ul>
+        </div>
       </div>
-      <SectionDivider className="mt-6" />
     </section>
   );
 }

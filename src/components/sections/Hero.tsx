@@ -9,6 +9,21 @@ const WA_URL = 'https://wa.me/5493624703040';
 // Candidatas del hero (optimizadas en /public/images/opt)
 const HERO_NUMS = ['04', '06', '08', '09', '11', '12', '17', '31', '34', '35', '36'];
 
+// NOTA: destinos tentativos — ajustá el real de cada foto cuando confirmes el contenido
+const HERO_LABELS: Record<string, string> = {
+  '04': 'Walt Disney World',
+  '06': 'Universal Orlando',
+  '08': 'Magic Kingdom',
+  '09': 'EPCOT',
+  '11': 'Islands of Adventure',
+  '12': 'Disney Springs',
+  '17': 'Orlando · Florida',
+  '31': 'Universal Studios',
+  '34': 'Walt Disney World',
+  '35': 'Orlando · Florida',
+  '36': 'Disney · Orlando',
+};
+
 const ROTATE_MS = 7000;
 
 function shuffle(arr: string[]): string[] {
@@ -51,6 +66,7 @@ export default function Hero() {
       <style>{`
         @keyframes heroZoomIn  { from { transform: scale(1);    } to { transform: scale(1.12); } }
         @keyframes heroZoomOut { from { transform: scale(1.12); } to { transform: scale(1);    } }
+        @keyframes fadeKicker  { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>
 
       {/* Slideshow de fondo */}
@@ -97,12 +113,39 @@ export default function Hero() {
         }}
       />
 
+      {/* Contador de slides */}
+      <div
+        aria-hidden
+        className="absolute top-32 right-6 sm:right-10 lg:right-20 z-10 flex flex-col items-end gap-2"
+      >
+        <span className="text-xs font-mono tracking-widest tabular-nums text-[#F0EDE8]/55">
+          {String(active + 1).padStart(2, '0')} / {String(order.length).padStart(2, '0')}
+        </span>
+        <div className="w-32 h-px" style={{ backgroundColor: 'rgba(255,255,255,0.20)' }}>
+          <div
+            style={{
+              height: '100%',
+              width: `${((active + 1) / order.length) * 100}%`,
+              background: 'linear-gradient(90deg,#F47B45,#E63957,#C44E92,#42C2C2)',
+              transition: reduce ? 'none' : 'width 600ms ease',
+            }}
+          />
+        </div>
+      </div>
+
       {/* Contenido */}
       <div className="relative z-10 w-full max-w-3xl flex flex-col items-start gap-6">
-        {/* Eyebrow */}
-        <span className="inline-flex items-center gap-2 text-xs font-medium px-4 py-1.5 rounded-full border border-white/15 bg-white/10 backdrop-blur-sm text-[#F0EDE8]/80 tracking-wide">
-          {t.hero.eyebrow}
-        </span>
+        {/* Kicker de destino */}
+        <div className="flex items-center gap-3">
+          <span className="shrink-0 rounded-full" style={{ width: 24, height: 2, backgroundColor: '#FF5B00' }} />
+          <span
+            key={order[active]}
+            className="text-xs uppercase tracking-[0.22em] text-[#F0EDE8]/80"
+            style={{ animation: reduce ? 'none' : 'fadeKicker 0.4s ease forwards' }}
+          >
+            {HERO_LABELS[order[active]] ?? 'Orlando · Florida, USA'}
+          </span>
+        </div>
 
         {/* H1 */}
         <h1 className="font-display text-5xl sm:text-6xl md:text-7xl text-[#F0EDE8] leading-[1.05] drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]">

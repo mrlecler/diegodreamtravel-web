@@ -26,17 +26,9 @@ const es = {
     badgeCert: 'Agente certificado Disney & Universal',
     badgeTrust: '★★★★★ Excelente en Trustpilot',
   },
-  trustBar: [
-    'Walt Disney World',
-    'Universal Studios',
-    'Dream 15',
-    'Viaje de 15',
-    'Caribe',
-    'Cancún',
-    'Europa',
-    'Grupos',
-    'Conciertos',
-  ],
+  trustBar: {
+    label: 'Trabajo junto a',
+  },
   about: {
     eyebrow: 'Sobre mí',
     titleA: 'Hola, soy ',
@@ -221,17 +213,9 @@ const en: Dict = {
     badgeCert: 'Certified Disney & Universal Agent',
     badgeTrust: '★★★★★ Excellent on Trustpilot',
   },
-  trustBar: [
-    'Walt Disney World',
-    'Universal Studios',
-    'Dream 15',
-    'Sweet 15 Trip',
-    'Caribbean',
-    'Cancún',
-    'Europe',
-    'Groups',
-    'Concerts',
-  ],
+  trustBar: {
+    label: 'I work with',
+  },
   about: {
     eyebrow: 'About me',
     titleA: "Hi, I'm ",

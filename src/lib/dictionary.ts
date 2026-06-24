@@ -43,6 +43,8 @@ const es = {
     titleHighlight: 'Diego.',
     body: 'Certificado por Disney y Universal bajo Team Livi Travel (Florida, USA). El servicio no tiene costo extra: las operadoras me pagan cuando confirmas el viaje. Cada viaje empieza con una conversación, no con un formulario — me cuentas qué quieres vivir y yo diseño cada detalle.',
     cta: 'Cuéntame de tu viaje',
+    galleryEyebrow: 'En persona, en cada destino',
+    liviLabel: 'Parte de la red',
     partnersLabel: 'Trabajo junto a',
     partners: ['Disney', 'Universal', 'Livi Travel'],
     stats: [
@@ -233,6 +235,8 @@ const en: Dict = {
     titleHighlight: 'Diego.',
     body: 'Certified by Disney and Universal under Team Livi Travel (Florida, USA). My service has no extra cost: the operators pay me when you confirm your trip. Every trip starts with a conversation, not a form — you tell me what you want to experience and I design every detail.',
     cta: 'Tell me about your trip',
+    galleryEyebrow: 'In person, at every destination',
+    liviLabel: 'Part of the network',
     partnersLabel: 'I work with',
     partners: ['Disney', 'Universal', 'Livi Travel'],
     stats: [

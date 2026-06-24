@@ -52,9 +52,9 @@ const es = {
     partners: ['Disney', 'Universal', 'Livi Travel'],
     stats: [
       { value: '$0', label: 'Costo del servicio' },
-      { value: '24 hs', label: 'Cotización sin cargo' },
-      { value: '2', label: 'Certificaciones oficiales' },
-      { value: '100%', label: 'Coordinación incluida' },
+      { value: '24 hs', label: 'Respuesta asegurada' },
+      { value: '13', label: 'Certificaciones oficiales' },
+      { value: '1:1', label: 'Atención personal' },
     ],
     certs: [
       {
@@ -247,9 +247,9 @@ const en: Dict = {
     partners: ['Disney', 'Universal', 'Livi Travel'],
     stats: [
       { value: '$0', label: 'Service cost' },
-      { value: '24 hrs', label: 'Free quote' },
-      { value: '2', label: 'Official certifications' },
-      { value: '100%', label: 'Coordination included' },
+      { value: '24 hrs', label: 'Guaranteed reply' },
+      { value: '13', label: 'Official certifications' },
+      { value: '1:1', label: 'Personal attention' },
     ],
     certs: [
       {

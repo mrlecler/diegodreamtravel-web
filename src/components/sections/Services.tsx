@@ -1,7 +1,7 @@
 'use client';
 
 import {
-  WhatsappLogo, CastleTurret, Sparkle, UsersThree, MapTrifold,
+  WhatsappLogo, CastleTurret, Sparkle, UsersThree, MapTrifold, ArrowRight,
   ChatsCircle, AirplaneTilt, Bed, Car, Van, Lifebuoy, Binoculars, Ticket, Boat, HandCoins,
 } from '@phosphor-icons/react';
 import Link from 'next/link';
@@ -9,28 +9,31 @@ import { useLang } from '@/lib/language';
 import DepartureStrip from '@/components/DepartureStrip';
 
 const WA_BASE = 'https://wa.me/5493624703040';
-const GRAD_DDT = 'linear-gradient(90deg,#F47B45,#E63957,#C44E92,#42C2C2)';
 
-// Diseño (no traducible). El texto sale del diccionario por índice.
+// Diseño de cada mundo (no traducible). El texto sale del diccionario por índice.
+// tint = gradiente de 3 paradas: navy abajo · color de categoría al medio · navy leve arriba.
 const design = [
-  { color: '#42C2C2', image: '/wdw01.jpg',                    Icon: CastleTurret, external: true,  href: '' },
-  { color: '#C44E92', image: '/wdw02.webp',                   Icon: Sparkle,      external: false, href: '/dream15' },
-  { color: '#F47B45', image: '/wdw03.webp',                   Icon: UsersThree,   external: true,  href: '' },
-  { color: '#E63957', image: '/images/opt/image52-1280.webp', Icon: MapTrifold,   external: true,  href: '' },
+  {
+    color: '#42C2C2', image: '/wdw01.jpg', Icon: CastleTurret, external: true, href: '',
+    tint: 'linear-gradient(to top,rgba(5,14,31,.94) 7%,rgba(66,194,194,.34) 56%,rgba(5,14,31,.22))',
+  },
+  {
+    color: '#C44E92', image: '/wdw02.webp', Icon: Sparkle, external: false, href: '/dream15',
+    tint: 'linear-gradient(to top,rgba(5,14,31,.94) 7%,rgba(196,78,146,.42) 56%,rgba(5,14,31,.22))',
+  },
+  {
+    color: '#F47B45', image: '/wdw03.webp', Icon: UsersThree, external: true, href: '',
+    tint: 'linear-gradient(to top,rgba(5,14,31,.94) 7%,rgba(244,123,69,.40) 56%,rgba(5,14,31,.22))',
+  },
+  {
+    color: '#E63957', image: '/images/opt/image52-1280.webp', Icon: MapTrifold, external: true, href: '',
+    tint: 'linear-gradient(to top,rgba(5,14,31,.94) 7%,rgba(230,57,87,.42) 56%,rgba(5,14,31,.22))',
+  },
 ];
 
 // Íconos de "Me encargo de cada detalle" (mismo orden que services.included.items)
 const includedIcons = [
-  ChatsCircle,   // Asesoramiento personalizado
-  AirplaneTilt,  // Vuelos y tickets
-  Bed,           // Alojamiento
-  Car,           // Alquiler de vehículos
-  Van,           // Traslados
-  Lifebuoy,      // Asistencia al viajero
-  Binoculars,    // Tours y excursiones
-  Ticket,        // Entradas a parques
-  Boat,          // Cruceros
-  HandCoins,     // Financiación en cuotas
+  ChatsCircle, AirplaneTilt, Bed, Car, Van, Lifebuoy, Binoculars, Ticket, Boat, HandCoins,
 ];
 
 export default function Services() {
@@ -38,6 +41,35 @@ export default function Services() {
 
   return (
     <section id="servicios" className="py-20 px-6" style={{ backgroundColor: 'var(--warm)' }}>
+      <style>{`
+        .cm-worlds{display:flex;gap:4px;border-radius:20px;overflow:hidden;box-shadow:0 30px 70px -34px rgba(5,14,31,.5);}
+        .cm-world{position:relative;flex:1 1 0;min-width:0;min-height:560px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;isolation:isolate;transition:flex .55s cubic-bezier(.22,1,.36,1),filter .45s ease;}
+        .cm-world .cm-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.6) saturate(1.15);transform:scale(1.001);transition:transform .7s ease,filter .5s ease;z-index:0;}
+        .cm-world .cm-tint{position:absolute;inset:0;z-index:1;}
+        .cm-world .cm-content{position:relative;z-index:2;flex:1;padding:32px 28px;display:flex;flex-direction:column;}
+        .cm-world .cm-icon{margin-bottom:auto;}
+        .cm-world .cm-eyebrow{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px;}
+        .cm-world .cm-title{font-size:clamp(24px,2.6vw,34px);line-height:1;letter-spacing:.4px;color:#F0EDE8;}
+        .cm-world .cm-tag{font-size:13.5px;line-height:1.6;color:rgba(240,237,232,.82);margin-top:12px;max-width:30ch;}
+        .cm-cta{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:11px 16px;border-radius:999px;font-weight:600;font-size:12px;color:#F0EDE8;background:rgba(240,237,232,.13);border:1px solid rgba(240,237,232,.28);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-self:flex-start;transition:background .25s ease,gap .25s ease;}
+        .cm-cta-d15{background:linear-gradient(90deg,#F47B45,#E63957 40%,#C44E92);border:0;font-weight:700;box-shadow:0 10px 26px -10px rgba(196,78,146,.6);}
+        @media (hover:hover) and (min-width:861px){
+          .cm-worlds:hover .cm-world{flex:.84;filter:brightness(.7) saturate(.55);}
+          .cm-worlds:hover .cm-world:hover{flex:1.95;filter:none;}
+          .cm-world:hover .cm-bg{transform:scale(1.07);filter:brightness(.82) saturate(1.32);}
+          .cm-world:hover .cm-cta{background:rgba(240,237,232,.22);gap:11px;}
+        }
+        @media (max-width:860px){
+          .cm-worlds{flex-direction:column;border-radius:18px;}
+          .cm-world{flex:none;min-height:380px;}
+          .cm-world .cm-bg{filter:brightness(.66) saturate(1.2);}
+          .cm-world .cm-icon{margin-bottom:120px;}
+        }
+        @media (prefers-reduced-motion: reduce){
+          .cm-world,.cm-world .cm-bg,.cm-cta{transition:none;}
+        }
+      `}</style>
+
       <div className="max-w-6xl mx-auto flex flex-col gap-12">
         {/* Header (alineado a la izquierda) */}
         <div className="flex flex-col gap-4 max-w-2xl">
@@ -60,78 +92,72 @@ export default function Services() {
         {/* Cartel de salidas */}
         <DepartureStrip />
 
-        {/* World cards — 4 en fila, inmersivas */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {t.services.worlds.map((w, i) => {
-            const d = design[i];
-            const Icon = d.Icon;
-            const num = String(i + 1).padStart(2, '0');
-            const href = d.external
-              ? `${WA_BASE}?text=${encodeURIComponent(w.wa)}`
-              : d.href;
+        {/* Cuatro mundos — panel único con efecto acordeón */}
+        <div>
+          <div className="cm-worlds">
+            {t.services.worlds.map((w, i) => {
+              const d = design[i];
+              const Icon = d.Icon;
+              const num = String(i + 1).padStart(2, '0');
 
-            return (
-              <div
-                key={w.title}
-                className="group relative rounded-3xl overflow-hidden min-h-[460px] flex flex-col justify-end cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
-                style={{
-                  backgroundImage: `url(${d.image})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
-              >
-                {/* Tinte de color por categoría */}
-                <div
-                  className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-90"
-                  style={{ background: `linear-gradient(to top, ${d.color}59 0%, ${d.color}26 38%, transparent 72%)` }}
-                />
-                {/* Scrim navy para legibilidad del texto */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      'linear-gradient(to top, rgba(5,14,31,.93) 0%, rgba(5,14,31,.5) 45%, rgba(5,14,31,.08) 78%, transparent 100%)',
-                  }}
-                />
-
-                {/* Contenido */}
-                <div className="relative z-10 p-6 flex flex-col items-start gap-3">
-                  <Icon size={34} weight="duotone" style={{ color: d.color }} />
-
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold tracking-widest" style={{ color: d.color }}>{num}</span>
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em]" style={{ color: d.color }}>
-                      · {w.category}
-                    </span>
+              const inner = (
+                <>
+                  <div className="cm-bg" style={{ backgroundImage: `url(${d.image})` }} />
+                  <div className="cm-tint" style={{ background: d.tint }} />
+                  <div className="cm-content">
+                    <Icon size={36} weight="duotone" className="cm-icon" style={{ color: d.color }} />
+                    <div className="cm-eyebrow" style={{ color: d.color }}>{num} · {w.category}</div>
+                    <div className="cm-title font-display">{w.title}</div>
+                    <div className="cm-tag">{w.desc}</div>
+                    {d.external ? (
+                      <span className="cm-cta">
+                        <WhatsappLogo size={15} weight="fill" style={{ color: d.color }} />
+                        {w.cta}
+                      </span>
+                    ) : (
+                      <span className="cm-cta cm-cta-d15">
+                        {w.cta}
+                        <ArrowRight size={14} weight="bold" />
+                      </span>
+                    )}
                   </div>
+                </>
+              );
 
-                  <h3 className="font-display text-2xl sm:text-[1.7rem] text-white leading-tight">{w.title}</h3>
-                  <p className="text-sm text-white/85 leading-relaxed">{w.desc}</p>
+              return d.external ? (
+                <a
+                  key={w.title}
+                  className="cm-world"
+                  href={`${WA_BASE}?text=${encodeURIComponent(w.wa)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${w.category}: ${w.title}`}
+                >
+                  {inner}
+                </a>
+              ) : (
+                <Link key={w.title} className="cm-world" href={d.href} aria-label={`${w.category}: ${w.title}`}>
+                  {inner}
+                </Link>
+              );
+            })}
+          </div>
 
-                  {d.external ? (
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-2 inline-flex items-center gap-2 self-start rounded-full px-4 py-2.5 text-xs font-semibold text-white border border-white/12 backdrop-blur-sm transition-all hover:scale-[1.03]"
-                      style={{ backgroundColor: 'rgba(12,21,33,0.82)' }}
-                    >
-                      <WhatsappLogo size={15} weight="fill" style={{ color: d.color }} />
-                      {w.cta}
-                    </a>
-                  ) : (
-                    <Link
-                      href={href}
-                      className="mt-2 inline-flex items-center gap-1.5 self-start rounded-full px-5 py-2.5 text-xs font-semibold text-white transition-all hover:scale-[1.03] hover:opacity-95"
-                      style={{ background: GRAD_DDT }}
-                    >
-                      {w.cta}
-                    </Link>
-                  )}
-                </div>
-              </div>
-            );
-          })}
+          {/* Cierre de los mundos: estrella de marca + principios */}
+          <div className="flex items-center gap-2.5 mt-6 flex-wrap">
+            <svg viewBox="0 0 100 100" width="14" height="14" aria-hidden="true">
+              <path
+                d="M50 0 C50 28 72 50 100 50 C72 50 50 72 50 100 C50 72 28 50 0 50 C28 50 50 28 50 0Z"
+                fill="#FF5B00"
+              />
+            </svg>
+            <span
+              className="text-[10px] uppercase tracking-[0.15em] text-[#050E1F]/40"
+              style={{ fontFamily: 'ui-monospace,SFMono-Regular,Menlo,monospace' }}
+            >
+              {t.services.footerLine}
+            </span>
+          </div>
         </div>
 
         {/* Me encargo de cada detalle — servicios incluidos */}
@@ -151,7 +177,7 @@ export default function Services() {
                   key={label}
                   className="flex items-center gap-2.5 rounded-xl border border-[#0C1521]/10 bg-white/55 px-4 py-3 transition-colors hover:border-[#0C1521]/20 hover:bg-white/80"
                 >
-                  <Icon size={22} weight="duotone" style={{ color: '#0C1521' }} className="shrink-0" />
+                  <Icon size={22} weight="duotone" style={{ color: '#FF5B00' }} className="shrink-0" />
                   <span className="text-sm text-[#0C1521] leading-tight">{label}</span>
                 </div>
               );
@@ -160,9 +186,6 @@ export default function Services() {
 
           <p className="text-xs text-[#475066]/55 leading-relaxed">{t.services.included.note}</p>
         </div>
-
-        {/* Footer line */}
-        <p className="text-center text-sm text-[#475066]/60">{t.services.footerLine}</p>
       </div>
     </section>
   );

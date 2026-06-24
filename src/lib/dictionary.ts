@@ -82,9 +82,9 @@ const es = {
         'Tours y excursiones',
         'Entradas a parques',
         'Cruceros',
-        'Financiación en cuotas',
+        'Financiación en cuotas*',
       ],
-      note: 'Cruceros con Royal Caribbean y Disney Cruise Line · Financiación en cuotas según destino y operador.',
+      note: 'Cruceros con Royal Caribbean y Disney Cruise Line. *Financiación en cuotas sujeta a destino y operador.',
     },
     worlds: [
       {
@@ -102,8 +102,8 @@ const es = {
         wa: '',
       },
       {
-        category: 'Grupos & amigos',
-        title: 'En grupo',
+        category: 'En grupo',
+        title: 'Grupos & amigos',
         desc: 'Caribe, Cancún, Europa, Vegas. Tú eliges el destino, yo armo el itinerario.',
         cta: 'Consultar por WhatsApp',
         wa: 'Hola Diego, quiero consultar por un viaje en grupo',
@@ -285,9 +285,9 @@ const en: Dict = {
         'Tours & excursions',
         'Park tickets',
         'Cruises',
-        'Installment financing',
+        'Installment financing*',
       ],
-      note: 'Cruises with Royal Caribbean and Disney Cruise Line · Installment financing subject to destination and operator.',
+      note: 'Cruises with Royal Caribbean and Disney Cruise Line. *Installment financing subject to destination and operator.',
     },
     worlds: [
       {
@@ -305,8 +305,8 @@ const en: Dict = {
         wa: '',
       },
       {
-        category: 'Groups & friends',
-        title: 'In a group',
+        category: 'In a group',
+        title: 'Groups & friends',
         desc: 'Caribbean, Cancún, Europe, Vegas. You choose the destination, I build the itinerary.',
         cta: 'Ask on WhatsApp',
         wa: "Hi Diego, I'd like to ask about a group trip",

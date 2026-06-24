@@ -18,9 +18,7 @@ const PARTNERS = [
   'disney-paris',
   'visit-orlando',
   'hellotickets',
-  'assist365',
   'bookingcars',
-  'disney',
   'pax',
 ];
 

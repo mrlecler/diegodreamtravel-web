@@ -3,6 +3,7 @@
 import { WhatsappLogo } from '@phosphor-icons/react';
 import Link from 'next/link';
 import { useLang } from '@/lib/language';
+import DepartureStrip from '@/components/DepartureStrip';
 
 const WA_BASE = 'https://wa.me/5493624703040';
 
@@ -38,6 +39,9 @@ export default function Services() {
           </p>
           <p className="text-xs text-[#475066]/50 mt-1">{t.services.hint}</p>
         </div>
+
+        {/* Cartel de salidas */}
+        <DepartureStrip />
 
         {/* World cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">

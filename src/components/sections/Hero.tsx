@@ -6,10 +6,12 @@ import { useLang } from '@/lib/language';
 
 const WA_URL = 'https://wa.me/5493624703040';
 
-// Fotos del hero (optimizadas en /public/images/opt). Curadas: solo postales de
-// destino que lucen a sangre completa. Las de gente/experiencia (12, 31, 36, 51,
-// 55, 60) quedan fuera del hero — van mejor en cards / Grupos / Dream 15.
-const HERO_NUMS = ['06', '08', '09', '11', '17', '50', '52', '53', '56', '57', '58', '61', '62', '63', '64'];
+// Fotos del hero (optimizadas en /public/images/opt), en ORDEN CURADO FIJO:
+//  1) Orlando — Universal + Disney mezclados, arrancando por Epic Universe
+//  2) Miami
+//  3) New York · California · Las Vegas
+// (Las de gente/experiencia 12, 31, 36, 51, 55, 60 quedan fuera del hero.)
+const HERO_NUMS = ['50', '09', '06', '11', '08', '17', '61', '56', '58', '52', '57', '63', '64', '53', '62'];
 
 // Destino real de cada foto (todas las disponibles en /opt, por si sumás alguna a HERO_NUMS)
 const HERO_LABELS: Record<string, string> = {
@@ -38,28 +40,17 @@ const HERO_LABELS: Record<string, string> = {
 
 const ROTATE_MS = 7000;
 
-function shuffle(arr: string[]): string[] {
-  const r = [...arr];
-  for (let i = r.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [r[i], r[j]] = [r[j], r[i]];
-  }
-  return r;
-}
-
 export default function Hero() {
   const { t } = useLang();
 
-  // Orden estable para SSR; se randomiza en el cliente (evita mismatch de hidratación)
-  const [order, setOrder] = useState<string[]>(HERO_NUMS);
+  // Orden fijo y determinístico (mismo en SSR y cliente → sin hydration mismatch)
+  const [order] = useState<string[]>(HERO_NUMS);
   const [active, setActive] = useState(0);
   const [reduce, setReduce] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
     setReduce(mq.matches);
-    setOrder(shuffle(HERO_NUMS));
-    setActive(0);
   }, []);
 
   useEffect(() => {

@@ -142,7 +142,7 @@ export default function NavIsland() {
             <img
               src={dark ? '/logo-ddt-20.svg' : '/logo-ddt-24.svg'}
               alt="Diego Dream Travel"
-              className="h-8 w-auto transition-opacity duration-300"
+              className="h-11 w-auto transition-opacity duration-300"
             />
           </a>
 

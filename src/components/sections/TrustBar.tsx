@@ -45,7 +45,7 @@ export default function TrustBar() {
           to   { transform: translateX(-50%); }
         }
         .animate-trust-marquee {
-          animation: trustMarquee 45s linear infinite;
+          animation: trustMarquee 35s linear infinite;
           will-change: transform;
         }
         @media (prefers-reduced-motion: reduce) {

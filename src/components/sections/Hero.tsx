@@ -63,7 +63,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col items-start justify-center text-left px-6 sm:px-10 lg:px-20 pt-28 pb-20 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-start justify-center text-left px-6 sm:px-10 lg:px-20 pt-28 pb-16 overflow-hidden"
       style={{ backgroundColor: 'var(--navy)' }}
     >
       <style>{`
@@ -137,7 +137,7 @@ export default function Hero() {
       </div>
 
       {/* Contenido */}
-      <div className="relative z-10 w-full max-w-3xl flex flex-col items-start gap-6">
+      <div className="relative z-10 w-full max-w-4xl flex flex-col items-start gap-5">
         {/* Kicker de destino */}
         <div className="flex items-center gap-3">
           <span className="shrink-0 rounded-full" style={{ width: 24, height: 2, backgroundColor: '#FF5B00' }} />
@@ -150,19 +150,22 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* H1 */}
-        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#F0EDE8] leading-[1.05] drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]">
+        {/* H1 — tamaño fluido: escala con ancho y alto del viewport, tope 72px */}
+        <h1
+          className="font-display text-[#F0EDE8] leading-[1.03] drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]"
+          style={{ fontSize: 'clamp(2.5rem, min(5.5vw, 8.5vh), 4.5rem)' }}
+        >
           {t.hero.titleA}
           <span className="text-grad-ddt">{t.hero.titleHighlight}</span>
         </h1>
 
         {/* Sub */}
-        <p className="text-lg sm:text-xl text-[#F0EDE8]/75 max-w-xl leading-relaxed drop-shadow-[0_1px_12px_rgba(0,0,0,0.5)]">
+        <p className="text-base sm:text-lg text-[#F0EDE8]/75 max-w-xl leading-relaxed drop-shadow-[0_1px_12px_rgba(0,0,0,0.5)]">
           {t.hero.sub}
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-2">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-1">
           <a
             href={WA_URL}
             target="_blank"
@@ -185,7 +188,7 @@ export default function Hero() {
         </div>
 
         {/* Badges */}
-        <div className="flex flex-wrap items-center justify-start gap-3 mt-2">
+        <div className="flex flex-wrap items-center justify-start gap-3 mt-1">
           <span className="text-xs text-[#F0EDE8]/70 border border-white/15 bg-white/5 backdrop-blur-sm rounded-full px-3 py-1.5">
             {t.hero.badgeCert}
           </span>

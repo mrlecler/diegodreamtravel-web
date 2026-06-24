@@ -6,22 +6,34 @@ import { useLang } from '@/lib/language';
 
 const WA_URL = 'https://wa.me/5493624703040';
 
-// Candidatas del hero (optimizadas en /public/images/opt)
-const HERO_NUMS = ['04', '06', '08', '09', '11', '12', '17', '31', '34', '35', '36'];
+// Fotos del hero (optimizadas en /public/images/opt). Curadas: solo postales de
+// destino que lucen a sangre completa. Las de gente/experiencia (12, 31, 36, 51,
+// 55, 60) quedan fuera del hero — van mejor en cards / Grupos / Dream 15.
+const HERO_NUMS = ['06', '08', '09', '11', '17', '50', '52', '53', '56', '57', '58', '61', '62', '63', '64'];
 
-// NOTA: destinos tentativos — ajustá el real de cada foto cuando confirmes el contenido
+// Destino real de cada foto (todas las disponibles en /opt, por si sumás alguna a HERO_NUMS)
 const HERO_LABELS: Record<string, string> = {
-  '04': 'Walt Disney World',
-  '06': 'Universal Orlando',
-  '08': 'Magic Kingdom',
-  '09': 'EPCOT',
-  '11': 'Islands of Adventure',
-  '12': 'Disney Springs',
-  '17': 'Orlando · Florida',
-  '31': 'Universal Studios',
-  '34': 'Walt Disney World',
-  '35': 'Orlando · Florida',
-  '36': 'Disney · Orlando',
+  '06': 'Islands of Adventure',
+  '08': 'EPCOT',
+  '09': 'Magic Kingdom',
+  '11': 'Walt Disney World',
+  '12': 'Ministry of Magic',        // Epic Universe
+  '17': 'Walt Disney World',
+  '31': 'Universal Orlando',
+  '36': 'Volcano Bay',
+  '50': 'Universal Epic Universe',
+  '51': 'Universal Orlando',
+  '52': 'New York',
+  '53': 'Las Vegas',
+  '55': 'Miami',                     // despedida de solteras en la playa
+  '56': 'Miami Beach',
+  '57': 'New York',
+  '58': 'Miami Beach',
+  '60': 'Disney Hollywood Studios',  // Slinky Dog
+  '61': 'Disney Hollywood Studios',  // Toy Story Land
+  '62': 'Las Vegas',                 // The Strip
+  '63': 'Santa Monica',              // Los Ángeles
+  '64': 'San Francisco',
 };
 
 const ROTATE_MS = 7000;

@@ -102,7 +102,7 @@ export default function AboutDiego() {
           </div>
         </div>
 
-        {/* Sellos de respaldo: 3 chips navy con logos */}
+        {/* Sellos de respaldo: 3 chips navy con logos grandes */}
         <div className="flex flex-col gap-5">
           <div className="flex items-center gap-3">
             <span className="shrink-0 rounded-full" style={{ width: 24, height: 2, backgroundColor: '#FF5B00' }} />
@@ -114,26 +114,41 @@ export default function AboutDiego() {
             {SEALS.map((s) => (
               <div
                 key={s.src}
-                className="flex items-center justify-center rounded-2xl py-6 px-5"
+                className="flex items-center justify-center rounded-2xl py-7 px-6"
                 style={{ backgroundColor: '#0C1521' }}
               >
-                <img src={s.src} alt={s.alt} className="h-9 w-auto max-w-[78%] object-contain" />
+                <img
+                  src={s.src}
+                  alt={s.alt}
+                  className="w-auto h-auto max-h-14 sm:max-h-16 max-w-[88%] object-contain"
+                />
               </div>
             ))}
           </div>
         </div>
 
-        {/* CTA de cierre */}
-        <a
-          href={WA_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 self-start rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-all hover:opacity-90 hover:scale-[1.02]"
-          style={{ backgroundColor: '#FF5B00', boxShadow: '0 0 24px rgba(255,91,0,.30)' }}
+        {/* Bloque de cierre: banda navy + CTA */}
+        <div
+          className="rounded-3xl px-8 py-10 sm:px-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+          style={{ backgroundColor: '#0C1521' }}
         >
-          <WhatsappLogo size={18} weight="fill" />
-          {t.about.cta}
-        </a>
+          <div className="text-center md:text-left">
+            <p className="font-display text-2xl sm:text-3xl text-[#F0EDE8] leading-tight">
+              {t.about.closeLine}
+            </p>
+            <p className="text-sm text-[#F0EDE8]/60 mt-2 max-w-md">{t.about.closeSub}</p>
+          </div>
+          <a
+            href={WA_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 self-center md:self-auto shrink-0 rounded-full px-8 py-4 text-base font-semibold text-white transition-all hover:opacity-90 hover:scale-[1.02]"
+            style={{ backgroundColor: '#FF5B00', boxShadow: '0 0 28px rgba(255,91,0,.40)' }}
+          >
+            <WhatsappLogo size={20} weight="fill" />
+            {t.about.cta}
+          </a>
+        </div>
       </div>
     </section>
   );

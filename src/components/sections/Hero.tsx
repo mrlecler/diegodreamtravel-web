@@ -151,7 +151,7 @@ export default function Hero() {
         </div>
 
         {/* H1 */}
-        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl text-[#F0EDE8] leading-[1.05] drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]">
+        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#F0EDE8] leading-[1.05] drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]">
           {t.hero.titleA}
           <span className="text-grad-ddt">{t.hero.titleHighlight}</span>
         </h1>
@@ -178,7 +178,7 @@ export default function Hero() {
           </a>
           <a
             href="/dream15"
-            className="inline-flex items-center gap-2 rounded-full px-6 py-4 text-base font-medium text-[#F0EDE8]/85 border border-white/25 bg-white/5 backdrop-blur-sm hover:border-white/45 hover:text-[#F0EDE8] transition-all"
+            className="inline-flex items-center gap-2 rounded-full px-6 py-4 text-base font-medium text-[#F0EDE8] backdrop-blur-sm transition-all border border-[rgba(196,78,146,0.7)] bg-[rgba(196,78,146,0.10)] hover:border-[rgba(196,78,146,1)] hover:bg-[rgba(196,78,146,0.20)] hover:shadow-[0_0_24px_rgba(196,78,146,0.45)] hover:scale-[1.02]"
           >
             {t.hero.ctaDream15}
           </a>
@@ -189,7 +189,7 @@ export default function Hero() {
           <span className="text-xs text-[#F0EDE8]/70 border border-white/15 bg-white/5 backdrop-blur-sm rounded-full px-3 py-1.5">
             {t.hero.badgeCert}
           </span>
-          <span className="text-xs text-[#F0EDE8]/70 border border-white/15 bg-white/5 backdrop-blur-sm rounded-full px-3 py-1.5">
+          <span className="text-xs text-[#00B67A] border border-[rgba(0,182,122,0.40)] bg-[rgba(0,182,122,0.08)] backdrop-blur-sm rounded-full px-3 py-1.5">
             {t.hero.badgeTrust}
           </span>
         </div>

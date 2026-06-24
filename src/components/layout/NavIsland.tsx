@@ -137,20 +137,13 @@ export default function NavIsland() {
                 }
           }
         >
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2 shrink-0">
-            <span
-              className="w-7 h-7 rounded-full flex items-center justify-center text-white shrink-0"
-              style={{ background: 'var(--grad-ddt)' }}
-            >
-              <Sparkle size={14} weight="fill" />
-            </span>
-            <span
-              className="hidden sm:block font-bold text-sm whitespace-nowrap transition-colors duration-300"
-              style={{ color: txt }}
-            >
-              Diego Dream Travel
-            </span>
+          {/* Logo — lockup completo, cambia según el fondo */}
+          <a href="#" className="flex items-center shrink-0" aria-label="Diego Dream Travel">
+            <img
+              src={dark ? '/logo-ddt-20.svg' : '/logo-ddt-24.svg'}
+              alt="Diego Dream Travel"
+              className="h-8 w-auto transition-opacity duration-300"
+            />
           </a>
 
           {/* Links desktop con la gota */}
@@ -235,8 +228,7 @@ export default function NavIsland() {
               href={WA_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold text-white transition-all hover:opacity-90"
-              style={{ backgroundColor: '#FF5B00', boxShadow: '0 6px 18px rgba(255,91,0,0.35)' }}
+              className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold transition-all border border-[rgba(37,211,102,0.6)] text-[#25D366] bg-[rgba(37,211,102,0.08)] hover:bg-[rgba(37,211,102,0.16)] hover:border-[#25D366] hover:shadow-[0_0_20px_rgba(37,211,102,0.45)]"
             >
               <WhatsappLogo size={14} weight="fill" />
               <span className="hidden sm:inline">{t.nav.whatsapp}</span>
@@ -277,15 +269,11 @@ export default function NavIsland() {
             />
 
             <div className="relative flex items-center justify-between mb-6">
-              <div className="flex items-center gap-2">
-                <span
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-white"
-                  style={{ background: 'var(--grad-ddt)' }}
-                >
-                  <Sparkle size={16} weight="fill" />
-                </span>
-                <span className="font-bold text-[#F0EDE8]">Diego</span>
-              </div>
+              <img
+                src="/logo-ddt-20.svg"
+                alt="Diego Dream Travel"
+                className="h-8 w-auto"
+              />
               <button
                 className="w-10 h-10 rounded-full flex items-center justify-center text-[#F0EDE8]"
                 style={{ background: 'rgba(255,255,255,0.08)' }}
@@ -336,8 +324,7 @@ export default function NavIsland() {
                   href={WA_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 justify-center flex-1 rounded-2xl py-3.5 text-base font-bold text-white"
-                  style={{ backgroundColor: '#FF5B00', boxShadow: '0 6px 18px rgba(255,91,0,0.35)' }}
+                  className="flex items-center gap-2 justify-center flex-1 rounded-2xl py-3.5 text-base font-bold transition-colors border border-[rgba(37,211,102,0.6)] text-[#25D366] bg-[rgba(37,211,102,0.10)] hover:bg-[rgba(37,211,102,0.18)]"
                 >
                   <WhatsappLogo size={18} weight="fill" />
                   {t.nav.whatsapp}

@@ -12,12 +12,32 @@ const PHOTOS = [
   { file: 'mario', caption: 'Super Nintendo World' },
   { file: 'epic-universe', caption: 'Epic Universe' },
   { file: 'hhn', caption: 'Halloween Horror Nights' },
-  { file: 'diagon', caption: 'Diagon Alley' },
+  { file: 'diagon', caption: 'Ministry of Magic' },
   { file: 'hollywood', caption: 'Hollywood' },
   { file: 'nyc', caption: 'New York' },
   { file: 'friends', caption: 'Friends Experience' },
   { file: 'lincoln', caption: 'Washington DC' },
 ];
+
+// Sellos de respaldo (logos blancos sobre chip navy). Los logos ya traen su texto.
+const SEALS = [
+  { src: '/cert-disney-avp.png', alt: 'Authorized Disney Vacation Planner' },
+  { src: '/cert-universal-pta.png', alt: 'Universal Parks & Resorts · Preferred Travel Agency' },
+  { src: '/images/logos/white/livi-travel.png', alt: 'Team Livi Travel' },
+];
+
+// Renderiza un texto con marcadores **negrita** resaltando los puntos importantes.
+function renderRich(text: string) {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.startsWith('**') && part.endsWith('**') ? (
+      <strong key={i} className="font-semibold text-[#0C1521]">
+        {part.slice(2, -2)}
+      </strong>
+    ) : (
+      <span key={i}>{part}</span>
+    )
+  );
+}
 
 export default function AboutDiego() {
   const { t } = useLang();
@@ -34,7 +54,7 @@ export default function AboutDiego() {
             {t.about.titleA}
             <span className="text-grad-ddt">{t.about.titleHighlight}</span>
           </h2>
-          <p className="text-[#475066] leading-relaxed">{t.about.body}</p>
+          <p className="text-[#475066] leading-relaxed">{renderRich(t.about.body)}</p>
         </div>
 
         {/* Stats */}
@@ -64,7 +84,6 @@ export default function AboutDiego() {
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
-                {/* overlay tipo hero para que no queden crudas */}
                 <div
                   className="absolute inset-0"
                   style={{
@@ -83,43 +102,38 @@ export default function AboutDiego() {
           </div>
         </div>
 
-        {/* CTA + sello Livi + certificaciones */}
-        <div className="grid md:grid-cols-2 gap-10 items-start">
-          <div className="flex flex-col gap-6">
-            <a
-              href={WA_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 self-start rounded-full px-6 py-3 text-sm font-semibold text-white transition-all hover:opacity-90"
-              style={{ backgroundColor: '#FF5B00' }}
-            >
-              <WhatsappLogo size={16} weight="fill" />
-              {t.about.cta}
-            </a>
-
-            {/* Sello: parte de la red Livi Travel (logo blanco sobre chip navy) */}
-            <div
-              className="inline-flex items-center gap-3 self-start rounded-2xl px-5 py-3"
-              style={{ backgroundColor: '#0C1521' }}
-            >
-              <span className="text-xs text-[#F0EDE8]/70">{t.about.liviLabel}</span>
-              <img src="/images/logos/white/livi-travel.png" alt="Livi Travel" className="h-6 w-auto" />
-            </div>
+        {/* Sellos de respaldo: 3 chips navy con logos */}
+        <div className="flex flex-col gap-5">
+          <div className="flex items-center gap-3">
+            <span className="shrink-0 rounded-full" style={{ width: 24, height: 2, backgroundColor: '#FF5B00' }} />
+            <p className="text-xs font-semibold tracking-[0.18em] text-[#475066] uppercase">
+              {t.about.certsEyebrow}
+            </p>
           </div>
-
-          <div className="flex flex-col gap-3">
-            {t.about.certs.map((c) => (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {SEALS.map((s) => (
               <div
-                key={c.title}
-                className="bg-white rounded-2xl border p-5"
-                style={{ borderColor: 'rgba(5,14,31,.07)', boxShadow: '0 2px 12px rgba(5,14,31,.06)' }}
+                key={s.src}
+                className="flex items-center justify-center rounded-2xl py-6 px-5"
+                style={{ backgroundColor: '#0C1521' }}
               >
-                <p className="font-semibold text-[#0C1521] text-sm">{c.title}</p>
-                <p className="text-xs text-[#475066] mt-1 leading-relaxed">{c.sub}</p>
+                <img src={s.src} alt={s.alt} className="h-9 w-auto max-w-[78%] object-contain" />
               </div>
             ))}
           </div>
         </div>
+
+        {/* CTA de cierre */}
+        <a
+          href={WA_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 self-start rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-all hover:opacity-90 hover:scale-[1.02]"
+          style={{ backgroundColor: '#FF5B00', boxShadow: '0 0 24px rgba(255,91,0,.30)' }}
+        >
+          <WhatsappLogo size={18} weight="fill" />
+          {t.about.cta}
+        </a>
       </div>
     </section>
   );

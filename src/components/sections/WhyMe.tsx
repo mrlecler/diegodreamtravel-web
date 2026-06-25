@@ -4,6 +4,7 @@ import {
   SealCheck, UserCircle, CreditCard, Headset, Check,
   SignOut, CaretRight, House, Question, MapTrifold, Ticket, BookOpen, Heartbeat,
 } from '@phosphor-icons/react';
+import { useEffect, useRef } from 'react';
 import { useLang } from '@/lib/language';
 
 const cardIcons = [SealCheck, UserCircle, CreditCard, Headset];
@@ -16,6 +17,46 @@ export default function WhyMe() {
   const { t } = useLang();
   const app = t.why.app;
   const ph = app.phone;
+
+  const blockRef = useRef<HTMLDivElement>(null);
+  const tiltRef = useRef<HTMLDivElement>(null);
+
+  // Parallax: el teléfono sigue suavemente el mouse (solo desktop, puntero fino)
+  useEffect(() => {
+    const block = blockRef.current;
+    const tilt = tiltRef.current;
+    if (!block || !tilt) return;
+    if (!window.matchMedia('(pointer:fine)').matches || !window.matchMedia('(min-width:1024px)').matches) return;
+
+    const BASE_Y = -22, BASE_X = 6;
+    let curY = BASE_Y, curX = BASE_X, tgtY = BASE_Y, tgtX = BASE_X, raf = 0;
+
+    const tick = () => {
+      curY += (tgtY - curY) * 0.12;
+      curX += (tgtX - curX) * 0.12;
+      tilt.style.setProperty('--ry', curY.toFixed(2) + 'deg');
+      tilt.style.setProperty('--rx', curX.toFixed(2) + 'deg');
+      if (Math.abs(tgtY - curY) > 0.04 || Math.abs(tgtX - curX) > 0.04) raf = requestAnimationFrame(tick);
+      else raf = 0;
+    };
+    const onMove = (e: MouseEvent) => {
+      const r = block.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      tgtY = BASE_Y + px * 14;
+      tgtX = BASE_X - py * 10;
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+    const onLeave = () => { tgtY = BASE_Y; tgtX = BASE_X; if (!raf) raf = requestAnimationFrame(tick); };
+
+    block.addEventListener('mousemove', onMove);
+    block.addEventListener('mouseleave', onLeave);
+    return () => {
+      block.removeEventListener('mousemove', onMove);
+      block.removeEventListener('mouseleave', onLeave);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   return (
     <section id="por-que" className="py-20 px-6" style={{ backgroundColor: 'var(--warm)' }}>
@@ -35,7 +76,7 @@ export default function WhyMe() {
         .ddt-g3 { width:280px; height:280px; top:34%; left:34%;  filter:blur(66px); background:radial-gradient(circle,rgba(124,77,205,.55),transparent 64%); animation-delay:.6s; }
         .ddt-g4 { width:230px; height:210px; bottom:14%; left:4%; filter:blur(52px); background:radial-gradient(circle,rgba(244,123,69,.4),transparent 64%); animation-delay:1.8s; }
 
-        .ddt-tilt { position:relative; z-index:2; transform:rotateY(-22deg) rotateX(6deg); transform-style:preserve-3d; }
+        .ddt-tilt { position:relative; z-index:2; transform:rotateY(var(--ry,-22deg)) rotateX(var(--rx,6deg)); transform-style:preserve-3d; }
         .ddt-phone { animation:ddtFloat 6s ease-in-out infinite; width:262px; }
         .ddt-frame { position:relative; border-radius:46px; padding:9px;
           background:linear-gradient(145deg,#262b3d 0%,#0a0d14 46%);
@@ -79,8 +120,8 @@ export default function WhyMe() {
         .ddt-push-title { font-size:10px; font-weight:700; color:#F0EDE8; }
         .ddt-push-body { font-size:10px; line-height:1.35; color:rgba(240,237,232,.72); }
 
-        @media (max-width:1024px){ .ddt-tilt{ transform:rotateY(-13deg) rotateX(4deg); } }
-        @media (max-width:640px){ .ddt-tilt{ transform:none; } .ddt-phone{ width:240px; } .ddt-stage{ min-height:500px; } }
+        @media (max-width:1024px){ .ddt-tilt{ --ry:-13deg; --rx:4deg; } }
+        @media (max-width:640px){ .ddt-tilt{ --ry:0deg; --rx:0deg; } .ddt-phone{ width:240px; } .ddt-stage{ min-height:500px; } }
       `}</style>
 
       <div className="max-w-6xl mx-auto flex flex-col gap-12">
@@ -99,7 +140,7 @@ export default function WhyMe() {
         </div>
 
         {/* Feature destacado: la app */}
-        <div className="relative rounded-3xl overflow-hidden" style={{ backgroundColor: '#070B12' }}>
+        <div ref={blockRef} className="relative rounded-3xl overflow-hidden" style={{ backgroundColor: '#070B12' }}>
           <div className="relative grid lg:grid-cols-2 gap-8 items-center p-8 sm:p-12">
             {/* Texto */}
             <div className="flex flex-col items-start gap-5 order-2 lg:order-1">
@@ -125,7 +166,7 @@ export default function WhyMe() {
               <span className="ddt-glow ddt-g3" />
               <span className="ddt-glow ddt-g4" />
 
-              <div className="ddt-tilt">
+              <div ref={tiltRef} className="ddt-tilt">
                 <div className="ddt-phone">
                   <div className="ddt-frame">
                     <div className="ddt-island" />

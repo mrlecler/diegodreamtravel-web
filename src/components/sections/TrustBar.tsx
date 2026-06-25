@@ -71,7 +71,7 @@ export default function TrustBar() {
             maskImage: 'linear-gradient(to right, transparent, black 4%, black 92%, transparent)',
           }}
         >
-          <div className="animate-trust-marquee flex shrink-0 items-center">
+          <div className="animate-trust-marquee flex shrink-0 items-center w-max">
             {doubled.map((p, i) => (
               <span key={i} className="inline-flex items-center justify-center px-6 sm:px-8 shrink-0">
                 <img

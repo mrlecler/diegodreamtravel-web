@@ -63,25 +63,27 @@ export default function WhyMe() {
       <style>{`
         @keyframes ddtFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
         @keyframes ddtPush {
-          0%,5%    { transform: translateY(-160%); opacity: 0; }
+          0%,5%    { transform: translateY(170%);  opacity: 0; }
           11%,44%  { transform: translateY(0);     opacity: 1; }
-          52%,100% { transform: translateY(-160%); opacity: 0; }
+          52%,100% { transform: translateY(170%);  opacity: 0; }
         }
         @keyframes ddtGlow { 0%,100%{opacity:.85} 50%{opacity:1} }
 
         .ddt-stage { position:relative; display:flex; justify-content:center; align-items:center; min-height:540px; perspective:1700px; }
         .ddt-glow { position:absolute; border-radius:50%; pointer-events:none; z-index:0; animation:ddtGlow 5s ease-in-out infinite; }
-        .ddt-g1 { width:340px; height:340px; top:4%;  left:-4%;  filter:blur(54px); background:radial-gradient(circle,rgba(196,78,146,.6),transparent 64%); }
-        .ddt-g2 { width:300px; height:300px; bottom:2%; right:-6%; filter:blur(58px); background:radial-gradient(circle,rgba(66,194,194,.5),transparent 64%); animation-delay:1.2s; }
-        .ddt-g3 { width:280px; height:280px; top:34%; left:34%;  filter:blur(66px); background:radial-gradient(circle,rgba(124,77,205,.55),transparent 64%); animation-delay:.6s; }
-        .ddt-g4 { width:230px; height:210px; bottom:14%; left:4%; filter:blur(52px); background:radial-gradient(circle,rgba(244,123,69,.4),transparent 64%); animation-delay:1.8s; }
+        .ddt-halo { width:360px; height:540px; top:50%; left:50%; transform:translate(-50%,-50%); filter:blur(72px); animation:none;
+          background:radial-gradient(ellipse at center, rgba(132,150,210,.26), rgba(132,150,210,.10) 45%, transparent 72%); }
+        .ddt-g1 { width:360px; height:360px; top:2%;  left:-6%;  filter:blur(50px); background:radial-gradient(circle,rgba(196,78,146,.72),transparent 64%); }
+        .ddt-g2 { width:320px; height:320px; bottom:0%; right:-8%; filter:blur(54px); background:radial-gradient(circle,rgba(66,194,194,.62),transparent 64%); animation-delay:1.2s; }
+        .ddt-g3 { width:300px; height:300px; top:32%; left:32%;  filter:blur(62px); background:radial-gradient(circle,rgba(124,77,205,.68),transparent 64%); animation-delay:.6s; }
+        .ddt-g4 { width:240px; height:220px; bottom:12%; left:2%; filter:blur(48px); background:radial-gradient(circle,rgba(244,123,69,.52),transparent 64%); animation-delay:1.8s; }
 
         .ddt-tilt { position:relative; z-index:2; transform:rotateY(var(--ry,-22deg)) rotateX(var(--rx,6deg)); transform-style:preserve-3d; }
         .ddt-phone { animation:ddtFloat 6s ease-in-out infinite; width:262px; }
-        .ddt-frame { position:relative; border-radius:46px; padding:9px;
-          background:linear-gradient(145deg,#262b3d 0%,#0a0d14 46%);
-          box-shadow:0 44px 96px -30px rgba(0,0,0,.85), 0 0 0 1px rgba(255,255,255,.05),
-                     inset 0 1px 1px rgba(255,255,255,.22), inset 0 -2px 6px rgba(0,0,0,.5); }
+        .ddt-frame { position:relative; border-radius:46px; padding:10px;
+          background:linear-gradient(150deg,#3c4359 0%,#1b2030 36%,#0a0d14 72%);
+          box-shadow:0 44px 96px -28px rgba(0,0,0,.85), 0 0 70px -8px rgba(124,77,205,.45), 0 0 0 1px rgba(255,255,255,.10),
+                     inset 0 1px 1px rgba(255,255,255,.30), inset 0 -2px 6px rgba(0,0,0,.5); }
         .ddt-island { position:absolute; top:19px; left:50%; transform:translateX(-50%); width:80px; height:22px; background:#05080f; border-radius:999px; z-index:6; }
         .ddt-screen { position:relative; border-radius:38px; overflow:hidden; background:#080c14; padding:40px 15px 0; min-height:496px; display:flex; flex-direction:column; }
         .ddt-sb { display:flex; justify-content:space-between; align-items:center; padding:0 8px 8px; }
@@ -111,8 +113,8 @@ export default function WhyMe() {
         .ddt-nav span { display:flex; flex-direction:column; align-items:center; gap:3px; font-size:8px; color:rgba(240,237,232,.4); }
         .ddt-nav span.on { color:#FF5B00; }
 
-        .ddt-push { position:absolute; top:14px; left:13px; right:13px; z-index:10; display:flex; gap:10px; align-items:flex-start;
-          padding:10px 12px; border-radius:16px; background:rgba(22,30,44,.92); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+        .ddt-push { position:absolute; bottom:74px; left:12px; right:12px; z-index:20; display:flex; gap:10px; align-items:flex-start;
+          padding:10px 12px; border-radius:16px; background:rgba(18,24,36,.96); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
           border:1px solid rgba(255,255,255,.13); box-shadow:0 14px 34px -10px rgba(0,0,0,.7); animation:ddtPush 7.5s ease-in-out infinite; }
         .ddt-push-ico { width:30px; height:30px; border-radius:9px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
           color:#fff; font-weight:800; font-size:14px; background:linear-gradient(135deg,#F47B45,#C44E92); }
@@ -140,7 +142,7 @@ export default function WhyMe() {
         </div>
 
         {/* Feature destacado: la app */}
-        <div ref={blockRef} className="relative rounded-3xl overflow-hidden" style={{ backgroundColor: '#070B12' }}>
+        <div ref={blockRef} className="relative rounded-3xl overflow-hidden" style={{ backgroundColor: '#0B1422' }}>
           <div className="relative grid lg:grid-cols-2 gap-8 items-center p-8 sm:p-12">
             {/* Texto */}
             <div className="flex flex-col items-start gap-5 order-2 lg:order-1">
@@ -161,6 +163,7 @@ export default function WhyMe() {
 
             {/* iPhone en perspectiva + glows */}
             <div className="order-1 lg:order-2 ddt-stage">
+              <span className="ddt-glow ddt-halo" />
               <span className="ddt-glow ddt-g1" />
               <span className="ddt-glow ddt-g2" />
               <span className="ddt-glow ddt-g3" />

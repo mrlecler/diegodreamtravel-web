@@ -14,19 +14,19 @@ const WA_BASE = 'https://wa.me/5493624703040';
 // tint = gradiente de 3 paradas: navy abajo · color de categoría al medio · navy leve arriba.
 const design = [
   {
-    color: '#42C2C2', image: '/wdw01.jpg', Icon: CastleTurret, external: true, href: '',
+    color: '#42C2C2', image: '/images/opt/image11-2560.webp', Icon: CastleTurret, external: true, href: '',
     tint: 'linear-gradient(to top,rgba(5,14,31,.94) 7%,rgba(66,194,194,.34) 56%,rgba(5,14,31,.22))',
   },
   {
-    color: '#C44E92', image: '/wdw02.webp', Icon: Sparkle, external: false, href: '/dream15',
+    color: '#C44E92', image: '/wdw03.webp', Icon: Sparkle, external: false, href: '/dream15',
     tint: 'linear-gradient(to top,rgba(5,14,31,.94) 7%,rgba(196,78,146,.42) 56%,rgba(5,14,31,.22))',
   },
   {
-    color: '#F47B45', image: '/wdw03.webp', Icon: UsersThree, external: true, href: '',
+    color: '#F47B45', image: '/images/opt/image45-2560.webp', Icon: UsersThree, external: true, href: '',
     tint: 'linear-gradient(to top,rgba(5,14,31,.94) 7%,rgba(244,123,69,.40) 56%,rgba(5,14,31,.22))',
   },
   {
-    color: '#E63957', image: '/images/opt/image52-1280.webp', Icon: MapTrifold, external: true, href: '',
+    color: '#E63957', image: '/images/opt/image46-2560.webp', Icon: MapTrifold, external: true, href: '',
     tint: 'linear-gradient(to top,rgba(5,14,31,.94) 7%,rgba(230,57,87,.42) 56%,rgba(5,14,31,.22))',
   },
 ];

@@ -111,7 +111,7 @@ export default function Services() {
                     <div className="cm-tag">{w.desc}</div>
                     {d.external ? (
                       <span className="cm-cta">
-                        <WhatsappLogo size={15} weight="fill" style={{ color: d.color }} />
+                        <WhatsappLogo size={15} weight="fill" style={{ color: '#25D366' }} />
                         {w.cta}
                       </span>
                     ) : (

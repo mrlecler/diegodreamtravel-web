@@ -85,16 +85,7 @@ function Flap({
 // ─── Panel principal ───────────────────────────────────────────────────────
 export default function DepartureStrip() {
   const [idx, setIdx]       = useState(0);
-  const [reduce, setReduce] = useState(false);
-
-  // prefers-reduced-motion
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const apply = () => setReduce(mq.matches);
-    apply();
-    mq.addEventListener('change', apply);
-    return () => mq.removeEventListener('change', apply);
-  }, []);
+  const reduce = false; // animaciones siempre activas (no frenar por prefers-reduced-motion)
 
   // loop de destinos
   // 4 000ms normal: ~1 235ms de animación + 2 400ms de hold + buffer

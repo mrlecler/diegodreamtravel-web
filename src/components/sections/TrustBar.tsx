@@ -48,9 +48,6 @@ export default function TrustBar() {
           animation: trustMarquee 35s linear infinite;
           will-change: transform;
         }
-        @media (prefers-reduced-motion: reduce) {
-          .animate-trust-marquee { animation: none; }
-        }
       `}</style>
 
       <div className="mx-auto max-w-6xl px-6 sm:px-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-0">

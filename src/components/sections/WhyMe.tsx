@@ -39,8 +39,8 @@ export default function WhyMe() {
     };
     const onMove = (e: MouseEvent) => {
       const r = block.getBoundingClientRect();
-      tgtY = ((e.clientX - r.left) / r.width - 0.5) * 9;
-      tgtX = -((e.clientY - r.top) / r.height - 0.5) * 7;
+      tgtY = ((e.clientX - r.left) / r.width - 0.5) * 6;
+      tgtX = -((e.clientY - r.top) / r.height - 0.5) * 5;
       if (!raf) raf = requestAnimationFrame(tick);
     };
     const onLeave = () => { tgtY = 0; tgtX = 0; if (!raf) raf = requestAnimationFrame(tick); };
@@ -79,12 +79,12 @@ export default function WhyMe() {
         .ddt-float { position:relative; animation:ddtFloaty 6s ease-in-out infinite; z-index:2; }
         .ddt-persp { perspective:1900px; }
         .ddt-parallax { transform:rotateX(var(--py,0deg)) rotateY(var(--px,0deg)); transform-style:preserve-3d; }
-        .ddt-pose { transform:matrix3d(0.694233,0.0135383,0.355326,0,-0.0491384,0.775609,0.0664545,0,-0.451503,-0.104528,0.886125,0,0,0,0,1); transform-style:preserve-3d; }
+        .ddt-pose { transform:none; transform-style:preserve-3d; }
 
         /* ===== iPhone ===== */
         .ddt-frame { position:relative; width:272px; border-radius:58px; padding:3px;
           background:linear-gradient(116deg,#D7DADE 0%,#6B6F74 6%,#F1F3F5 15%,#7E8389 26%,#3C4045 37%,#BCC0C5 51%,#585C62 63%,#E6E9EC 77%,#4E5257 89%,#A6AAAF 100%);
-          box-shadow:0 1px 2px rgba(255,255,255,.5), 0 20px 44px -18px rgba(0,0,0,.75); }
+          box-shadow:0 1px 2px rgba(255,255,255,.5), 0 26px 50px -18px rgba(0,0,0,.75), 0 50px 90px -30px rgba(0,0,0,.55); }
         .ddt-btn { position:absolute; border-radius:2px 3px 3px 2px; z-index:1;
           background:linear-gradient(180deg,#A3A8AE,#565A60 16%,#3A3E43 50%,#565A60 84%,#A3A8AE); }
         .ddt-btn.pw  { width:3px; height:11%; top:40%; right:-3px; border-radius:3px 2px 2px 3px; }
@@ -132,8 +132,7 @@ export default function WhyMe() {
         .ddt-push-title { font-size:10px; font-weight:700; color:#F0EDE8; }
         .ddt-push-body { font-size:10px; line-height:1.35; color:rgba(240,237,232,.72); }
 
-        @media (max-width:1024px){ .ddt-pose{ transform:matrix3d(0.82,0.01,0.22,0,-0.03,0.86,0.04,0,-0.28,-0.06,0.92,0,0,0,0,1); } }
-        @media (max-width:640px){ .ddt-pose{ transform:none; } .ddt-frame{ width:248px; } .ddt-stage{ min-height:560px; } }
+        @media (max-width:640px){ .ddt-frame{ width:248px; } .ddt-stage{ min-height:560px; } }
       `}</style>
 
       <div className="max-w-6xl mx-auto flex flex-col gap-12">

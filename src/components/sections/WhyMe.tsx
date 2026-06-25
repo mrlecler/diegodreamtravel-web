@@ -21,33 +21,29 @@ export default function WhyMe() {
   const blockRef = useRef<HTMLDivElement>(null);
   const tiltRef = useRef<HTMLDivElement>(null);
 
-  // Parallax: el teléfono sigue suavemente el mouse (solo desktop, puntero fino)
+  // Parallax: el teléfono sigue suavemente el mouse (suma un giro leve sobre la pose 3D)
   useEffect(() => {
     const block = blockRef.current;
     const tilt = tiltRef.current;
     if (!block || !tilt) return;
     if (!window.matchMedia('(pointer:fine)').matches || !window.matchMedia('(min-width:1024px)').matches) return;
 
-    const BASE_Y = -22, BASE_X = 6;
-    let curY = BASE_Y, curX = BASE_X, tgtY = BASE_Y, tgtX = BASE_X, raf = 0;
-
+    let curX = 0, curY = 0, tgtX = 0, tgtY = 0, raf = 0;
     const tick = () => {
       curY += (tgtY - curY) * 0.12;
       curX += (tgtX - curX) * 0.12;
-      tilt.style.setProperty('--ry', curY.toFixed(2) + 'deg');
-      tilt.style.setProperty('--rx', curX.toFixed(2) + 'deg');
-      if (Math.abs(tgtY - curY) > 0.04 || Math.abs(tgtX - curX) > 0.04) raf = requestAnimationFrame(tick);
+      tilt.style.setProperty('--px', curY.toFixed(2) + 'deg'); // rotateY
+      tilt.style.setProperty('--py', curX.toFixed(2) + 'deg'); // rotateX
+      if (Math.abs(tgtY - curY) > 0.03 || Math.abs(tgtX - curX) > 0.03) raf = requestAnimationFrame(tick);
       else raf = 0;
     };
     const onMove = (e: MouseEvent) => {
       const r = block.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width - 0.5;
-      const py = (e.clientY - r.top) / r.height - 0.5;
-      tgtY = BASE_Y + px * 14;
-      tgtX = BASE_X - py * 10;
+      tgtY = ((e.clientX - r.left) / r.width - 0.5) * 9;
+      tgtX = -((e.clientY - r.top) / r.height - 0.5) * 7;
       if (!raf) raf = requestAnimationFrame(tick);
     };
-    const onLeave = () => { tgtY = BASE_Y; tgtX = BASE_X; if (!raf) raf = requestAnimationFrame(tick); };
+    const onLeave = () => { tgtY = 0; tgtX = 0; if (!raf) raf = requestAnimationFrame(tick); };
 
     block.addEventListener('mousemove', onMove);
     block.addEventListener('mouseleave', onLeave);
@@ -61,31 +57,45 @@ export default function WhyMe() {
   return (
     <section id="por-que" className="py-20 px-6" style={{ backgroundColor: 'var(--warm)' }}>
       <style>{`
-        @keyframes ddtFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+        @keyframes ddtFloaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
         @keyframes ddtPush {
-          0%,5%    { transform: translateY(170%);  opacity: 0; }
-          11%,44%  { transform: translateY(0);     opacity: 1; }
-          52%,100% { transform: translateY(170%);  opacity: 0; }
+          0%,5%{ transform:translateY(170%); opacity:0; }
+          11%,44%{ transform:translateY(0); opacity:1; }
+          52%,100%{ transform:translateY(170%); opacity:0; }
         }
-        @keyframes ddtGlow { 0%,100%{opacity:.85} 50%{opacity:1} }
+        @keyframes ddtGlow { 0%,100%{opacity:.82} 50%{opacity:1} }
 
-        .ddt-stage { position:relative; display:flex; justify-content:center; align-items:center; min-height:540px; perspective:1700px; }
-        .ddt-glow { position:absolute; border-radius:50%; pointer-events:none; z-index:0; animation:ddtGlow 5s ease-in-out infinite; }
-        .ddt-halo { width:360px; height:540px; top:50%; left:50%; transform:translate(-50%,-50%); filter:blur(72px); animation:none;
-          background:radial-gradient(ellipse at center, rgba(132,150,210,.26), rgba(132,150,210,.10) 45%, transparent 72%); }
-        .ddt-g1 { width:360px; height:360px; top:2%;  left:-6%;  filter:blur(50px); background:radial-gradient(circle,rgba(196,78,146,.72),transparent 64%); }
-        .ddt-g2 { width:320px; height:320px; bottom:0%; right:-8%; filter:blur(54px); background:radial-gradient(circle,rgba(66,194,194,.62),transparent 64%); animation-delay:1.2s; }
-        .ddt-g3 { width:300px; height:300px; top:32%; left:32%;  filter:blur(62px); background:radial-gradient(circle,rgba(124,77,205,.68),transparent 64%); animation-delay:.6s; }
-        .ddt-g4 { width:240px; height:220px; bottom:12%; left:2%; filter:blur(48px); background:radial-gradient(circle,rgba(244,123,69,.52),transparent 64%); animation-delay:1.8s; }
+        /* ===== Stage + glows (valores tomados del render 3D) ===== */
+        .ddt-stage { position:relative; display:flex; align-items:center; justify-content:center; width:100%; min-height:660px; }
+        .ddt-glow { position:absolute; border-radius:50%; pointer-events:none; z-index:0; animation:ddtGlow 5.5s ease-in-out infinite; }
+        .ddt-gHalo { width:90.2%; height:66.1%; top:16.9%; left:4.9%;  filter:blur(28px); background:radial-gradient(circle, rgba(196,78,146,.5), rgba(124,77,205,.28) 42%, transparent 68%); animation:none; }
+        .ddt-gFu   { width:60.2%; height:44.1%; top:8%;    left:12%;   filter:blur(26px); background:radial-gradient(circle, rgba(196,78,146,.85), transparent 60%); }
+        .ddt-gTe   { width:56.4%; height:41.3%; top:52.6%; left:35.5%; filter:blur(26px); background:radial-gradient(circle, rgba(66,194,194,.8), transparent 60%); animation-delay:1.2s; }
+        .ddt-gVi   { width:43.2%; height:31.7%; top:36%;   left:34.7%; filter:blur(30px); background:radial-gradient(circle, rgba(124,77,205,.7), transparent 62%); animation-delay:.6s; }
+        .ddt-gOr   { width:35.7%; height:26.2%; top:51.8%; left:16%;   filter:blur(26px); background:radial-gradient(circle, rgba(244,123,69,.6), transparent 62%); animation-delay:1.8s; }
+        .ddt-gShad { width:37.6%; height:5%;    top:84%;   left:31.2%; filter:blur(26px); background:radial-gradient(ellipse at center, rgba(0,0,0,.55), transparent 70%); animation:none; }
 
-        .ddt-tilt { position:relative; z-index:2; transform:rotateY(var(--ry,-22deg)) rotateX(var(--rx,6deg)); transform-style:preserve-3d; }
-        .ddt-phone { animation:ddtFloat 6s ease-in-out infinite; width:262px; }
-        .ddt-frame { position:relative; border-radius:46px; padding:10px;
-          background:linear-gradient(150deg,#3c4359 0%,#1b2030 36%,#0a0d14 72%);
-          box-shadow:0 44px 96px -28px rgba(0,0,0,.85), 0 0 70px -8px rgba(124,77,205,.45), 0 0 0 1px rgba(255,255,255,.10),
-                     inset 0 1px 1px rgba(255,255,255,.30), inset 0 -2px 6px rgba(0,0,0,.5); }
-        .ddt-island { position:absolute; top:19px; left:50%; transform:translateX(-50%); width:80px; height:22px; background:#05080f; border-radius:999px; z-index:6; }
-        .ddt-screen { position:relative; border-radius:38px; overflow:hidden; background:#080c14; padding:40px 15px 0; min-height:496px; display:flex; flex-direction:column; }
+        /* ===== Perspectiva + parallax + float + pose ===== */
+        .ddt-float { position:relative; animation:ddtFloaty 6s ease-in-out infinite; z-index:2; }
+        .ddt-persp { perspective:1900px; }
+        .ddt-parallax { transform:rotateX(var(--py,0deg)) rotateY(var(--px,0deg)); transform-style:preserve-3d; }
+        .ddt-pose { transform:matrix3d(0.694233,0.0135383,0.355326,0,-0.0491384,0.775609,0.0664545,0,-0.451503,-0.104528,0.886125,0,0,0,0,1); transform-style:preserve-3d; }
+
+        /* ===== iPhone ===== */
+        .ddt-frame { position:relative; width:272px; border-radius:58px; padding:3px;
+          background:linear-gradient(116deg,#D7DADE 0%,#6B6F74 6%,#F1F3F5 15%,#7E8389 26%,#3C4045 37%,#BCC0C5 51%,#585C62 63%,#E6E9EC 77%,#4E5257 89%,#A6AAAF 100%);
+          box-shadow:0 1px 2px rgba(255,255,255,.5), 0 20px 44px -18px rgba(0,0,0,.75); }
+        .ddt-btn { position:absolute; border-radius:2px 3px 3px 2px; z-index:1;
+          background:linear-gradient(180deg,#A3A8AE,#565A60 16%,#3A3E43 50%,#565A60 84%,#A3A8AE); }
+        .ddt-btn.pw  { width:3px; height:11%; top:40%; right:-3px; border-radius:3px 2px 2px 3px; }
+        .ddt-btn.ac  { width:3px; height:3.6%; top:26%; left:-3px; }
+        .ddt-btn.vu  { width:3px; height:6.7%; top:36%; left:-3px; }
+        .ddt-btn.vd  { width:3px; height:6.7%; top:46%; left:-3px; }
+        .ddt-bezel { position:relative; border-radius:54px; padding:9px; background:#05070b;
+          box-shadow:inset 0 0 0 2px #090b10, inset 0 0 0 3px rgba(255,255,255,.12), inset 0 0 7px 0 #000; }
+        .ddt-island { position:absolute; top:13px; left:50%; transform:translateX(-50%); width:96px; height:27px; background:#000; border-radius:999px; z-index:10; }
+        .ddt-screen { position:relative; border-radius:42px; overflow:hidden; background:#080c14; padding:40px 14px 0; min-height:540px; display:flex; flex-direction:column; }
+
         .ddt-sb { display:flex; justify-content:space-between; align-items:center; padding:0 8px 8px; }
         .ddt-sb time { font-family:ui-monospace,SFMono-Regular,monospace; font-size:11px; color:#F0EDE8; font-weight:600; }
         .ddt-batt { width:20px; height:10px; border-radius:3px; border:1px solid rgba(240,237,232,.5); position:relative; }
@@ -94,7 +104,7 @@ export default function WhyMe() {
         .ddt-head { display:flex; align-items:center; justify-content:space-between; padding:2px 4px 12px; border-bottom:1px solid rgba(255,255,255,.07); }
         .ddt-pax { font-size:15px; font-weight:700; color:#F0EDE8; }
         .ddt-trip { position:relative; border-radius:18px; padding:15px 16px 16px; margin-top:13px; overflow:hidden;
-          background:linear-gradient(100deg,#F47B45 0%,#E63957 38%,#C44E92 68%,#42C2C2 100%); }
+          background:linear-gradient(105deg,#FF5B00 0%,#E63957 38%,#C44E92 68%,#42C2C2 100%); box-shadow:0 14px 30px -12px rgba(196,78,146,.5); }
         .ddt-badge { display:inline-block; font-size:8px; font-weight:800; letter-spacing:1.2px; color:#fff; background:rgba(255,255,255,.22); padding:3px 9px; border-radius:999px; margin-bottom:9px; }
         .ddt-trip-name { font-size:18px; font-weight:800; color:#fff; line-height:1.05; }
         .ddt-trip-dest { font-size:12px; color:rgba(255,255,255,.85); margin-top:2px; }
@@ -109,11 +119,11 @@ export default function WhyMe() {
         .ddt-rtxt { flex:1; min-width:0; }
         .ddt-rtxt b { display:block; font-size:13px; color:#F0EDE8; font-weight:600; }
         .ddt-rtxt small { font-size:10px; color:rgba(240,237,232,.5); }
-        .ddt-nav { display:flex; justify-content:space-between; align-items:center; padding:12px 14px 14px; margin-top:14px; border-top:1px solid rgba(255,255,255,.07); }
+        .ddt-nav { display:flex; justify-content:space-between; align-items:center; padding:12px 10px 14px; margin-top:14px; border-top:1px solid rgba(255,255,255,.07); }
         .ddt-nav span { display:flex; flex-direction:column; align-items:center; gap:3px; font-size:8px; color:rgba(240,237,232,.4); }
         .ddt-nav span.on { color:#FF5B00; }
 
-        .ddt-push { position:absolute; bottom:74px; left:12px; right:12px; z-index:20; display:flex; gap:10px; align-items:flex-start;
+        .ddt-push { position:absolute; bottom:72px; left:12px; right:12px; z-index:20; display:flex; gap:10px; align-items:flex-start;
           padding:10px 12px; border-radius:16px; background:rgba(18,24,36,.96); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
           border:1px solid rgba(255,255,255,.13); box-shadow:0 14px 34px -10px rgba(0,0,0,.7); animation:ddtPush 7.5s ease-in-out infinite; }
         .ddt-push-ico { width:30px; height:30px; border-radius:9px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
@@ -122,8 +132,8 @@ export default function WhyMe() {
         .ddt-push-title { font-size:10px; font-weight:700; color:#F0EDE8; }
         .ddt-push-body { font-size:10px; line-height:1.35; color:rgba(240,237,232,.72); }
 
-        @media (max-width:1024px){ .ddt-tilt{ --ry:-13deg; --rx:4deg; } }
-        @media (max-width:640px){ .ddt-tilt{ --ry:0deg; --rx:0deg; } .ddt-phone{ width:240px; } .ddt-stage{ min-height:500px; } }
+        @media (max-width:1024px){ .ddt-pose{ transform:matrix3d(0.82,0.01,0.22,0,-0.03,0.86,0.04,0,-0.28,-0.06,0.92,0,0,0,0,1); } }
+        @media (max-width:640px){ .ddt-pose{ transform:none; } .ddt-frame{ width:248px; } .ddt-stage{ min-height:560px; } }
       `}</style>
 
       <div className="max-w-6xl mx-auto flex flex-col gap-12">
@@ -161,65 +171,73 @@ export default function WhyMe() {
               </ul>
             </div>
 
-            {/* iPhone en perspectiva + glows */}
+            {/* iPhone 3D + glows */}
             <div className="order-1 lg:order-2 ddt-stage">
-              <span className="ddt-glow ddt-halo" />
-              <span className="ddt-glow ddt-g1" />
-              <span className="ddt-glow ddt-g2" />
-              <span className="ddt-glow ddt-g3" />
-              <span className="ddt-glow ddt-g4" />
+              <span className="ddt-glow ddt-gHalo" />
+              <span className="ddt-glow ddt-gFu" />
+              <span className="ddt-glow ddt-gTe" />
+              <span className="ddt-glow ddt-gVi" />
+              <span className="ddt-glow ddt-gOr" />
+              <span className="ddt-glow ddt-gShad" />
 
-              <div ref={tiltRef} className="ddt-tilt">
-                <div className="ddt-phone">
-                  <div className="ddt-frame">
-                    <div className="ddt-island" />
-                    <div className="ddt-screen">
-                      <div className="ddt-sb"><time>9:41</time><span className="ddt-batt" /></div>
-                      <div className="ddt-head">
-                        <span className="ddt-pax">{ph.passenger}</span>
-                        <SignOut size={17} style={{ color: 'rgba(240,237,232,.6)' }} />
-                      </div>
-                      <div className="ddt-trip">
-                        <span className="ddt-badge">{ph.status}</span>
-                        <div className="ddt-trip-name">{ph.tripName}</div>
-                        <div className="ddt-trip-dest">{ph.tripDest}</div>
-                      </div>
-                      <div className="ddt-dates">
-                        <div className="ddt-date"><span>{ph.depart}</span><b>—</b></div>
-                        <div className="ddt-date"><span>{ph.ret}</span><b>—</b></div>
-                      </div>
-                      <div className="ddt-qt">{ph.quickTitle}</div>
-                      <div className="ddt-rows">
-                        {ph.rows.map((r) => {
-                          const RIcon = rowIconMap[r.icon] ?? MapTrifold;
-                          return (
-                            <div className="ddt-row" key={r.title}>
-                              <span className="ddt-rico"><RIcon size={18} weight="duotone" style={{ color: '#FF5B00' }} /></span>
-                              <span className="ddt-rtxt"><b>{r.title}</b><small>{r.meta}</small></span>
-                              <CaretRight size={14} style={{ color: 'rgba(240,237,232,.35)' }} />
+              <div className="ddt-float">
+                <div className="ddt-persp">
+                  <div ref={tiltRef} className="ddt-parallax">
+                    <div className="ddt-pose">
+                      <div className="ddt-frame">
+                        <span className="ddt-btn ac" /><span className="ddt-btn vu" /><span className="ddt-btn vd" /><span className="ddt-btn pw" />
+                        <div className="ddt-bezel">
+                          <div className="ddt-island" />
+                          <div className="ddt-screen">
+                            <div className="ddt-sb"><time>9:41</time><span className="ddt-batt" /></div>
+                            <div className="ddt-head">
+                              <span className="ddt-pax">{ph.passenger}</span>
+                              <SignOut size={17} style={{ color: 'rgba(240,237,232,.6)' }} />
                             </div>
-                          );
-                        })}
-                      </div>
-                      <div className="ddt-nav">
-                        {ph.nav.map((label, i) => {
-                          const NIcon = navIcons[i];
-                          return (
-                            <span key={label} className={i === 0 ? 'on' : ''}>
-                              <NIcon size={18} weight={i === 0 ? 'fill' : 'regular'} />
-                              {label}
+                            <div className="ddt-trip">
+                              <span className="ddt-badge">{ph.status}</span>
+                              <div className="ddt-trip-name">{ph.tripName}</div>
+                              <div className="ddt-trip-dest">{ph.tripDest}</div>
+                            </div>
+                            <div className="ddt-dates">
+                              <div className="ddt-date"><span>{ph.depart}</span><b>—</b></div>
+                              <div className="ddt-date"><span>{ph.ret}</span><b>—</b></div>
+                            </div>
+                            <div className="ddt-qt">{ph.quickTitle}</div>
+                            <div className="ddt-rows">
+                              {ph.rows.map((r) => {
+                                const RIcon = rowIconMap[r.icon] ?? MapTrifold;
+                                return (
+                                  <div className="ddt-row" key={r.title}>
+                                    <span className="ddt-rico"><RIcon size={18} weight="duotone" style={{ color: '#FF5B00' }} /></span>
+                                    <span className="ddt-rtxt"><b>{r.title}</b><small>{r.meta}</small></span>
+                                    <CaretRight size={14} style={{ color: 'rgba(240,237,232,.35)' }} />
+                                  </div>
+                                );
+                              })}
+                            </div>
+                            <div className="ddt-nav">
+                              {ph.nav.map((label, i) => {
+                                const NIcon = navIcons[i];
+                                return (
+                                  <span key={label} className={i === 0 ? 'on' : ''}>
+                                    <NIcon size={18} weight={i === 0 ? 'fill' : 'regular'} />
+                                    {label}
+                                  </span>
+                                );
+                              })}
+                            </div>
+                          </div>
+                          {/* Notificación push */}
+                          <div className="ddt-push">
+                            <span className="ddt-push-ico">D</span>
+                            <span className="ddt-push-txt">
+                              <span className="ddt-push-title">{ph.pushTitle}</span>
+                              <span className="ddt-push-body">{ph.pushBody}</span>
                             </span>
-                          );
-                        })}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    {/* Notificación push */}
-                    <div className="ddt-push">
-                      <span className="ddt-push-ico">D</span>
-                      <span className="ddt-push-txt">
-                        <span className="ddt-push-title">{ph.pushTitle}</span>
-                        <span className="ddt-push-body">{ph.pushBody}</span>
-                      </span>
                     </div>
                   </div>
                 </div>

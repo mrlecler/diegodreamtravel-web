@@ -163,11 +163,11 @@ const es = {
       },
       {
         title: 'Cuotas o pago seguro',
-        desc: 'Financiación en cuotas para Argentina y Latam. Pago seguro con tarjeta de débito o crédito a través de plataformas oficiales.',
+        desc: '**Financiación en cuotas para Argentina y Latam**. Pago seguro con tarjeta de débito o crédito a través de plataformas oficiales.',
       },
       {
         title: 'Asistencia antes, durante y después',
-        desc: 'Si hay un retraso, un cambio o un problema, te aviso y lo resuelvo. El viaje no termina cuando se cierra el itinerario.',
+        desc: 'Si hay un retraso, un cambio o un problema, te aviso **y lo resuelvo**. El viaje no termina cuando se cierra el itinerario.',
       },
     ],
   },
@@ -420,11 +420,11 @@ const en: Dict = {
       },
       {
         title: 'Installments or secure payment',
-        desc: 'Installment financing for Argentina and Latam. Secure payment by debit or credit card through official platforms.',
+        desc: '**Installment financing for Argentina and Latam**. Secure payment by debit or credit card through official platforms.',
       },
       {
         title: 'Support before, during and after',
-        desc: "If there's a delay, a change or a problem, I let you know and I solve it. The trip doesn't end when the itinerary is set.",
+        desc: "If there's a delay, a change or a problem, I let you know **and I solve it**. The trip doesn't end when the itinerary is set.",
       },
     ],
   },

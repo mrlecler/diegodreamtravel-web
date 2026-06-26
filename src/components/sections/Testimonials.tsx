@@ -52,27 +52,26 @@ export default function Testimonials() {
   return (
     <section id="testimonios" className="py-20 px-6" style={{ backgroundColor: 'var(--warm)' }}>
       <style>{`
-        @keyframes tSpot { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
-        .t-spot { animation: tSpot .55s cubic-bezier(.22,.61,.36,1); }
+        @keyframes tSpot { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+        .t-spot { animation: tSpot .5s cubic-bezier(.22,.61,.36,1); }
       `}</style>
 
-      <div className="max-w-5xl mx-auto flex flex-col items-center gap-8">
-        {/* Header */}
-        <div className="text-center flex flex-col items-center gap-3">
-          <p className="text-xs font-semibold tracking-widest text-[#475066] uppercase">{tp.eyebrow}</p>
+      <div className="max-w-5xl mx-auto flex flex-col gap-10">
+        {/* Header (alineado a la izquierda como el resto del sitio) */}
+        <div className="flex flex-col gap-3 max-w-2xl">
+          <div className="flex items-center gap-3">
+            <span className="shrink-0 rounded-full" style={{ width: 24, height: 2, backgroundColor: '#FF5B00' }} />
+            <p className="text-xs font-semibold tracking-[0.18em] text-[#475066] uppercase">{tp.eyebrow}</p>
+          </div>
           <h2 className="font-display text-4xl sm:text-5xl text-[#0C1521] leading-tight">
             {tp.titleA}
             <span className="text-grad-ddt">{tp.titleHighlight}</span>
           </h2>
-          <div className="flex items-center gap-2.5 mt-1">
-            <TrustStars rating={4.2} size={24} />
-            <span className="text-sm font-semibold text-[#0C1521]">{tp.scoreLine}</span>
-          </div>
         </div>
 
         {/* Spotlight rotativo */}
         <div
-          className="relative w-full flex flex-col items-center text-center pt-6"
+          className="relative w-full flex flex-col items-start"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
@@ -80,22 +79,22 @@ export default function Testimonials() {
           <span
             aria-hidden="true"
             className="select-none leading-none"
-            style={{ fontFamily: SERIF, fontSize: '5rem', color: 'rgba(12,21,33,.12)', marginBottom: '-1.5rem' }}
+            style={{ fontFamily: SERIF, fontSize: '4rem', color: 'rgba(12,21,33,.13)', marginBottom: '-1.25rem' }}
           >
             &ldquo;
           </span>
 
-          <div key={idx} className="t-spot flex flex-col items-center gap-7">
-            <TrustStars rating={cur.rating} size={22} />
+          <div key={idx} className="t-spot flex flex-col items-start gap-6 w-full">
+            <TrustStars rating={cur.rating} size={20} />
 
             <blockquote
               className="text-[#0C1521] max-w-3xl"
-              style={{ fontFamily: SERIF, fontSize: 'clamp(1.5rem, 3.4vw, 2.6rem)', lineHeight: 1.32, fontWeight: 500 }}
+              style={{ fontFamily: SERIF, fontSize: 'clamp(1.25rem, 2vw, 1.7rem)', lineHeight: 1.45, fontWeight: 500 }}
             >
               {cur.text}
             </blockquote>
 
-            <div className="flex flex-col items-center gap-1.5">
+            <div className="flex flex-col gap-1">
               <p className="text-[#0C1521] font-semibold text-base">{cur.name}</p>
               <p className="flex items-center gap-1.5 text-[11px] tracking-wide text-[#475066] uppercase">
                 <CheckCircle size={15} weight="fill" style={{ color: TP_GREEN }} />
@@ -105,7 +104,7 @@ export default function Testimonials() {
           </div>
 
           {/* Avatares para navegar */}
-          <div className="flex items-center justify-center gap-3 mt-10 flex-wrap">
+          <div className="flex items-center gap-3 mt-9 flex-wrap">
             {items.map((it, i) => {
               const active = i === idx;
               return (
@@ -124,10 +123,10 @@ export default function Testimonials() {
                 >
                   {it.photo ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={it.photo} alt={it.name} className="w-12 h-12 rounded-full object-cover" loading="lazy" />
+                    <img src={it.photo} alt={it.name} className="w-11 h-11 rounded-full object-cover" loading="lazy" />
                   ) : (
                     <span
-                      className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xs font-bold"
+                      className="w-11 h-11 rounded-full flex items-center justify-center text-white text-xs font-bold"
                       style={{ background: 'var(--grad-ddt)' }}
                     >
                       {it.initials}
@@ -139,21 +138,16 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* Footer Trustpilot */}
-        <div className="text-center flex flex-col items-center gap-3 mt-2">
-          <div className="flex items-center gap-2">
-            <TrustStars rating={5} size={18} />
-            <span className="text-sm text-[#475066]">{tp.trustLine}</span>
-          </div>
-          <a
-            href="https://www.trustpilot.com/review/diegodreamtravel.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-[#475066]/60 underline underline-offset-2 hover:text-[#0C1521] transition-colors"
-          >
-            {tp.seeAll}
-          </a>
-        </div>
+        {/* Footer Trustpilot (sin puntaje ni cantidad) */}
+        <a
+          href="https://www.trustpilot.com/review/diegodreamtravel.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-sm text-[#475066] hover:text-[#0C1521] transition-colors w-fit"
+        >
+          <TrustStars rating={5} size={18} />
+          <span className="underline underline-offset-2">{tp.seeAll}</span>
+        </a>
       </div>
     </section>
   );

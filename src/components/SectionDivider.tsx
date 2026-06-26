@@ -1,10 +1,8 @@
 'use client';
 
-import { AirplaneTilt } from '@phosphor-icons/react';
-
 /**
  * Divisor de secciones con identidad de viaje: línea punteada que se desvanece
- * en los extremos y un avión que la recorre, lento, dejando una estela.
+ * en los extremos y un avión (PNG de marca) que la recorre, lento, con estela.
  * Pensado para ir ENTRE secciones (sobre fondo crema o blanco).
  */
 export default function SectionDivider({ className = '' }: { className?: string }) {
@@ -17,20 +15,19 @@ export default function SectionDivider({ className = '' }: { className?: string 
           -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);
                   mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%); }
         .ddt-div-plane { position:absolute; top:50%; transform:translate(-50%,-50%);
-          animation:ddtFly 30s linear infinite; }
-        .ddt-div-plane .glow { position:absolute; top:50%; left:50%; width:70px; height:70px;
+          animation:ddtFly 60s linear infinite; }
+        .ddt-div-plane .glow { position:absolute; top:50%; left:50%; width:62px; height:62px;
           transform:translate(-50%,-50%); border-radius:50%;
-          background:radial-gradient(circle, rgba(255,91,0,.26), transparent 68%); }
-        .ddt-div-plane .trail { position:absolute; top:50%; right:46%; transform:translateY(-50%);
-          width:64px; height:3px; border-radius:3px;
-          background:linear-gradient(90deg, transparent, rgba(255,91,0,.55)); }
-        .ddt-div-plane svg { position:relative; display:block; color:#FF5B00;
-          transform:rotate(45deg);
-          filter:drop-shadow(0 3px 6px rgba(255,91,0,.4)); }
+          background:radial-gradient(circle, rgba(255,91,0,.22), transparent 68%); }
+        .ddt-div-plane .trail { position:absolute; top:50%; right:52%; transform:translateY(-50%);
+          width:62px; height:3px; border-radius:3px;
+          background:linear-gradient(90deg, transparent, rgba(255,91,0,.5)); }
+        .ddt-div-plane img { position:relative; display:block; width:52px; height:auto;
+          filter:drop-shadow(0 3px 6px rgba(255,91,0,.35)); }
         @keyframes ddtFly {
           0%   { left:24px; opacity:0; }
-          6%   { opacity:1; }
-          94%  { opacity:1; }
+          5%   { opacity:1; }
+          95%  { opacity:1; }
           100% { left:calc(100% - 24px); opacity:0; }
         }
       `}</style>
@@ -38,7 +35,8 @@ export default function SectionDivider({ className = '' }: { className?: string 
       <span className="ddt-div-plane">
         <span className="glow" />
         <span className="trail" />
-        <AirplaneTilt size={44} weight="fill" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/decor/plane.png" alt="" />
       </span>
     </div>
   );

@@ -191,7 +191,7 @@ const es = {
       {
         initials: 'ML',
         name: 'Miryan Lecler',
-        photo: '/images/testimonials/miryan.png',
+        photo: '',
         rating: 5,
         title: '1000/100 recomendable',
         text: 'Excelente experiencia. Desde el inicio nos sentimos acompañados en nuestro primer viaje a Brasil. Diego nos orientó al armar un itinerario según nuestros deseos y presupuesto, y nos aconsejó sobre mil detalles para aprovechar el viaje. Incluso estando en el destino nos contactó para ver cómo lo estábamos viviendo.',
@@ -199,7 +199,7 @@ const es = {
       {
         initials: 'MC',
         name: 'Mauro Francisco Chejolán',
-        photo: '/images/testimonials/mauro.png',
+        photo: '',
         rating: 5,
         title: 'Un genio en todo momento',
         text: 'Nos ayudó desde el principio, ofreciendo lo mejor para que nuestro viaje fuera cómodo, divertido y relajante. Volvería sin dudas a contratarlo para planear más viajes. Muchas gracias Diego por tus consejos y ayuda.',
@@ -207,7 +207,7 @@ const es = {
       {
         initials: 'HM',
         name: 'Hugo Martínez',
-        photo: '/images/testimonials/hugo.png',
+        photo: '',
         rating: 5,
         title: 'Excelente',
         text: 'El asesoramiento y la organización de Diego fueron clave para que el viaje saliera perfecto. Siempre estuvo pendiente y en comunicación con nosotros durante toda la estadía.',
@@ -448,7 +448,7 @@ const en: Dict = {
       {
         initials: 'ML',
         name: 'Miryan Lecler',
-        photo: '/images/testimonials/miryan.png',
+        photo: '',
         rating: 5,
         title: '1000/100 recommended',
         text: 'Excellent experience. From the start we felt accompanied on our first trip to Brazil. Diego helped us build an itinerary around our wishes and budget, and advised us on countless details to make the most of the trip. Even at the destination he reached out to see how we were enjoying it.',
@@ -456,7 +456,7 @@ const en: Dict = {
       {
         initials: 'MC',
         name: 'Mauro Francisco Chejolán',
-        photo: '/images/testimonials/mauro.png',
+        photo: '',
         rating: 5,
         title: 'Brilliant the whole way',
         text: 'He helped us from the very beginning, offering the best so our trip would be comfortable, fun and relaxing. I would hire him again without a doubt to plan more trips. Thank you Diego for your advice and help.',
@@ -464,7 +464,7 @@ const en: Dict = {
       {
         initials: 'HM',
         name: 'Hugo Martínez',
-        photo: '/images/testimonials/hugo.png',
+        photo: '',
         rating: 5,
         title: 'Excellent',
         text: "Diego's advice and organization were key to a perfect trip. He was always attentive and in touch with us throughout the stay.",

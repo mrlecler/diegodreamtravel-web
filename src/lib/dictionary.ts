@@ -155,15 +155,15 @@ const es = {
     cards: [
       {
         title: 'Certificación oficial verificable',
-        desc: 'Authorized Vacation Planner (Disney) y Preferred Travel Agent (Universal). No autoproclamado: verificable.',
+        desc: 'Authorized Vacation Planner para **Disney Destinations**, Preferred Travel Agent para **Universal Destinations & Experiences**, y Travel Advisor para **United Parks & Resorts**. No autoproclamado, sino que totalmente verificable.',
       },
       {
         title: 'Una sola persona, siempre',
-        desc: 'El mismo Diego antes, durante y después del viaje. Sin ser transferido a otro operador cuando más lo necesitas.',
+        desc: 'El mismo agente, la misma persona, antes, durante y después del viaje. Sin ser transferido a otro operador cuando más lo necesitas.',
       },
       {
-        title: 'Cuotas o pago seguro en USA',
-        desc: 'Financiación en cuotas para Argentina y Latam. Pago seguro con tarjeta en USA vía Square (Livi Travel).',
+        title: 'Cuotas o pago seguro',
+        desc: 'Financiación en cuotas para Argentina y Latam. Pago seguro con tarjeta de débito o crédito a través de plataformas oficiales.',
       },
       {
         title: 'Asistencia antes, durante y después',
@@ -412,15 +412,15 @@ const en: Dict = {
     cards: [
       {
         title: 'Verifiable official certification',
-        desc: 'Authorized Vacation Planner (Disney) and Preferred Travel Agent (Universal). Not self-proclaimed: verifiable.',
+        desc: 'Authorized Vacation Planner for **Disney Destinations**, Preferred Travel Agent for **Universal Destinations & Experiences**, and Travel Advisor for **United Parks & Resorts**. Not self-proclaimed, fully verifiable.',
       },
       {
         title: 'One person, always',
-        desc: 'The same Diego before, during and after the trip. Never handed off to another operator when you need it most.',
+        desc: 'The same agent, the same person, before, during and after your trip. Never handed off to another operator when you need it most.',
       },
       {
-        title: 'Installments or secure US payment',
-        desc: 'Installment financing for Argentina and Latam. Secure card payment in the US via Square (Livi Travel).',
+        title: 'Installments or secure payment',
+        desc: 'Installment financing for Argentina and Latam. Secure payment by debit or credit card through official platforms.',
       },
       {
         title: 'Support before, during and after',

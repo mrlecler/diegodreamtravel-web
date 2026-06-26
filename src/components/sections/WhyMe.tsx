@@ -6,6 +6,19 @@ import { useLang } from '@/lib/language';
 
 const cardIcons = [SealCheck, UserCircle, CreditCard, Headset];
 
+// Convierte **texto** en <strong> dentro de un string del diccionario.
+function withBold(text: string) {
+  return text.split('**').map((part, i) =>
+    i % 2 === 1 ? (
+      <strong key={i} className="font-semibold text-[#0C1521]">
+        {part}
+      </strong>
+    ) : (
+      part
+    ),
+  );
+}
+
 export default function WhyMe() {
   const { t } = useLang();
   const app = t.why.app;
@@ -142,7 +155,7 @@ export default function WhyMe() {
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <h3 className="font-semibold text-[#0C1521] text-sm leading-snug">{card.title}</h3>
-                  <p className="text-xs text-[#475066] leading-relaxed">{card.desc}</p>
+                  <p className="text-xs text-[#475066] leading-relaxed">{withBold(card.desc)}</p>
                 </div>
               </div>
             );

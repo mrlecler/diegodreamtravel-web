@@ -7,6 +7,7 @@ import Services from '@/components/sections/Services';
 import WhyMe from '@/components/sections/WhyMe';
 import Testimonials from '@/components/sections/Testimonials';
 import CTAClose from '@/components/sections/CTAClose';
+import ContactSection from '@/components/sections/ContactSection';
 import SectionDivider from '@/components/SectionDivider';
 
 // Divisor sobre fondo crema (entre secciones claras)
@@ -33,6 +34,7 @@ export default function Home() {
         <Divider />
         <Testimonials />
         <CTAClose />
+        <ContactSection />
       </main>
       <Footer />
     </>

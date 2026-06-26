@@ -10,25 +10,31 @@ export default function CTAClose() {
 
   return (
     <section
-      className="relative py-28 px-6 overflow-hidden"
-      style={{ backgroundColor: 'var(--navy)' }}
+      className="relative px-6 overflow-hidden flex flex-col items-center"
+      style={{
+        backgroundColor: 'var(--navy)',
+        minHeight: '90vh',
+        justifyContent: 'flex-start',
+        paddingTop: 'clamp(72px, 11vh, 150px)',
+        paddingBottom: '64px',
+      }}
     >
-      {/* Foto Animal Kingdom de fondo */}
+      {/* Foto Animal Kingdom de fondo (cubre toda la sección, árbol completo abajo) */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: "url('/images/decor/cierre-bg.webp')",
           backgroundSize: 'cover',
-          backgroundPosition: 'center 68%',
-          opacity: 0.55,
+          backgroundPosition: 'center 55%',
+          opacity: 0.62,
         }}
       />
-      {/* Overlay navy (más oscuro arriba, deja ver el árbol abajo) */}
+      {/* Overlay navy: oscuro arriba (texto legible) → claro abajo (se ve el árbol) */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'linear-gradient(to bottom, rgba(5,14,31,.95) 0%, rgba(5,14,31,.80) 42%, rgba(5,14,31,.52) 100%)',
+            'linear-gradient(to bottom, rgba(5,14,31,.96) 0%, rgba(5,14,31,.86) 28%, rgba(5,14,31,.60) 58%, rgba(5,14,31,.34) 100%)',
         }}
       />
       {/* Glow fucsia */}
@@ -36,7 +42,7 @@ export default function CTAClose() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 60% 50% at 20% 40%, rgba(196,78,146,.22) 0%, transparent 70%)',
+            'radial-gradient(ellipse 55% 40% at 18% 28%, rgba(196,78,146,.20) 0%, transparent 70%)',
         }}
       />
       {/* Glow turquesa */}
@@ -44,7 +50,7 @@ export default function CTAClose() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 55% 45% at 85% 45%, rgba(66,194,194,.18) 0%, transparent 70%)',
+            'radial-gradient(ellipse 50% 38% at 86% 32%, rgba(66,194,194,.16) 0%, transparent 70%)',
         }}
       />
 

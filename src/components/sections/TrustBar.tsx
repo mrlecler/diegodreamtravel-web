@@ -29,7 +29,7 @@ export default function TrustBar() {
   const doubled = [...PARTNERS, ...PARTNERS];
 
   return (
-    <section className="relative py-5 sm:py-6 overflow-hidden" style={{ backgroundColor: '#0C1521' }}>
+    <section data-nav-dark className="relative py-5 sm:py-6 overflow-hidden" style={{ backgroundColor: '#0C1521' }}>
       {/* hairline superior con el gradiente de marca */}
       <div
         className="absolute top-0 left-0 right-0 h-px"

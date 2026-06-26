@@ -29,7 +29,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer style={{ backgroundColor: '#07101c', borderTop: '1px solid rgba(240,237,232,.08)' }} className="px-6 pt-12 pb-9">
+    <footer data-nav-dark style={{ backgroundColor: '#07101c', borderTop: '1px solid rgba(240,237,232,.08)' }} className="px-6 pt-12 pb-9">
       <div className="mx-auto" style={{ maxWidth: 'min(1080px, calc(100% - 48px))' }}>
         {/* Logo + tagline */}
         <div className="mb-8">

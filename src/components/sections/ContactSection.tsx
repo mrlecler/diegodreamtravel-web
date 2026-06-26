@@ -9,6 +9,7 @@ export default function ContactSection() {
 
   return (
     <section
+      data-nav-dark
       id="contacto"
       className="relative overflow-hidden px-6"
       style={{ background: 'var(--navy)', padding: 'clamp(52px,7vw,88px) 24px' }}

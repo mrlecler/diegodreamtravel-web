@@ -36,12 +36,19 @@ export default function NavIsland() {
     return () => mq.removeEventListener('change', apply);
   }, []);
 
-  // nav sobre hero (oscuro) vs cuerpo (claro)
+  // El nav se pone en modo oscuro (texto claro) cuando está sobre una sección
+  // marcada con data-nav-dark (hero, trustbar y todo el cierre). Sobre las
+  // secciones claras (crema) usa texto oscuro.
   useEffect(() => {
-    const hero = document.querySelector('main > *:first-child') as HTMLElement | null;
+    const NAV_Y = 56; // línea del nav (px desde el tope del viewport)
     const calc = () => {
-      const threshold = hero ? hero.offsetHeight - 90 : window.innerHeight - 90;
-      setDark(window.scrollY < threshold);
+      const els = document.querySelectorAll('[data-nav-dark]');
+      let isDark = false;
+      els.forEach((el) => {
+        const r = (el as HTMLElement).getBoundingClientRect();
+        if (r.top <= NAV_Y && r.bottom >= NAV_Y) isDark = true;
+      });
+      setDark(isDark);
     };
     calc();
     window.addEventListener('scroll', calc, { passive: true });

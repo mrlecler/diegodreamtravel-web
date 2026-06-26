@@ -10,6 +10,7 @@ export default function CTAClose() {
 
   return (
     <section
+      data-nav-dark
       className="relative px-6 overflow-hidden flex flex-col items-center justify-center"
       style={{
         backgroundColor: 'var(--navy)',

@@ -63,6 +63,7 @@ export default function Hero() {
 
   return (
     <section
+      data-nav-dark
       className="relative min-h-screen flex flex-col items-start justify-center text-left px-6 sm:px-10 lg:px-20 pt-28 pb-16 overflow-hidden"
       style={{ backgroundColor: 'var(--navy)' }}
     >

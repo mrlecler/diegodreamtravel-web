@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useLang } from '@/lib/language';
+import { DREAM15_LIVE } from '@/lib/flags';
 
 const WA_ICON = (
   <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
@@ -77,8 +78,25 @@ export default function Footer() {
               {t.footer.sectionsHeading}
             </p>
             <div className="flex flex-col gap-2">
-              {secciones.map((s) =>
-                s.href.startsWith('/') ? (
+              {secciones.map((s) => {
+                const locked = s.href === '/dream15' && !DREAM15_LIVE;
+                if (locked) {
+                  return (
+                    <span
+                      key={s.label}
+                      className="flex items-center gap-2 text-[13px] text-[#F0EDE8]/40 cursor-default select-none"
+                    >
+                      {s.label}
+                      <span
+                        className="rounded-full px-1.5 py-[2px] text-[9px] font-bold uppercase tracking-wide leading-none text-white"
+                        style={{ background: 'var(--grad-ddt)' }}
+                      >
+                        {t.common.soon}
+                      </span>
+                    </span>
+                  );
+                }
+                return s.href.startsWith('/') ? (
                   <Link
                     key={s.label}
                     href={s.href}
@@ -94,8 +112,8 @@ export default function Footer() {
                   >
                     {s.label}
                   </a>
-                ),
-              )}
+                );
+              })}
             </div>
           </div>
 

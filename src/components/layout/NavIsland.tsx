@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { List, X, WhatsappLogo, Sparkle } from '@phosphor-icons/react';
 import { useLang } from '@/lib/language';
+import { DREAM15_LIVE } from '@/lib/flags';
 
 const WA_URL = 'https://wa.me/5493624703040';
 
@@ -199,14 +200,29 @@ export default function NavIsland() {
 
           {/* Derecha */}
           <div className="flex items-center gap-2">
-            <Link
-              href="/dream15"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-transform hover:scale-[1.03]"
-              style={{ background: 'var(--grad-ddt)' }}
-            >
-              <Sparkle size={12} weight="fill" />
-              {t.nav.dream15}
-            </Link>
+            {DREAM15_LIVE ? (
+              <Link
+                href="/dream15"
+                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-transform hover:scale-[1.03]"
+                style={{ background: 'var(--grad-ddt)' }}
+              >
+                <Sparkle size={12} weight="fill" />
+                {t.nav.dream15}
+              </Link>
+            ) : (
+              <span
+                className="hidden sm:inline-flex items-center gap-1.5 pl-3 pr-1.5 py-1.5 rounded-full text-xs font-semibold text-white cursor-default select-none"
+                style={{ background: 'var(--grad-ddt)', opacity: 0.92 }}
+                title={t.common.soon}
+                aria-disabled="true"
+              >
+                <Sparkle size={12} weight="fill" />
+                {t.nav.dream15}
+                <span className="rounded-full bg-white/25 px-1.5 py-[2px] text-[9px] font-bold uppercase tracking-wide leading-none">
+                  {t.common.soon}
+                </span>
+              </span>
+            )}
 
             <div className="hidden sm:flex items-center gap-0.5 text-xs font-medium">
               <button
@@ -316,15 +332,29 @@ export default function NavIsland() {
             </ul>
 
             <div className="relative mt-5 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.10)' }}>
-              <Link
-                href="/dream15"
-                onClick={() => setOpen(false)}
-                className="flex items-center gap-2 justify-center w-full rounded-2xl py-3.5 text-base font-bold text-white"
-                style={{ background: 'var(--grad-ddt)' }}
-              >
-                <Sparkle size={18} weight="fill" />
-                {t.nav.dream15Full}
-              </Link>
+              {DREAM15_LIVE ? (
+                <Link
+                  href="/dream15"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-2 justify-center w-full rounded-2xl py-3.5 text-base font-bold text-white"
+                  style={{ background: 'var(--grad-ddt)' }}
+                >
+                  <Sparkle size={18} weight="fill" />
+                  {t.nav.dream15Full}
+                </Link>
+              ) : (
+                <div
+                  className="flex items-center justify-center gap-2 w-full rounded-2xl py-3.5 text-base font-bold text-white cursor-default select-none"
+                  style={{ background: 'var(--grad-ddt)', opacity: 0.92 }}
+                  aria-disabled="true"
+                >
+                  <Sparkle size={18} weight="fill" />
+                  {t.nav.dream15Full}
+                  <span className="rounded-full bg-white/25 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide leading-none">
+                    {t.common.soon}
+                  </span>
+                </div>
+              )}
 
               <div className="flex items-center gap-3 mt-3">
                 <a

@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: 'Dream 15 — El viaje de tus 15 | Diego Dream Travel',
   description:
     'El viaje grupal a Orlando para los que cumplen 15. Disney, Universal y tu grupo. Agente certificado. Pagá en cuotas. Atención personalizada desde el primer mensaje.',
+  // Dream 15 todavía no está en producción: que no se indexe en buscadores.
+  // Quitar este bloque (o cambiar DREAM15_LIVE a true no afecta esto) cuando se lance.
+  robots: { index: false, follow: false },
   openGraph: {
     title: 'Dream 15 — El viaje de tus 15 | Diego Dream Travel',
     description:

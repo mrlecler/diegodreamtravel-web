@@ -2,10 +2,11 @@
 
 import {
   WhatsappLogo, CastleTurret, Sparkle, UsersThree, MapTrifold, ArrowRight,
-  ChatsCircle, AirplaneTilt, Bed, Car, Van, Lifebuoy, Binoculars, Ticket, Boat, HandCoins,
+  ChatsCircle, AirplaneTilt, Bed, Car, Van, Lifebuoy, Binoculars, Ticket, Boat, HandCoins, Clock,
 } from '@phosphor-icons/react';
 import Link from 'next/link';
 import { useLang } from '@/lib/language';
+import { DREAM15_LIVE } from '@/lib/flags';
 import DepartureStrip from '@/components/DepartureStrip';
 
 const WA_BASE = 'https://wa.me/5493624703040';
@@ -53,6 +54,9 @@ export default function Services() {
         .cm-world .cm-tag{font-size:13.5px;line-height:1.6;color:rgba(240,237,232,.82);margin-top:12px;max-width:30ch;}
         .cm-cta{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:11px 16px;border-radius:999px;font-weight:600;font-size:12px;color:#F0EDE8;background:rgba(240,237,232,.13);border:1px solid rgba(240,237,232,.28);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-self:flex-start;transition:background .25s ease,gap .25s ease;}
         .cm-cta-d15{background:linear-gradient(90deg,#F47B45,#E63957 40%,#C44E92);border:0;font-weight:700;box-shadow:0 10px 26px -10px rgba(196,78,146,.6);}
+        .cm-world-locked{cursor:default;}
+        .cm-cta-soon{background:rgba(240,237,232,.13);border:1px solid rgba(240,237,232,.30);color:#F0EDE8;cursor:default;}
+        .cm-soon{position:absolute;top:16px;right:16px;z-index:3;font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#fff;padding:6px 12px;border-radius:999px;background:linear-gradient(90deg,#F47B45,#E63957 40%,#C44E92);box-shadow:0 10px 24px -8px rgba(196,78,146,.85);}
         @media (hover:hover) and (min-width:861px){
           .cm-worlds:hover .cm-world{flex:.84;filter:brightness(.7) saturate(.55);}
           .cm-worlds:hover .cm-world:hover{flex:1.95;filter:none;}
@@ -99,17 +103,24 @@ export default function Services() {
               const d = design[i];
               const Icon = d.Icon;
               const num = String(i + 1).padStart(2, '0');
+              const locked = d.href === '/dream15' && !DREAM15_LIVE;
 
               const inner = (
                 <>
                   <div className="cm-bg" style={{ backgroundImage: `url(${d.image})` }} />
                   <div className="cm-tint" style={{ background: d.tint }} />
+                  {locked && <span className="cm-soon">{t.common.soon}</span>}
                   <div className="cm-content">
                     <Icon size={36} weight="duotone" className="cm-icon" style={{ color: d.color }} />
                     <div className="cm-eyebrow" style={{ color: d.color }}>{num} · {w.category}</div>
                     <div className="cm-title font-display">{w.title}</div>
                     <div className="cm-tag">{w.desc}</div>
-                    {d.external ? (
+                    {locked ? (
+                      <span className="cm-cta cm-cta-soon">
+                        <Clock size={15} weight="duotone" />
+                        {t.common.soon}
+                      </span>
+                    ) : d.external ? (
                       <span className="cm-cta">
                         <WhatsappLogo size={15} weight="fill" style={{ color: '#25D366' }} />
                         {w.cta}
@@ -123,6 +134,18 @@ export default function Services() {
                   </div>
                 </>
               );
+
+              if (locked) {
+                return (
+                  <div
+                    key={w.title}
+                    className="cm-world cm-world-locked"
+                    aria-label={`${w.category}: ${w.title} — ${t.common.soon}`}
+                  >
+                    {inner}
+                  </div>
+                );
+              }
 
               return d.external ? (
                 <a

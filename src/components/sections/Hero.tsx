@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { WhatsappLogo } from '@phosphor-icons/react';
+import { WhatsappLogo, Clock } from '@phosphor-icons/react';
 import { useLang } from '@/lib/language';
+import { DREAM15_LIVE } from '@/lib/flags';
 
 const WA_URL = 'https://wa.me/5493624703040';
 
@@ -180,12 +181,29 @@ export default function Hero() {
             <WhatsappLogo size={20} weight="fill" />
             {t.hero.ctaWhatsapp}
           </a>
-          <a
-            href="/dream15"
-            className="inline-flex items-center gap-2 rounded-full px-6 py-4 text-base font-medium text-[#F0EDE8] backdrop-blur-sm transition-all border border-[rgba(196,78,146,0.7)] bg-[rgba(196,78,146,0.10)] hover:border-[rgba(196,78,146,1)] hover:bg-[rgba(196,78,146,0.20)] hover:shadow-[0_0_24px_rgba(196,78,146,0.45)] hover:scale-[1.02]"
-          >
-            {t.hero.ctaDream15}
-          </a>
+          {DREAM15_LIVE ? (
+            <a
+              href="/dream15"
+              className="inline-flex items-center gap-2 rounded-full px-6 py-4 text-base font-medium text-[#F0EDE8] backdrop-blur-sm transition-all border border-[rgba(196,78,146,0.7)] bg-[rgba(196,78,146,0.10)] hover:border-[rgba(196,78,146,1)] hover:bg-[rgba(196,78,146,0.20)] hover:shadow-[0_0_24px_rgba(196,78,146,0.45)] hover:scale-[1.02]"
+            >
+              {t.hero.ctaDream15}
+            </a>
+          ) : (
+            <span
+              className="relative inline-flex items-center gap-2 rounded-full px-6 py-4 text-base font-medium text-[#F0EDE8]/85 backdrop-blur-sm border border-[rgba(196,78,146,0.45)] bg-[rgba(196,78,146,0.08)] cursor-default select-none"
+              aria-disabled="true"
+              title={t.common.soon}
+            >
+              <Clock size={18} weight="duotone" style={{ color: '#C44E92' }} />
+              {t.hero.ctaDream15}
+              <span
+                className="absolute -top-2.5 -right-2 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide leading-none text-white shadow-[0_6px_16px_-6px_rgba(196,78,146,0.9)]"
+                style={{ background: 'var(--grad-ddt)' }}
+              >
+                {t.common.soon}
+              </span>
+            </span>
+          )}
         </div>
 
         {/* Badges */}

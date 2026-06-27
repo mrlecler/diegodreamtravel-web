@@ -5,6 +5,9 @@
 export type Lang = 'es' | 'en';
 
 const es = {
+  common: {
+    soon: 'Próximamente',
+  },
   nav: {
     about: 'Quién soy',
     services: 'Servicios',
@@ -287,6 +290,9 @@ const es = {
 export type Dict = typeof es;
 
 const en: Dict = {
+  common: {
+    soon: 'Coming soon',
+  },
   nav: {
     about: 'About',
     services: 'Services',

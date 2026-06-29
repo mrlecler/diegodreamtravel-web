@@ -1,7 +1,6 @@
 'use client';
 
 import { SealCheck, UserCircle, CreditCard, Headset, Check } from '@phosphor-icons/react';
-import { useEffect, useRef } from 'react';
 import { useLang } from '@/lib/language';
 
 const cardIcons = [SealCheck, UserCircle, CreditCard, Headset];
@@ -23,42 +22,6 @@ export default function WhyMe() {
   const { t } = useLang();
   const app = t.why.app;
 
-  const blockRef = useRef<HTMLDivElement>(null);
-  const tiltRef = useRef<HTMLDivElement>(null);
-
-  // Parallax: el mockup flota siguiendo suavemente el mouse (desktop, puntero fino)
-  useEffect(() => {
-    const block = blockRef.current;
-    const tilt = tiltRef.current;
-    if (!block || !tilt) return;
-    if (!window.matchMedia('(pointer:fine)').matches || !window.matchMedia('(min-width:1024px)').matches) return;
-
-    let curX = 0, curY = 0, tgtX = 0, tgtY = 0, raf = 0;
-    const tick = () => {
-      curX += (tgtX - curX) * 0.1;
-      curY += (tgtY - curY) * 0.1;
-      tilt.style.setProperty('--tx', curX.toFixed(1) + 'px');
-      tilt.style.setProperty('--ty', curY.toFixed(1) + 'px');
-      if (Math.abs(tgtX - curX) > 0.1 || Math.abs(tgtY - curY) > 0.1) raf = requestAnimationFrame(tick);
-      else raf = 0;
-    };
-    const onMove = (e: MouseEvent) => {
-      const r = block.getBoundingClientRect();
-      tgtX = ((e.clientX - r.left) / r.width - 0.5) * 22;
-      tgtY = ((e.clientY - r.top) / r.height - 0.5) * 16;
-      if (!raf) raf = requestAnimationFrame(tick);
-    };
-    const onLeave = () => { tgtX = 0; tgtY = 0; if (!raf) raf = requestAnimationFrame(tick); };
-
-    block.addEventListener('mousemove', onMove);
-    block.addEventListener('mouseleave', onLeave);
-    return () => {
-      block.removeEventListener('mousemove', onMove);
-      block.removeEventListener('mouseleave', onLeave);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, []);
-
   return (
     <section id="por-que" className="py-20 px-6" style={{ backgroundColor: 'var(--warm)' }}>
       <style>{`
@@ -78,11 +41,14 @@ export default function WhyMe() {
         .ddt-bTe { width:56%; height:44%; top:50%; left:34%; background:radial-gradient(circle, rgba(66,194,194,.20), transparent 66%); animation-delay:1.4s; }
         .ddt-bOr { width:40%; height:34%; top:42%; left:8%;  background:radial-gradient(circle, rgba(244,123,69,.16), transparent 66%); animation-delay:.7s; }
 
-        /* Float + parallax */
-        .ddt-float { position:relative; z-index:2; animation:ddtFloaty 6s ease-in-out infinite; }
-        .ddt-parallax { transform:translate3d(var(--tx,0px), var(--ty,0px), 0); will-change:transform; }
-        .ddt-phone-img { width:460px; max-width:100%; height:auto; display:block;
-          filter:drop-shadow(0 38px 46px rgba(20,16,30,.30)); }
+        /* Mockup estático, sin sombra de silueta (evita el halo cuadrado) */
+        .ddt-float { position:relative; z-index:2; }
+        .ddt-parallax { transform:none; }
+        .ddt-phone-img { width:460px; max-width:100%; height:auto; display:block; }
+        /* Sombra de contacto suave en el piso: elíptica, no traza el rectángulo del teléfono */
+        .ddt-phone-shadow { position:absolute; z-index:1; left:50%; bottom:6%; transform:translateX(-50%);
+          width:60%; height:42px; border-radius:50%; pointer-events:none;
+          background:radial-gradient(ellipse at center, rgba(20,16,30,.26), transparent 70%); filter:blur(16px); }
 
         @media (max-width:1024px){ .ddt-phone-img{ width:400px; } }
         @media (max-width:640px){ .ddt-phone-img{ width:300px; } .ddt-stage{ min-height:460px; } }
@@ -105,7 +71,6 @@ export default function WhyMe() {
 
         {/* Feature destacado: la app (modo claro) */}
         <div
-          ref={blockRef}
           className="relative rounded-3xl overflow-hidden border border-[#0C1521]/8 shadow-[0_30px_70px_-30px_rgba(12,21,33,.30)]"
           style={{ background: 'linear-gradient(135deg,#FCFBF9 0%,#F2EEE7 100%)' }}
         >
@@ -133,9 +98,10 @@ export default function WhyMe() {
               <span className="ddt-bloom ddt-bFu" />
               <span className="ddt-bloom ddt-bTe" />
               <span className="ddt-bloom ddt-bOr" />
+              <span className="ddt-phone-shadow" aria-hidden="true" />
 
               <div className="ddt-float">
-                <div ref={tiltRef} className="ddt-parallax">
+                <div className="ddt-parallax">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src="/images/decor/iphone-opt.webp" alt={app.title} className="ddt-phone-img" />
                 </div>

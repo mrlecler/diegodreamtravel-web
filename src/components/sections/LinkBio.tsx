@@ -92,7 +92,8 @@ export default function LinkBio() {
         .lb-btn.primary:hover{ box-shadow:0 8px 44px rgba(196,78,146,.55); }
 
         .lb-ic{ width:22px; height:22px; flex:none; display:flex; align-items:center; justify-content:center; }
-        .lb-ic img{ height:20px; width:72px; max-width:72px; object-fit:contain; object-position:left center; filter:brightness(0) invert(1); opacity:.92; }
+        .lb-ic.logo{ width:72px; justify-content:flex-start; }
+        .lb-ic img{ height:18px; width:auto; max-width:72px; object-fit:contain; object-position:left center; filter:brightness(0) invert(1); opacity:.92; }
         .lb-label{ flex:1; line-height:1.25; }
         .lb-arrow{ flex:none; opacity:.5; transition:transform .18s, opacity .18s; }
         .lb-btn:hover .lb-arrow{ transform:translateX(3px); opacity:.9; }
@@ -138,7 +139,7 @@ export default function LinkBio() {
               rel={link.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
               className={`lb-btn${link.primary ? ' primary' : ''}`}
             >
-              <span className="lb-ic">
+              <span className={`lb-ic${link.logo ? ' logo' : ''}`}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 {link.logo ? <img src={link.logo} alt="" /> : link.icon}
               </span>

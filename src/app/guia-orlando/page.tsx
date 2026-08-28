@@ -9,6 +9,7 @@ import {
   Coins,
   Clock,
 } from '@phosphor-icons/react/dist/ssr';
+import Footer from '@/components/layout/Footer';
 import GuiaForm from './GuiaForm';
 
 export const metadata: Metadata = {
@@ -62,7 +63,8 @@ const CONTENIDO = [
 
 export default function GuiaOrlandoPage() {
   return (
-    <main style={{ backgroundColor: 'var(--navy)' }} className="min-h-screen">
+    <>
+      <main style={{ backgroundColor: 'var(--navy)' }} className="min-h-screen">
       {/* Franja de marca */}
       <div style={{ height: 5, background: 'var(--grad-ddt)' }} />
 
@@ -215,17 +217,8 @@ export default function GuiaOrlandoPage() {
         </div>
       </section>
 
-      <footer
-        className="py-10 text-center"
-        style={{ borderTop: '1px solid rgba(240,237,232,.08)' }}
-      >
-        <p className="text-[13px] text-[rgba(240,237,232,.4)]">
-          Diego Dream Travel · Resistencia, Chaco ·{' '}
-          <Link href="/" className="underline hover:text-[rgba(240,237,232,.7)]">
-            diegodreamtravel.com
-          </Link>
-        </p>
-      </footer>
-    </main>
+      </main>
+      <Footer />
+    </>
   );
 }

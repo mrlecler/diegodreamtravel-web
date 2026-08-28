@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useLang } from '@/lib/language';
 import { DREAM15_LIVE } from '@/lib/flags';
 
@@ -20,12 +21,19 @@ const YEAR = new Date().getFullYear();
 
 export default function Footer() {
   const { t } = useLang();
+  const pathname = usePathname();
+
+  // Las secciones son anclas del home. Desde cualquier otra pagina (la landing
+  // de la guia, /link, etc.) un '#quien-soy' suelto no lleva a ningun lado:
+  // hay que mandarlo al home con el ancla.
+  const enHome = pathname === '/';
+  const ancla = (id: string) => (enHome ? id : `/${id}`);
 
   const secciones = [
-    { label: t.footer.links.about, href: '#quien-soy' },
-    { label: t.footer.links.services, href: '#servicios' },
-    { label: t.footer.links.why, href: '#por-que' },
-    { label: t.footer.links.testimonials, href: '#testimonios' },
+    { label: t.footer.links.about, href: ancla('#quien-soy') },
+    { label: t.footer.links.services, href: ancla('#servicios') },
+    { label: t.footer.links.why, href: ancla('#por-que') },
+    { label: t.footer.links.testimonials, href: ancla('#testimonios') },
     { label: t.footer.links.dream15, href: '/dream15' },
   ];
 

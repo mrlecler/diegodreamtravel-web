@@ -45,3 +45,6 @@ next-env.d.ts
 # Imagenes: solo se versiona /opt (optimizadas). Los originales crudos no.
 /public/images/hero/
 /public/images/misc/
+
+# Configuración local de Claude Code, no va al repo.
+.claude/

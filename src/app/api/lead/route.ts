@@ -22,14 +22,43 @@ import { Resend } from 'resend';
  * porque perder un lead es peor que tenerlo sólo en el mail.
  */
 
-const CRM_URL =
-  process.env.CRM_BASE_URL || 'https://app.diegodreamtravel.com';
+/**
+ * A qué SGI le pega, con el mismo criterio fail-closed que `src/lib/sgi.ts`:
+ * sólo el dominio de producción escribe en la base de producción.
+ *
+ * `getSgiUrl()` de ese archivo no sirve acá porque mira
+ * `window.location.hostname` y esta ruta corre en el servidor. Pero el
+ * servidor sí sabe por qué host entró el request, así que se decide con
+ * eso — que además es más confiable que el navegador.
+ *
+ * Importa de verdad: los tres dominios (www, el apex y dev) sirven el
+ * MISMO deployment, así que entrar por dev.diegodreamtravel.com es la
+ * única forma de probar el formulario sin ensuciar la base real. Antes
+ * de esto, esta ruta insertaba directo con la service role del proyecto
+ * y una prueba desde dev creaba un lead de verdad.
+ */
+const PROD_HOSTS = ['www.diegodreamtravel.com', 'diegodreamtravel.com'];
+const CRM_PROD   = 'https://app.diegodreamtravel.com';
+const CRM_DEV    = 'https://dev.app.diegodreamtravel.com';
+
+function crmUrl(req: NextRequest): string {
+  const override = process.env.CRM_BASE_URL;
+  if (override) return override.replace(/\/$/, '');
+
+  // El host real detrás de Vercel. `req.nextUrl.hostname` ya lo resuelve,
+  // pero se chequea también la cabecera por si algún proxy la reescribe.
+  const host = (req.headers.get('host') || req.nextUrl.hostname || '')
+    .split(':')[0]
+    .toLowerCase();
+
+  return PROD_HOSTS.includes(host) ? CRM_PROD : CRM_DEV;
+}
 
 // Si el CRM tarda más que esto, se manda el mail y listo. El visitante
 // no puede quedar mirando un spinner porque el CRM esté frío.
 const TIMEOUT_MS = 8000;
 
-async function avisarPorMail(datos: Record<string, string | null>) {
+async function avisarPorMail(datos: Record<string, string | null>, esProd: boolean) {
   const resendKey = process.env.RESEND_API_KEY;
   if (!resendKey) return false;
 
@@ -49,7 +78,8 @@ cargarlo a mano en app.diegodreamtravel.com/app/leads/)`;
     from: 'web@diegodreamtravel.com',
     to: 'info@diegodreamtravel.com',
     replyTo: 'info@diegodreamtravel.com',
-    subject: `Nuevo lead web (sin cargar) — ${datos.nombre_apellido}`,
+    subject: (esProd ? '' : '[PRUEBA] ') +
+      `Nuevo lead web (sin cargar) — ${datos.nombre_apellido}`,
     text: emailBody,
   });
   if (error) {
@@ -71,6 +101,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const esProd = crmUrl(req) === CRM_PROD;
+
     const datos = {
       nombre_apellido: String(nombre_apellido).trim(),
       whatsapp: String(whatsapp).trim(),
@@ -82,7 +114,7 @@ export async function POST(req: NextRequest) {
 
     // 1) El CRM es el único que escribe en `leads`.
     try {
-      const res = await fetch(`${CRM_URL}/api/leads`, {
+      const res = await fetch(`${crmUrl(req)}/api/leads`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(datos),
@@ -110,7 +142,7 @@ export async function POST(req: NextRequest) {
     }
 
     // 2) Red de contención: el CRM no contestó, pero el lead no se pierde.
-    if (await avisarPorMail(datos)) {
+    if (await avisarPorMail(datos, esProd)) {
       return NextResponse.json({ ok: true });
     }
 

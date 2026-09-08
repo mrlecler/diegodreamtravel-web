@@ -29,9 +29,16 @@ const LINKS = [
     logo: '/images/logos-civitatis.png',
   },
   {
-    href: 'https://www.trustpilot.com/evaluate/diegodreamtravel.com',
+    // Reseñas nuevas → Google Business (perfil verificado, código de tienda
+    // 09820016873060583845). Hay un perfil duplicado dando vueltas: este es
+    // el bueno. La estrella va en el naranja de marca (--orange); el logo de
+    // Google no se usa, tiene reglas de uso de marca. Las reseñas de
+    // Trustpilot que ya existen se siguen mostrando (TrustpilotWidget,
+    // Testimonials, D15Testimonials): esto solo cambia a dónde mandamos a
+    // quien quiere dejar una nueva.
+    href: 'https://g.page/r/CXu_uXsuATpkEAI/review',
     label: '¿Cómo fue tu experiencia con mis servicios?',
-    icon: <Star size={20} weight="duotone" style={{ color: '#00B67A' }} />,
+    icon: <Star size={20} weight="duotone" style={{ color: '#FF5B00' }} />,
   },
   {
     href: 'mailto:info@diegodreamtravel.com',

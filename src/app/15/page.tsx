@@ -1,7 +1,20 @@
+import type { Metadata } from 'next';
 import { MessageCircle } from 'lucide-react';
 import GradientButton from '@/components/ui/GradientButton';
 
 const WA_URL = 'https://wa.me/5493624703040';
+
+export const metadata: Metadata = {
+  title: 'Quinceañeras — Diego Dream Travel',
+  description:
+    'Viajes de quince a medida. Agente certificado Disney & Universal.',
+  // La página dice "Próximamente": todavía no hay producto que mostrar. Si
+  // se indexa, lo que Google publica de nosotros es que algo nuestro no
+  // existe. Sigue viva para quien llegue por un link directo — de ahí el
+  // follow: true, que deja rastrear la salida a WhatsApp. Cuando haya
+  // contenido real, sacar este bloque y agregar la ruta a src/app/sitemap.ts.
+  robots: { index: false, follow: true },
+};
 
 export default function QuincePage() {
   return (

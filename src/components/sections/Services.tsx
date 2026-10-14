@@ -98,7 +98,7 @@ export default function Services() {
 
         {/* Cuatro mundos — panel único con efecto acordeón */}
         <div>
-          <div className="cm-worlds">
+          <div className="cm-worlds" data-sparkle-dark>
             {t.services.worlds.map((w, i) => {
               const d = design[i];
               const Icon = d.Icon;

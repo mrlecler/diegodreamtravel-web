@@ -9,6 +9,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import CTAClose from '@/components/sections/CTAClose';
 import ContactSection from '@/components/sections/ContactSection';
 import SectionDivider from '@/components/SectionDivider';
+import SparkleTrail from '@/components/SparkleTrail';
 
 // Divisor sobre fondo crema (entre secciones claras)
 function Divider() {
@@ -37,6 +38,8 @@ export default function Home() {
         <ContactSection />
       </main>
       <Footer />
+      {/* Estela de estrellitas del mouse (solo escritorio) */}
+      <SparkleTrail />
     </>
   );
 }

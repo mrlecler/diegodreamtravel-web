@@ -157,7 +157,7 @@ export default function NavIsland() {
           {/* Links desktop con la gota */}
           <ul
             ref={listRef}
-            className="hidden md:flex items-center gap-1 relative"
+            className="hidden lg:flex items-center gap-1 relative"
             onMouseLeave={() => setHoverId(null)}
           >
             <span
@@ -188,7 +188,7 @@ export default function NavIsland() {
                   <a
                     href={link.href}
                     onClick={(e) => onNavClick(e, link.href)}
-                    className="relative z-10 block px-3.5 py-1.5 text-sm font-medium transition-colors duration-200"
+                    className="relative z-10 block px-3.5 py-1.5 text-sm font-medium whitespace-nowrap transition-colors duration-200"
                     style={{ color: lit ? '#fff' : dark ? 'rgba(240,237,232,0.75)' : 'rgba(12,21,33,0.75)' }}
                   >
                     {t.nav[link.key]}
@@ -258,7 +258,7 @@ export default function NavIsland() {
             </a>
 
             <button
-              className="md:hidden p-1 transition-colors"
+              className="lg:hidden p-1 transition-colors"
               style={{ color: txt }}
               onClick={() => setOpen(true)}
               aria-label={t.nav.openMenu}
@@ -271,7 +271,7 @@ export default function NavIsland() {
 
       {/* Menú mobile — panel sólido */}
       {open && (
-        <div className="fixed inset-0 z-[60] md:hidden">
+        <div className="fixed inset-0 z-[60] lg:hidden">
           <div
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setOpen(false)}

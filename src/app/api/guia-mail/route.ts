@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { GUIA_PDF_URL } from '@/lib/sgi';
-import { permitir, ipCliente } from '@/lib/rate-limit';
+import { reservarIntento, ipCliente } from '@/lib/rate-limit';
 import { origenPermitido, escapeHtml, texto, buzonNormalizado, DIEZ_MINUTOS } from '@/lib/servidor';
 import { emailValido } from '@/lib/email';
 
@@ -53,25 +53,39 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Email inválido' }, { status: 400 });
     }
 
-    const ip = ipCliente(req.headers);
-    const okIp = await permitir(ip && `web-guia-mail:ip:${ip}`, MAX_POR_IP, DIEZ_MINUTOS);
-    const okEmail = okIp &&
-      await permitir(`web-guia-mail:to:${buzonNormalizado(destino)}`, MAX_POR_EMAIL, DIEZ_MINUTOS);
-    // El total va último: sólo gasta cupo un intento que ya pasó los otros.
-    const okTotal = okEmail &&
-      await permitir('web-guia-mail:total', MAX_TOTAL, DIEZ_MINUTOS);
-    if (!okIp || !okEmail || !okTotal) {
-      return NextResponse.json({ ok: false, enviado: false }, { status: 429 });
-    }
-
+    // Antes de tocar los cupos: sin key no sale nada y no hay por qué
+    // gastarle a la persona el intento de su buzón.
     const resendKey = process.env.RESEND_API_KEY;
     if (!resendKey) {
       console.error('[guia-mail] Falta RESEND_API_KEY: no se envió el mail');
       return NextResponse.json({ ok: false, enviado: false }, { status: 200 });
     }
 
+    const ip = ipCliente(req.headers);
+    const porIp = await reservarIntento(ip && `web-guia-mail:ip:${ip}`, MAX_POR_IP, DIEZ_MINUTOS);
+    if (!porIp.pasa) {
+      return NextResponse.json({ ok: false, enviado: false }, { status: 429 });
+    }
+    const porBuzon = await reservarIntento(
+      `web-guia-mail:to:${buzonNormalizado(destino)}`, MAX_POR_EMAIL, DIEZ_MINUTOS
+    );
+    if (!porBuzon.pasa) {
+      return NextResponse.json({ ok: false, enviado: false }, { status: 429 });
+    }
+    // El total va último: sólo gasta cupo un intento que ya pasó los otros.
+    const total = await reservarIntento('web-guia-mail:total', MAX_TOTAL, DIEZ_MINUTOS);
+    if (!total.pasa) {
+      // El buzón no recibió nada: que pueda reintentar cuando baje el total.
+      await porBuzon.liberar();
+      return NextResponse.json({ ok: false, enviado: false }, { status: 429 });
+    }
+
     const saludo = saludoPara(nombre_apellido);
 
+    // Si Resend falla se devuelve SÓLO el cupo del buzón, así la persona
+    // puede reintentar con el mismo mail. El de la IP y el total quedan
+    // gastados a propósito: son los que acotan cuántas llamadas a Resend
+    // se pueden provocar con envíos que fallan.
     const resend = new Resend(resendKey);
     const { error } = await resend.emails.send({
       from: 'Diego Dream Travel <web@diegodreamtravel.com>',
@@ -105,9 +119,13 @@ export async function POST(req: NextRequest) {
   </div>
 </body></html>
       `,
+    }).catch(async (err: unknown) => {
+      await porBuzon.liberar();
+      throw err;
     });
 
     if (error) {
+      await porBuzon.liberar();
       console.error('[guia-mail] Resend error:', error);
       return NextResponse.json({ ok: false, enviado: false }, { status: 200 });
     }

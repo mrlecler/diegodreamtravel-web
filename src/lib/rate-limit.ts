@@ -50,13 +50,14 @@ function db(): SupabaseClient | null {
   return cliente;
 }
 
-function permitirEnMemoria(clave: string, max: number, ventanaMs: number): boolean {
+/** Anota el intento en memoria. Devuelve su marca (para liberarlo) o null si no pasa. */
+function reservarEnMemoria(clave: string, max: number, ventanaMs: number): number | null {
   const ahora = Date.now();
   const recientes = (memoria.get(clave) || []).filter((t) => t > ahora - ventanaMs);
 
   if (recientes.length >= max) {
     memoria.set(clave, recientes);
-    return false;
+    return null;
   }
 
   recientes.push(ahora);
@@ -69,7 +70,14 @@ function permitirEnMemoria(clave: string, max: number, ventanaMs: number): boole
     }
     if (memoria.size > MAX_CLAVES_MEMORIA) memoria.clear();
   }
-  return true;
+  return ahora;
+}
+
+function liberarEnMemoria(clave: string, marca: number): void {
+  const tiempos = memoria.get(clave);
+  if (!tiempos) return;
+  const i = tiempos.indexOf(marca);
+  if (i >= 0) tiempos.splice(i, 1);
 }
 
 function esTablaInexistente(err: unknown): boolean {
@@ -77,20 +85,52 @@ function esTablaInexistente(err: unknown): boolean {
   return code === 'PGRST205' || code === '42P01';
 }
 
+export interface Intento {
+  /** true = dejalo pasar. */
+  pasa: boolean;
+  /**
+   * Borra este intento (de memoria y de intentos_publicos), como si no
+   * hubiera pasado. Para cupos que sólo deben gastarse cuando la acción
+   * sale bien. Es idempotente y nunca tira: si el borrado falla, el
+   * intento cuenta hasta que venza la ventana.
+   */
+  liberar: () => Promise<void>;
+}
+
+const NADA = async () => {};
+
 /**
- * ¿Puede pasar este intento? true = dejalo pasar.
+ * Anota el intento y dice si puede pasar. Mismo contrato que
+ * `reservarIntento` del SGI (src/lib/rate-limit.js).
  *
  * @param clave     identidad de quien intenta ('web-guia-mail:ip:1.2.3.4')
  * @param max       intentos permitidos dentro de la ventana
  * @param ventanaMs largo de la ventana
  */
-export async function permitir(clave: string | null, max: number, ventanaMs: number): Promise<boolean> {
-  if (!clave) return true; // sin identidad no hay a quién limitar
+export async function reservarIntento(clave: string | null, max: number, ventanaMs: number): Promise<Intento> {
+  if (!clave) return { pasa: true, liberar: NADA }; // sin identidad no hay a quién limitar
 
-  if (!permitirEnMemoria(clave, max, ventanaMs)) return false;
+  const marca = reservarEnMemoria(clave, max, ventanaMs);
+  if (marca === null) return { pasa: false, liberar: NADA };
 
+  let id: number | string | null = null;
+  let liberado = false;
   const supa = db();
-  if (!supa || Date.now() < sinTablaHasta) return true;
+  const liberar = async () => {
+    if (liberado) return;
+    liberado = true;
+    liberarEnMemoria(clave, marca);
+    if (!supa || id == null) return;
+    const propio = id;
+    try {
+      const { error } = await supa.from('intentos_publicos').delete().eq('id', propio);
+      if (error) throw error;
+    } catch (err) {
+      console.error('[rate-limit] no se pudo borrar el intento:', (err as Error)?.message || err);
+    }
+  };
+
+  if (!supa || Date.now() < sinTablaHasta) return { pasa: true, liberar };
 
   try {
     // Primero se REGISTRA el intento y después se cuenta, incluida la fila
@@ -104,6 +144,7 @@ export async function permitir(clave: string | null, max: number, ventanaMs: num
       .select('id')
       .single();
     if (insError) throw insError;
+    id = (fila as { id?: number | string } | null)?.id ?? null;
 
     const desde = new Date(Date.now() - ventanaMs).toISOString();
     const { count, error } = await supa
@@ -114,14 +155,12 @@ export async function permitir(clave: string | null, max: number, ventanaMs: num
     if (error) throw error;
 
     if ((count || 0) > max) {
-      // El intento rechazado no suma: se borra la fila recién insertada.
-      // Si el borrado falla, esa fila cuenta hasta que venza la ventana
-      // (falla cerrado para esa clave, aceptable acá).
-      const id = (fila as { id?: number | string } | null)?.id;
-      if (id != null) {
-        await supa.from('intentos_publicos').delete().eq('id', id).then(() => {}, () => {});
-      }
-      return false;
+      // El intento rechazado no suma: se borra la fila recién insertada
+      // (y la marca en memoria). Si el borrado falla, esa fila cuenta
+      // hasta que venza la ventana (falla cerrado para esa clave,
+      // aceptable acá).
+      await liberar();
+      return { pasa: false, liberar: NADA };
     }
 
     if (Math.random() < 1 / BARRIDO_CADA) {
@@ -131,12 +170,21 @@ export async function permitir(clave: string | null, max: number, ventanaMs: num
         .lt('creado_at', new Date(Date.now() - RETENCION_MS).toISOString())
         .then(() => {}, () => {});
     }
-    return true;
+    return { pasa: true, liberar };
   } catch (err) {
     if (esTablaInexistente(err)) sinTablaHasta = Date.now() + REINTENTO_TABLA_MS;
     console.error('[rate-limit] falla abierto (queda el límite en memoria):', (err as Error)?.message || err);
-    return true;
+    return { pasa: true, liberar };
   }
+}
+
+/**
+ * ¿Puede pasar este intento? true = dejalo pasar. El intento queda
+ * contado aunque lo que venga después falle (ver `reservarIntento` si
+ * hace falta devolver el cupo).
+ */
+export async function permitir(clave: string | null, max: number, ventanaMs: number): Promise<boolean> {
+  return (await reservarIntento(clave, max, ventanaMs)).pasa;
 }
 
 /**

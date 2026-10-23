@@ -1,6 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { GUIA_PDF_URL } from '@/lib/sgi';
+import { permitir, ipCliente } from '@/lib/rate-limit';
+import { origenPermitido, escapeHtml, texto, DIEZ_MINUTOS } from '@/lib/servidor';
+
+// Un nombre de pila "normal": letras (con tildes), apóstrofo, punto o
+// guion. Cualquier otra cosa no entra al mail: se saluda con "Hola,".
+// Con RegExp() y no literal porque el target de TS es ES2017.
+const NOMBRE_OK = new RegExp("^[\\p{L}\\p{M}'’.-]{1,40}$", 'u');
+
+// Esta ruta manda un mail a la dirección que le pasen, desde el dominio
+// de Diego. Sin freno es un relay: se limita por IP y por destinatario.
+const MAX_POR_IP = 3;
+const MAX_POR_EMAIL = 1;
+
+function saludoPara(nombreApellido: unknown): string {
+  const primero = texto(nombreApellido, 200).split(/\s+/)[0] || '';
+  return NOMBRE_OK.test(primero) ? `Hola ${escapeHtml(primero)},` : 'Hola,';
+}
 
 /**
  * Manda la guía por mail a quien dejó su dirección en /guia-orlando.
@@ -13,11 +30,23 @@ import { GUIA_PDF_URL } from '@/lib/sgi';
  */
 export async function POST(req: NextRequest) {
   try {
+    if (!origenPermitido(req)) {
+      return NextResponse.json({ ok: false, enviado: false }, { status: 403 });
+    }
+
     const { email, nombre_apellido } = await req.json();
 
-    const destino = String(email || '').trim();
+    const destino = texto(email, 254);
     if (!destino || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(destino)) {
       return NextResponse.json({ error: 'Email inválido' }, { status: 400 });
+    }
+
+    const ip = ipCliente(req.headers);
+    const okIp = await permitir(ip && `web-guia-mail:ip:${ip}`, MAX_POR_IP, DIEZ_MINUTOS);
+    const okEmail = okIp &&
+      await permitir(`web-guia-mail:to:${destino.toLowerCase()}`, MAX_POR_EMAIL, DIEZ_MINUTOS);
+    if (!okIp || !okEmail) {
+      return NextResponse.json({ ok: false, enviado: false }, { status: 429 });
     }
 
     const resendKey = process.env.RESEND_API_KEY;
@@ -26,8 +55,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, enviado: false }, { status: 200 });
     }
 
-    const nombre = String(nombre_apellido || '').trim().split(' ')[0] || '';
-    const saludo = nombre ? `Hola ${nombre},` : 'Hola,';
+    const saludo = saludoPara(nombre_apellido);
 
     const resend = new Resend(resendKey);
     const { error } = await resend.emails.send({

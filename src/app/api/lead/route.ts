@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { permitir, ipCliente } from '@/lib/rate-limit';
+import { emailValido } from '@/lib/email';
 import { origenPermitido, texto, whatsappValido, DIEZ_MINUTOS } from '@/lib/servidor';
 
 /**
@@ -73,9 +74,8 @@ const MAIL_MAX_TOTAL = 30;
 // llena ese balde a todos los demás. Mismo cupo que el CRM.
 const LEAD_MAX_POR_IP = 5;
 
-// Mismo patrón que GuiaForm. El email es opcional: si viene y no tiene
-// forma de email, no se manda al CRM (el form ya lo frena en el cliente).
-const EMAIL_OK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// El email es opcional: si viene y no es una dirección simple (mismo
+// criterio que los forms, src/lib/email.ts), no se manda al CRM.
 
 const MSG_WHATSAPP = 'Revisá el número de WhatsApp: tiene que tener entre 8 y 15 números, con característica.';
 
@@ -138,7 +138,7 @@ export async function POST(req: NextRequest) {
     const datos = {
       nombre_apellido: texto(b.nombre_apellido, 120),
       whatsapp: texto(b.whatsapp, 30),
-      email: email && EMAIL_OK.test(email) ? email : null,
+      email: email && emailValido(email) ? email : null,
       viaje: texto(b.viaje, 500) || null,
       fecha_tentativa: texto(b.fecha_tentativa, 100) || null,
       origen: 'web',

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { EMAIL_OK } from '@/lib/email';
 import { CircleNotch, DownloadSimple, CheckCircle } from '@phosphor-icons/react/dist/ssr';
 import { getSgiUrl, GUIA_PDF_PATH } from '@/lib/sgi';
 
@@ -17,7 +18,6 @@ const WA_ICON = (
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
 // La misma regex que valida /api/guia-mail.
-const EMAIL_OK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const MSG_GENERICO = 'No pudimos guardar tus datos. Podés bajar la guía igual, o escribirme por WhatsApp.';
 

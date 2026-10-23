@@ -3,6 +3,7 @@ import { Resend } from 'resend';
 import { GUIA_PDF_URL } from '@/lib/sgi';
 import { permitir, ipCliente } from '@/lib/rate-limit';
 import { origenPermitido, escapeHtml, texto, buzonNormalizado, DIEZ_MINUTOS } from '@/lib/servidor';
+import { emailValido } from '@/lib/email';
 
 // Un nombre de pila "normal": letras (con tildes), apóstrofo, punto o
 // guion. Cualquier otra cosa no entra al mail: se saluda con "Hola,".
@@ -41,8 +42,11 @@ export async function POST(req: NextRequest) {
 
     const { email, nombre_apellido } = await req.json();
 
+    // Sólo una dirección simple: con '<>', comillas o un nombre visible
+    // la misma casilla se podría escribir de infinitas formas y el límite
+    // por buzón dejaría de valer (src/lib/email.ts).
     const destino = texto(email, 254);
-    if (!destino || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(destino)) {
+    if (!destino || !emailValido(destino)) {
       return NextResponse.json({ error: 'Email inválido' }, { status: 400 });
     }
 

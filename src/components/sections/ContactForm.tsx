@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { EMAIL_OK } from '@/lib/email';
 import { CircleNotch } from '@phosphor-icons/react/dist/ssr';
 import { useLang } from '@/lib/language';
 
@@ -17,7 +18,6 @@ type FormData = {
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
 // Mismo patrón que GuiaForm (/guia-orlando) y que /api/lead.
-const EMAIL_OK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const WA_ICON = (
   <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">

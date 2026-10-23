@@ -6,9 +6,11 @@ import { esHostProd, origenPermitido, texto, whatsappValido, DIEZ_MINUTOS } from
 
 // Mismo cupo que POST /api/leads del SGI: 5 cada 10 minutos por IP.
 const MAX_POR_IP = 5;
-// Tope total (como la red de contención de /api/lead): cada lead aceptado
-// es una fila con service role y un mail a info@, así que rotar IPs no
-// puede convertirse en un volumen sin techo.
+// Tope total del MAIL a info@ (como la red de contención de /api/lead):
+// rotar IPs no puede convertirse en una inundación de la casilla. No
+// frena el alta: si no, cualquiera con 6 IPs llena el cupo y los leads
+// reales de esos 10 minutos se pierden con un 429. La fila la acota el
+// límite por visitante.
 const MAX_TOTAL = 30;
 const TIPOS = ['quinceanero', 'familia'];
 
@@ -44,15 +46,15 @@ export async function POST(req: NextRequest) {
     }
 
     const ip = ipCliente(req.headers);
-    const permitido =
-      (await permitir(ip && `web-dream15:${ip}`, MAX_POR_IP, DIEZ_MINUTOS)) &&
-      (await permitir('web-dream15:total', MAX_TOTAL, DIEZ_MINUTOS));
-    if (!permitido) {
-      return NextResponse.json(
-        { error: 'Demasiadas solicitudes. Probá de nuevo en unos minutos.' },
-        { status: 429 }
-      );
+    const demasiadas = () => NextResponse.json(
+      { error: 'Demasiadas solicitudes. Probá de nuevo en unos minutos.' },
+      { status: 429 }
+    );
+    if (!(await permitir(ip && `web-dream15:${ip}`, MAX_POR_IP, DIEZ_MINUTOS))) {
+      return demasiadas();
     }
+    // Sólo decide si sale el mail; la fila se guarda igual (ver MAX_TOTAL).
+    const mailPermitido = await permitir('web-dream15:total', MAX_TOTAL, DIEZ_MINUTOS);
 
     // Mismo criterio fail-closed que /api/lead: www, el apex y dev sirven
     // el MISMO deployment, así que sólo el dominio de producción escribe
@@ -84,7 +86,9 @@ export async function POST(req: NextRequest) {
     // 2) Enviar el email (PRIORIDAD)
     try {
       const resendKey = process.env.RESEND_API_KEY;
-      if (resendKey) {
+      if (!mailPermitido) {
+        console.warn('[lead-dream15] tope total de mails alcanzado: el lead queda sólo en leads_dream15');
+      } else if (resendKey) {
         const resend = new Resend(resendKey);
         const tipoLabel =
           tipo === 'quinceanero' ? 'La quinceañera'
@@ -117,6 +121,9 @@ Fecha tentativa: ${fecha_tentativa || '—'}`;
     if (emailEnviado || leadGuardado) {
       return NextResponse.json({ ok: true });
     }
+    // Sin mail por el tope y sin fila (fuera de producción o la base
+    // falló): que la persona reintente, como antes.
+    if (!mailPermitido) return demasiadas();
     return NextResponse.json(
       { error: 'No pudimos procesar tu solicitud. Escribinos por WhatsApp.' },
       { status: 500 }

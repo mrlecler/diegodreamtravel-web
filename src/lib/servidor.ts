@@ -56,6 +56,27 @@ export function whatsappValido(valor: string): boolean {
   return digitos.length >= 8 && digitos.length <= 15;
 }
 
+/**
+ * Clave de rate limit para un destinatario de mail: la misma para todas
+ * las formas de escribir el mismo buzón. En minúsculas, sin el sufijo
+ * `+tag` del local-part y, en Gmail (que ignora los puntos y acepta
+ * googlemail.com como alias), sin puntos y con dominio gmail.com.
+ * Sólo sirve para contar intentos: el mail se manda a la dirección tal
+ * cual la escribió la persona.
+ */
+export function buzonNormalizado(email: string): string {
+  const e = email.trim().toLowerCase();
+  const arroba = e.lastIndexOf('@');
+  if (arroba <= 0) return e;
+  let local = e.slice(0, arroba);
+  let dominio = e.slice(arroba + 1);
+  const mas = local.indexOf('+');
+  if (mas > 0) local = local.slice(0, mas);
+  if (dominio === 'googlemail.com') dominio = 'gmail.com';
+  if (dominio === 'gmail.com') local = local.replace(/\./g, '') || local;
+  return `${local}@${dominio}`;
+}
+
 /** Escapa texto para meterlo en HTML de un mail. */
 export function escapeHtml(s: string): string {
   return s

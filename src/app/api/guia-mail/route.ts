@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { GUIA_PDF_URL } from '@/lib/sgi';
 import { permitir, ipCliente } from '@/lib/rate-limit';
-import { origenPermitido, escapeHtml, texto, DIEZ_MINUTOS } from '@/lib/servidor';
+import { origenPermitido, escapeHtml, texto, buzonNormalizado, DIEZ_MINUTOS } from '@/lib/servidor';
 
 // Un nombre de pila "normal": letras (con tildes), apóstrofo, punto o
 // guion. Cualquier otra cosa no entra al mail: se saluda con "Hola,".
@@ -10,9 +10,14 @@ import { origenPermitido, escapeHtml, texto, DIEZ_MINUTOS } from '@/lib/servidor
 const NOMBRE_OK = new RegExp("^[\\p{L}\\p{M}'’.-]{1,40}$", 'u');
 
 // Esta ruta manda un mail a la dirección que le pasen, desde el dominio
-// de Diego. Sin freno es un relay: se limita por IP y por destinatario.
+// de Diego. Sin freno es un relay: se limita por IP, por buzón (con los
+// alias +tag y los puntos de Gmail juntos) y con un tope total, igual que
+// la red de contención de /api/lead, para que rotar IPs no lo destape.
+// Ventanas de 1 h o menos: el barrido de intentos_publicos borra lo más
+// viejo (RETENCION_MS en src/lib/rate-limit.ts).
 const MAX_POR_IP = 3;
 const MAX_POR_EMAIL = 1;
+const MAX_TOTAL = 30;
 
 function saludoPara(nombreApellido: unknown): string {
   const primero = texto(nombreApellido, 200).split(/\s+/)[0] || '';
@@ -44,8 +49,11 @@ export async function POST(req: NextRequest) {
     const ip = ipCliente(req.headers);
     const okIp = await permitir(ip && `web-guia-mail:ip:${ip}`, MAX_POR_IP, DIEZ_MINUTOS);
     const okEmail = okIp &&
-      await permitir(`web-guia-mail:to:${destino.toLowerCase()}`, MAX_POR_EMAIL, DIEZ_MINUTOS);
-    if (!okIp || !okEmail) {
+      await permitir(`web-guia-mail:to:${buzonNormalizado(destino)}`, MAX_POR_EMAIL, DIEZ_MINUTOS);
+    // El total va último: sólo gasta cupo un intento que ya pasó los otros.
+    const okTotal = okEmail &&
+      await permitir('web-guia-mail:total', MAX_TOTAL, DIEZ_MINUTOS);
+    if (!okIp || !okEmail || !okTotal) {
       return NextResponse.json({ ok: false, enviado: false }, { status: 429 });
     }
 

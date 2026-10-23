@@ -5,10 +5,13 @@ import { permitir, ipCliente } from '@/lib/rate-limit';
 import { origenPermitido, escapeHtml, texto, buzonNormalizado, DIEZ_MINUTOS } from '@/lib/servidor';
 import { emailValido } from '@/lib/email';
 
-// Un nombre de pila "normal": letras (con tildes), apóstrofo, punto o
-// guion. Cualquier otra cosa no entra al mail: se saluda con "Hola,".
+// Un nombre de pila "normal": letras (con tildes), apóstrofo o guion, y
+// a lo sumo un punto AL FINAL (una inicial, "J."). Un punto en el medio
+// no: dejaría meter un dominio ("Hola WWW.PAGOS-DISNEY.COM.AR,") en un
+// mail que sale desde el dominio de Diego y los clientes de correo lo
+// convierten en link. Cualquier otra cosa no entra: se saluda con "Hola,".
 // Con RegExp() y no literal porque el target de TS es ES2017.
-const NOMBRE_OK = new RegExp("^[\\p{L}\\p{M}'’.-]{1,40}$", 'u');
+const NOMBRE_OK = new RegExp("^(?=.{1,40}$)[\\p{L}\\p{M}'’-]+\\.?$", 'u');
 
 // Esta ruta manda un mail a la dirección que le pasen, desde el dominio
 // de Diego. Sin freno es un relay: se limita por IP, por buzón (con los

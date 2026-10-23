@@ -140,12 +140,39 @@ export async function permitir(clave: string | null, max: number, ventanaMs: num
 }
 
 /**
- * IP del visitante. En Vercel `x-forwarded-for` lo arma la plataforma
- * ("cliente, proxy1, ..."); se toma el primero y sólo si es una IP.
+ * Prefijo /64 de una IPv6 ('2001:db8:0:1::/64'). Una conexión IPv6
+ * normal recibe un /64 entero, así que limitar por la dirección completa
+ * no frena a nadie: cambiando el sufijo cada request caería en un balde
+ * nuevo. Una IPv4 mapeada (::ffff:1.2.3.4) cuenta como la IPv4.
+ */
+function prefijoIpv6(ip: string): string {
+  const sinZona = ip.split('%')[0].toLowerCase();
+  const mapeada = sinZona.match(/^::ffff:(\d+\.\d+\.\d+\.\d+)$/);
+  if (mapeada && isIP(mapeada[1]) === 4) return mapeada[1];
+
+  // Si termina en IPv4 embebida, esos 32 bits son los últimos 2 grupos:
+  // no tocan el /64, alcanza con reemplazarlos por dos grupos cualquiera.
+  const base = sinZona.replace(/\d+\.\d+\.\d+\.\d+$/, '0:0');
+  const [izq, der] = base.split('::');
+  const gruposIzq = izq ? izq.split(':') : [];
+  const gruposDer = der !== undefined && der !== '' ? der.split(':') : [];
+  const faltan = base.includes('::') ? 8 - gruposIzq.length - gruposDer.length : 0;
+  const grupos = [...gruposIzq, ...Array(Math.max(faltan, 0)).fill('0'), ...gruposDer];
+  return grupos.slice(0, 4).map((g) => (parseInt(g, 16) || 0).toString(16)).join(':') + '::/64';
+}
+
+/**
+ * Identidad del visitante para el rate limit. En Vercel
+ * `x-forwarded-for` lo arma la plataforma ("cliente, proxy1, ..."); se
+ * toma el primero y sólo si es una IP. IPv4 va entera; IPv6 se agrupa
+ * por su /64 (ver prefijoIpv6).
  */
 export function ipCliente(headers: Headers): string | null {
   const raw = headers.get('x-forwarded-for') || headers.get('x-real-ip');
   if (!raw) return null;
   const primero = raw.split(',')[0].trim();
-  return isIP(primero) ? primero : null;
+  const version = isIP(primero);
+  if (version === 4) return primero;
+  if (version === 6) return prefijoIpv6(primero);
+  return null;
 }

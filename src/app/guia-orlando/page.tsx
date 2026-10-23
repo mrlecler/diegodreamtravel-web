@@ -26,6 +26,17 @@ export const metadata: Metadata = {
     type: 'website',
     images: [{ url: 'https://www.diegodreamtravel.com/guia-orlando-portada.webp' }],
   },
+  // Sin esto hereda el twitter del layout (título y descripción de la home).
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Guía gratis: Mi primer viaje a Orlando',
+    description:
+      'Requisitos de ingreso, Disney, Universal y las mejores fechas para viajar. Escrita por un Authorized Disney Vacation Planner.',
+    images: ['https://www.diegodreamtravel.com/guia-orlando-portada.webp'],
+  },
+  // dev.diegodreamtravel.com sirve el mismo deployment: el canónico es www
+  // (metadataBase del layout).
+  alternates: { canonical: '/guia-orlando' },
 };
 
 const CONTENIDO = [

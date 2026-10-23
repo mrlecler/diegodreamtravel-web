@@ -14,6 +14,21 @@ export const metadata: Metadata = {
   // follow: true, que deja rastrear la salida a WhatsApp. Cuando haya
   // contenido real, sacar este bloque y agregar la ruta a src/app/sitemap.ts.
   robots: { index: false, follow: true },
+  // Sin esto hereda el openGraph del layout: og:url de la home y su
+  // título, y al compartir /15 la tarjeta muestra la home.
+  openGraph: {
+    title: 'Quinceañeras — Diego Dream Travel',
+    description: 'Viajes de quince a medida. Agente certificado Disney & Universal.',
+    url: 'https://www.diegodreamtravel.com/15',
+    siteName: 'Diego Dream Travel',
+    locale: 'es',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Quinceañeras — Diego Dream Travel',
+    description: 'Viajes de quince a medida. Agente certificado Disney & Universal.',
+  },
 };
 
 export default function QuincePage() {

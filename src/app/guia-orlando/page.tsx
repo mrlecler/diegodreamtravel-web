@@ -86,7 +86,7 @@ export default function GuiaOrlandoPage() {
             src="/logo-ddt-20.svg"
             alt="Diego Dream Travel"
             width={132}
-            height={38}
+            height={60}
             priority
           />
         </Link>

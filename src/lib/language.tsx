@@ -27,6 +27,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
+      // Hidratación intencional desde localStorage: el server siempre
+      // renderiza 'es' y la preferencia guardada se aplica al montar.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (stored === 'es' || stored === 'en') setLangState(stored);
     } catch {
       /* localStorage no disponible */

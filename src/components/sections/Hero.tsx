@@ -51,6 +51,9 @@ export default function Hero() {
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // Se lee después de montar a propósito: en el server no hay
+    // matchMedia y leerlo en el initializer daría hydration mismatch.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setReduce(mq.matches);
   }, []);
 

@@ -1,4 +1,5 @@
 import type { ComponentType } from 'react';
+import type { IconProps } from '@phosphor-icons/react';
 
 export default function IconBadge({
   Icon,
@@ -9,7 +10,7 @@ export default function IconBadge({
   iconSize = 23,
   radius = 14,
 }: {
-  Icon: ComponentType<any>;
+  Icon: ComponentType<IconProps>;
   ring: string;
   iconColor: string;
   glow?: string;

@@ -34,6 +34,9 @@ function Flap({
     prevRef.current = target;
 
     if (reduce) {
+      // Sin animación: el flap copia el valor nuevo del prop de una. Es la
+      // única forma de sincronizar este estado con el cambio de `target`.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setDisplay(target);
       return;
     }
@@ -42,11 +45,10 @@ function Flap({
     const scrambleDuration = 380;      // cuánto tiempo cicla antes de fijarse
     const frameMs = 55;
 
-    let t1: ReturnType<typeof setTimeout>;
     let iv: ReturnType<typeof setInterval>;
     let t2: ReturnType<typeof setTimeout>;
 
-    t1 = setTimeout(() => {
+    const t1 = setTimeout(() => {
       iv = setInterval(() => {
         setDisplay(GLYPHS[Math.floor(Math.random() * GLYPHS.length)]);
       }, frameMs);

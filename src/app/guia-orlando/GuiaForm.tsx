@@ -16,6 +16,11 @@ const WA_ICON = (
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
+// La misma regex que valida /api/guia-mail.
+const EMAIL_OK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const MSG_GENERICO = 'No pudimos guardar tus datos. Podés bajar la guía igual, o escribirme por WhatsApp.';
+
 export default function GuiaForm() {
   const [nombre, setNombre] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
@@ -24,11 +29,29 @@ export default function GuiaForm() {
   const [errorMsg, setErrorMsg] = useState('');
   const [mailEnviado, setMailEnviado] = useState(false);
 
+  const [avisoCampo, setAvisoCampo] = useState('');
+
   const listo = nombre.trim().length > 1 && whatsapp.replace(/\D/g, '').length >= 8;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!listo) return;
+
+    // Mismos criterios que el SGI (whatsapp de 8 a 15 dígitos) y que
+    // /api/guia-mail (email). Se avisa acá, antes de mandar nada, para que
+    // la persona corrija en vez de quedarse sin el mail o con un número
+    // que no sirve.
+    if (whatsapp.replace(/\D/g, '').length > 15) {
+      setAvisoCampo('Revisá el WhatsApp: tiene que tener entre 8 y 15 números, con característica.');
+      setStatus('idle');
+      return;
+    }
+    if (email.trim() && !EMAIL_OK.test(email.trim())) {
+      setAvisoCampo('Revisá el email (o dejalo vacío).');
+      setStatus('idle');
+      return;
+    }
+    setAvisoCampo('');
 
     setStatus('loading');
     setErrorMsg('');
@@ -55,11 +78,15 @@ export default function GuiaForm() {
           /* respuesta sin JSON */
         }
         console.error('[guia-orlando] El SGI rechazó el lead:', detalle);
-        throw new Error(
+        setStatus('error');
+        setErrorMsg(
           res.status === 429
             ? 'Probaste varias veces seguidas. Esperá unos minutos y volvé a intentar.'
-            : 'No pudimos guardar tus datos. Podés bajar la guía igual, o escribirme por WhatsApp.'
+            : /whatsapp/i.test(detalle)
+              ? 'Revisá el WhatsApp: tiene que tener entre 8 y 15 números, con característica.'
+              : MSG_GENERICO
         );
+        return;
       }
 
       // El mail es secundario: si falla, la descarga directa ya cumple.
@@ -79,8 +106,11 @@ export default function GuiaForm() {
 
       setStatus('success');
     } catch (err) {
+      // Sin red, CORS o el SGI caído: el "Failed to fetch" va a consola,
+      // no a la pantalla.
+      console.error('[guia-orlando] No se pudo enviar el lead:', err);
       setStatus('error');
-      setErrorMsg(err instanceof Error ? err.message : 'Algo falló. Probá de nuevo.');
+      setErrorMsg(MSG_GENERICO);
     }
   }
 
@@ -191,6 +221,12 @@ export default function GuiaForm() {
           style={inputStyle}
         />
       </div>
+
+      {avisoCampo && (
+        <p role="alert" className="text-sm text-center" style={{ color: '#FF5B00' }}>
+          {avisoCampo}
+        </p>
+      )}
 
       {status === 'error' && (
         <div role="alert" className="text-center">

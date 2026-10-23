@@ -43,6 +43,14 @@ export default function ContactForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.nombre_apellido.trim() || !form.whatsapp.trim()) return;
+    // Mismo criterio que el CRM (8 a 15 dígitos): mejor avisar acá que
+    // mandar un número que después no sirve.
+    const digitos = form.whatsapp.replace(/\D/g, '').length;
+    if (digitos < 8 || digitos > 15) {
+      setStatus('error');
+      setErrorMsg(c.errorWhatsapp);
+      return;
+    }
     setStatus('loading');
     setErrorMsg('');
     try {
@@ -51,12 +59,19 @@ export default function ContactForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || c.errorGeneric);
+      // Si la respuesta no es JSON (un 502 de la plataforma, por ejemplo)
+      // no se le muestra al visitante el error técnico del parseo.
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setStatus('error');
+        setErrorMsg(typeof data?.error === 'string' && data.error ? data.error : c.errorGeneric);
+        return;
+      }
       setStatus('success');
     } catch (err) {
+      console.error('[contacto] no se pudo enviar:', err);
       setStatus('error');
-      setErrorMsg(err instanceof Error ? err.message : c.errorGeneric);
+      setErrorMsg(c.errorGeneric);
     }
   }
 

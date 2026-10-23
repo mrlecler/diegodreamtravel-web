@@ -41,6 +41,13 @@ export default function D15Form() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.nombre_apellido.trim() || !form.whatsapp.trim()) return;
+    // Mismo criterio que la ruta (8 a 15 dígitos).
+    const digitos = form.whatsapp.replace(/\D/g, '').length;
+    if (digitos < 8 || digitos > 15) {
+      setStatus('error');
+      setErrorMsg('Revisá el WhatsApp: tiene que tener entre 8 y 15 números, con característica.');
+      return;
+    }
     setStatus('loading');
     setErrorMsg('');
     try {
@@ -49,12 +56,21 @@ export default function D15Form() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Error inesperado.');
+      // Una respuesta que no es JSON (502 de la plataforma) no tiene que
+      // terminar en un "Unexpected token '<'" en pantalla.
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setStatus('error');
+        setErrorMsg(
+          typeof data?.error === 'string' && data.error ? data.error : 'Error al enviar. Intentá de nuevo.'
+        );
+        return;
+      }
       setStatus('success');
     } catch (err) {
+      console.error('[dream15] no se pudo enviar:', err);
       setStatus('error');
-      setErrorMsg(err instanceof Error ? err.message : 'Error al enviar. Intentá de nuevo.');
+      setErrorMsg('Error al enviar. Intentá de nuevo.');
     }
   }
 

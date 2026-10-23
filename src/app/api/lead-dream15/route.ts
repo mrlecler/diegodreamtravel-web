@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { Resend } from 'resend';
-import { permitir, ipCliente } from '@/lib/rate-limit';
+import { permitir, reservarIntento, ipCliente } from '@/lib/rate-limit';
 import { esHostProd, origenPermitido, texto, whatsappValido, DIEZ_MINUTOS } from '@/lib/servidor';
 
 // Mismo cupo que POST /api/leads del SGI: 5 cada 10 minutos por IP.
@@ -88,6 +88,32 @@ export async function POST(req: NextRequest) {
       const resendKey = process.env.RESEND_API_KEY;
       if (!mailPermitido) {
         console.warn('[lead-dream15] tope total de mails alcanzado: el lead queda sólo en leads_dream15');
+        // leads_dream15 no la lee ninguna pantalla del SGI: sin este aviso
+        // Diego no se entera de que hay leads que no le llegaron por mail.
+        // Uno solo por ventana, así la casilla no se inunda.
+        // Si el aviso falla se devuelve el cupo y lo intenta el próximo lead.
+        const aviso = leadGuardado && resendKey
+          ? await reservarIntento('web-dream15:aviso-tope', 1, DIEZ_MINUTOS)
+          : null;
+        if (aviso?.pasa && resendKey) {
+          const { error: avisoError } = await new Resend(resendKey).emails.send({
+            from: 'web@diegodreamtravel.com',
+            to: 'info@diegodreamtravel.com',
+            subject: 'Dream 15: se llenó el tope de mails, revisá leads_dream15',
+            text: `Se llenó el tope de mails de leads de Dream 15 (${MAX_TOTAL} cada 10 minutos).
+
+Los leads que entren mientras dure el tope se guardan en la tabla leads_dream15 de Supabase pero NO te llegan por mail. Revisalos ahí (ordenados por fecha): puede haber leads reales mezclados con basura de alguien que esté abusando del formulario.
+
+Este aviso sale como mucho una vez cada 10 minutos.`,
+          }).catch(async (err: unknown) => {
+            await aviso.liberar();
+            throw err;
+          });
+          if (avisoError) {
+            await aviso.liberar();
+            console.error('Resend aviso-tope error:', avisoError);
+          }
+        }
       } else if (resendKey) {
         const resend = new Resend(resendKey);
         const tipoLabel =

@@ -2,14 +2,25 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { Resend } from 'resend';
 import { permitir, ipCliente } from '@/lib/rate-limit';
-import { esHostProd, texto, whatsappValido, DIEZ_MINUTOS } from '@/lib/servidor';
+import { esHostProd, origenPermitido, texto, whatsappValido, DIEZ_MINUTOS } from '@/lib/servidor';
 
 // Mismo cupo que POST /api/leads del SGI: 5 cada 10 minutos por IP.
 const MAX_POR_IP = 5;
+// Tope total (como la red de contención de /api/lead): cada lead aceptado
+// es una fila con service role y un mail a info@, así que rotar IPs no
+// puede convertirse en un volumen sin techo.
+const MAX_TOTAL = 30;
 const TIPOS = ['quinceanero', 'familia'];
 
 export async function POST(req: NextRequest) {
   try {
+    // Que otro sitio no pueda usar el navegador (y la IP) de sus visitantes
+    // para cargar leads: req.json() parsea aunque venga como text/plain sin
+    // preflight.
+    if (!origenPermitido(req)) {
+      return NextResponse.json({ error: 'Origen no permitido.' }, { status: 403 });
+    }
+
     const body = await req.json().catch(() => null);
     if (!body || typeof body !== 'object') {
       return NextResponse.json({ error: 'Nombre y WhatsApp son requeridos.' }, { status: 400 });
@@ -33,7 +44,10 @@ export async function POST(req: NextRequest) {
     }
 
     const ip = ipCliente(req.headers);
-    if (!await permitir(ip && `web-dream15:${ip}`, MAX_POR_IP, DIEZ_MINUTOS)) {
+    const permitido =
+      (await permitir(ip && `web-dream15:${ip}`, MAX_POR_IP, DIEZ_MINUTOS)) &&
+      (await permitir('web-dream15:total', MAX_TOTAL, DIEZ_MINUTOS));
+    if (!permitido) {
       return NextResponse.json(
         { error: 'Demasiadas solicitudes. Probá de nuevo en unos minutos.' },
         { status: 429 }

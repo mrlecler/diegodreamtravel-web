@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { permitir, ipCliente } from '@/lib/rate-limit';
+import { texto, whatsappValido, DIEZ_MINUTOS } from '@/lib/servidor';
 
 /**
  * Alta de lead desde el formulario de contacto del sitio institucional.
@@ -58,6 +60,15 @@ function crmUrl(req: NextRequest): string {
 // no puede quedar mirando un spinner porque el CRM esté frío.
 const TIMEOUT_MS = 8000;
 
+// Freno para la red de contención: cuando el CRM está caído, cada request
+// terminaría en un mail a info@. Con esto un loop no lo inunda (por IP) y
+// tampoco uno distribuido (tope total). Si se pasa, el visitante ve el
+// error de siempre, que lo manda a WhatsApp.
+const MAIL_MAX_POR_IP = 3;
+const MAIL_MAX_TOTAL = 30;
+
+const MSG_WHATSAPP = 'Revisá el número de WhatsApp: tiene que tener entre 8 y 15 números, con característica.';
+
 async function avisarPorMail(datos: Record<string, string | null>, esProd: boolean) {
   const resendKey = process.env.RESEND_API_KEY;
   if (!resendKey) return false;
@@ -91,26 +102,34 @@ cargarlo a mano en app.diegodreamtravel.com/app/leads/)`;
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { nombre_apellido, whatsapp, email, viaje, fecha_tentativa } = body;
+    const body = await req.json().catch(() => null);
+    const b = body && typeof body === 'object' ? body : {};
 
-    if (!nombre_apellido?.trim() || !whatsapp?.trim()) {
+    // Todo pasa por texto(): sólo strings/números, recortados y con largo
+    // máximo (antes un body de 4 MB entraba entero al mail y al subject).
+    const datos = {
+      nombre_apellido: texto(b.nombre_apellido, 120),
+      whatsapp: texto(b.whatsapp, 30),
+      email: texto(b.email, 200) || null,
+      viaje: texto(b.viaje, 500) || null,
+      fecha_tentativa: texto(b.fecha_tentativa, 100) || null,
+      origen: 'web',
+    };
+
+    if (!datos.nombre_apellido || !datos.whatsapp) {
       return NextResponse.json(
         { error: 'Nombre y WhatsApp son requeridos.' },
         { status: 400 }
       );
     }
 
-    const esProd = crmUrl(req) === CRM_PROD;
+    // Mismo criterio que el SGI. Si no, el CRM lo rechaza con 400 y el
+    // visitante nunca se entera de que tiene que corregir el número.
+    if (!whatsappValido(datos.whatsapp)) {
+      return NextResponse.json({ error: MSG_WHATSAPP }, { status: 400 });
+    }
 
-    const datos = {
-      nombre_apellido: String(nombre_apellido).trim(),
-      whatsapp: String(whatsapp).trim(),
-      email: email?.trim() || null,
-      viaje: viaje?.trim() || null,
-      fecha_tentativa: fecha_tentativa?.trim() || null,
-      origen: 'web',
-    };
+    const esProd = crmUrl(req) === CRM_PROD;
 
     // 1) El CRM es el único que escribe en `leads`.
     try {
@@ -136,13 +155,37 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      console.error('[lead] el CRM respondió', res.status, await res.text().catch(() => ''));
+      const detalle = await res.text().catch(() => '');
+      console.error('[lead] el CRM respondió', res.status, detalle);
+
+      // 400/422 = el CRM contestó y rechazó los DATOS. No es una caída:
+      // no se manda el mail de contención (que diría "el CRM no respondió")
+      // y se le pide al visitante que corrija.
+      if (res.status === 400 || res.status === 422) {
+        return NextResponse.json(
+          {
+            error: /whatsapp/i.test(detalle)
+              ? MSG_WHATSAPP
+              : 'Revisá los datos del formulario y probá de nuevo.',
+          },
+          { status: 400 }
+        );
+      }
     } catch (e) {
       console.error('[lead] no se pudo llegar al CRM:', e);
     }
 
-    // 2) Red de contención: el CRM no contestó, pero el lead no se pierde.
-    if (await avisarPorMail(datos, esProd)) {
+    // 2) Red de contención: el CRM no contestó (5xx, timeout, red), pero el
+    //    lead no se pierde. Con freno, para que una caída del CRM no se
+    //    convierta en un mail por request.
+    const ip = ipCliente(req.headers);
+    const mailPermitido =
+      (await permitir(ip && `web-lead-mail:${ip}`, MAIL_MAX_POR_IP, DIEZ_MINUTOS)) &&
+      (await permitir('web-lead-mail:total', MAIL_MAX_TOTAL, DIEZ_MINUTOS));
+
+    if (!mailPermitido) {
+      console.error('[lead] red de contención limitada: no se manda el mail');
+    } else if (await avisarPorMail(datos, esProd)) {
       return NextResponse.json({ ok: true });
     }
 

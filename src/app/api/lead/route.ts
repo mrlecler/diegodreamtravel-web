@@ -20,9 +20,11 @@ import { origenPermitido, texto, whatsappValido, DIEZ_MINUTOS } from '@/lib/serv
  *   - rate limit
  *   - registro de que alguien volvió a consultar
  *
- * Ahora hay un solo camino: esta ruta reenvía al CRM. El mail directo
- * queda como red de contención para el caso de que el CRM no conteste,
- * porque perder un lead es peor que tenerlo sólo en el mail.
+ * Después esta ruta reenviaba al CRM desde el servidor, y el CRM veía a
+ * todos los visitantes con la IP de salida de Vercel: su rate limit
+ * quedaba compartido. Desde el 23/10/2026 el formulario le pega directo
+ * al CRM desde el navegador (como el de la guía) y esta ruta es SOLO la
+ * red de contención por mail para cuando el CRM no contesta.
  */
 
 /**
@@ -56,10 +58,6 @@ function crmUrl(req: NextRequest): string {
 
   return PROD_HOSTS.includes(host) ? CRM_PROD : CRM_DEV;
 }
-
-// Si el CRM tarda más que esto, se manda el mail y listo. El visitante
-// no puede quedar mirando un spinner porque el CRM esté frío.
-const TIMEOUT_MS = 8000;
 
 // Freno para la red de contención: cuando el CRM está caído, cada request
 // terminaría en un mail a info@. Con esto un loop no lo inunda (por IP) y
@@ -160,49 +158,14 @@ export async function POST(req: NextRequest) {
     }
 
     const esProd = crmUrl(req) === CRM_PROD;
-    let motivo = 'El CRM no respondió';
+    // El formulario ya intentó cargar el lead en el CRM DESDE EL NAVEGADOR
+    // (ver ContactForm.tsx) y llega acá sólo si el CRM no contestó. Esta
+    // ruta ya no reenvía al CRM: hacerlo desde el servidor ponía a todos
+    // los visitantes detrás de la IP de Vercel en el rate limit del CRM.
+    const motivo = 'El CRM no le respondió al navegador del visitante';
 
-    // 1) El CRM es el único que escribe en `leads`.
-    try {
-      const res = await fetch(`${crmUrl(req)}/api/leads`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(datos),
-        signal: AbortSignal.timeout(TIMEOUT_MS),
-      });
-
-      if (res.ok) {
-        // El CRM ya guardó el lead, mandó el mail de aviso y creó el
-        // seguimiento. No hay nada más que hacer acá.
-        return NextResponse.json({ ok: true });
-      }
-
-      const detalle = await res.text().catch(() => '');
-      console.error('[lead] el CRM respondió', res.status, detalle);
-
-      // 429 = se llenó el balde del CRM, que cuenta por la IP de salida de
-      // esta función (compartida), no por visitante. El freno por
-      // visitante ya se aplicó arriba, así que esto se trata como caída:
-      // va a la red de contención (que tiene su propio freno).
-      if (res.status === 429) {
-        motivo = 'El CRM respondió 429 (límite de la IP compartida)';
-      }
-
-      // 400/422 = el CRM contestó y rechazó los DATOS. No es una caída:
-      // no se manda el mail de contención (que diría "el CRM no respondió")
-      // y se le pide al visitante que corrija.
-      if (res.status === 400 || res.status === 422) {
-        return /whatsapp/i.test(detalle)
-          ? responderError('whatsapp', MSG_WHATSAPP, 400)
-          : responderError('datos', 'Revisá los datos del formulario y probá de nuevo.', 400);
-      }
-    } catch (e) {
-      console.error('[lead] no se pudo llegar al CRM:', e);
-    }
-
-    // 2) Red de contención: el CRM no contestó (5xx, timeout, red) o
-    //    devolvió 429 por el balde compartido, pero el lead no se pierde. Con freno, para que una caída del CRM no se
-    //    convierta en un mail por request.
+    // Red de contención: el lead no se pierde. Con freno, para que una
+    // caída del CRM no se convierta en un mail por request.
     const mailPermitido =
       (await permitir(ip && `web-lead-mail:${ip}`, MAIL_MAX_POR_IP, DIEZ_MINUTOS)) &&
       (await permitir('web-lead-mail:total', MAIL_MAX_TOTAL, DIEZ_MINUTOS));

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { EMAIL_OK } from '@/lib/email';
 import { CircleNotch } from '@phosphor-icons/react/dist/ssr';
 import { useLang } from '@/lib/language';
+import { getSgiUrl } from '@/lib/sgi';
 
 const WA_URL = `https://wa.me/5493624703040?text=${encodeURIComponent('Hola Diego! Dejé mis datos en la web y me gustaría empezar a planear mi viaje.')}`;
 
@@ -63,6 +64,42 @@ export default function ContactForm() {
     }
     setStatus('loading');
     setErrorMsg('');
+
+    // 1) El navegador le pega DIRECTO al CRM, como el formulario de la
+    //    guía. Antes pasaba por /api/lead de esta landing y el CRM veía a
+    //    todos los visitantes con la misma IP (la del servidor de Vercel),
+    //    así que el límite de intentos era compartido. Ahora es por la IP
+    //    real de cada visitante.
+    try {
+      const ctrl = new AbortController();
+      const corte = setTimeout(() => ctrl.abort(), 8000);
+      const res = await fetch(`${getSgiUrl()}/api/leads`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, origen: 'web' }),
+        signal: ctrl.signal,
+      }).finally(() => clearTimeout(corte));
+      if (res.ok) { setStatus('success'); return; }
+      // 4xx: el CRM contestó. 429 = esperar; 400/422 = corregir datos.
+      if (res.status < 500) {
+        const data = await res.json().catch(() => ({}));
+        const detalle = typeof data?.error === 'string' ? data.error : '';
+        setStatus('error');
+        setErrorMsg(
+          res.status === 429 ? c.errorRateLimit
+            : /whatsapp/i.test(detalle) ? c.errorWhatsapp
+            : res.status === 400 || res.status === 422 ? c.errorDatos
+            : c.errorGeneric
+        );
+        return;
+      }
+      console.error('[contacto] el CRM respondió', res.status, '— va por mail');
+    } catch (err) {
+      console.error('[contacto] el CRM no respondió, va por mail:', err);
+    }
+
+    // 2) Red de contención: el CRM no contestó (caído, red, timeout) y la
+    //    landing se lo manda por mail a Diego para que el lead no se pierda.
     try {
       const res = await fetch('/api/lead', {
         method: 'POST',

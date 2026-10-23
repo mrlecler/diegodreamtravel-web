@@ -93,6 +93,18 @@ export async function permitir(clave: string | null, max: number, ventanaMs: num
   if (!supa || Date.now() < sinTablaHasta) return true;
 
   try {
+    // Primero se REGISTRA el intento y después se cuenta, incluida la fila
+    // propia. Al revés (contar y después insertar) dos requests que caen
+    // en lambdas distintas leen el mismo count y pasan los dos. Así cada
+    // uno ve al otro: en el peor caso se rechazan los dos, nunca pasan de
+    // más.
+    const { data: fila, error: insError } = await supa
+      .from('intentos_publicos')
+      .insert({ clave })
+      .select('id')
+      .single();
+    if (insError) throw insError;
+
     const desde = new Date(Date.now() - ventanaMs).toISOString();
     const { count, error } = await supa
       .from('intentos_publicos')
@@ -101,11 +113,16 @@ export async function permitir(clave: string | null, max: number, ventanaMs: num
       .gte('creado_at', desde);
     if (error) throw error;
 
-    if ((count || 0) >= max) return false;
-
-    // Se registra DESPUÉS de contar: el intento rechazado no suma.
-    const { error: insError } = await supa.from('intentos_publicos').insert({ clave });
-    if (insError) throw insError;
+    if ((count || 0) > max) {
+      // El intento rechazado no suma: se borra la fila recién insertada.
+      // Si el borrado falla, esa fila cuenta hasta que venza la ventana
+      // (falla cerrado para esa clave, aceptable acá).
+      const id = (fila as { id?: number | string } | null)?.id;
+      if (id != null) {
+        await supa.from('intentos_publicos').delete().eq('id', id).then(() => {}, () => {});
+      }
+      return false;
+    }
 
     if (Math.random() < 1 / BARRIDO_CADA) {
       supa

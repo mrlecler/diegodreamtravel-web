@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { CircleNotch } from '@phosphor-icons/react/dist/ssr';
+import { eventoFormularioEnviado } from '@/lib/medicion';
+import AceptoPrivacidad from '@/components/AceptoPrivacidad';
 
 const WA_URL = `https://wa.me/5493624703040?text=${encodeURIComponent('Hola Diego! Completé el formulario Dream 15 y me gustaría saber más.')}`;
 
@@ -66,6 +68,7 @@ export default function D15Form() {
         );
         return;
       }
+      eventoFormularioEnviado();
       setStatus('success');
     } catch (err) {
       console.error('[dream15] no se pudo enviar:', err);
@@ -294,6 +297,7 @@ export default function D15Form() {
           'Quiero más info'
         )}
       </button>
+      <AceptoPrivacidad soloEspanol />
       <p className="text-center text-[12px] text-[rgba(240,237,232,.35)]">
         Te respondo personalmente. Diego.
       </p>

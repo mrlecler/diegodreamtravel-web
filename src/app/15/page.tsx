@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { MessageCircle } from 'lucide-react';
 import GradientButton from '@/components/ui/GradientButton';
+import EnlacesLegales from '@/components/EnlacesLegales';
 
 const WA_URL = 'https://wa.me/5493624703040';
 
@@ -55,6 +56,7 @@ export default function QuincePage() {
         <MessageCircle size={16} />
         Consultá ahora por WhatsApp
       </GradientButton>
+      <EnlacesLegales soloEspanol className="mt-4" />
     </main>
   );
 }

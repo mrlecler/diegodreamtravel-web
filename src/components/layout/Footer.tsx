@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLang } from '@/lib/language';
 import { DREAM15_LIVE } from '@/lib/flags';
+import EnlacesLegales from '@/components/EnlacesLegales';
 
 const WA_ICON = (
   <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
@@ -145,6 +146,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-[11.5px] text-[#F0EDE8]/30">
           <span>{t.footer.bottomLeft}</span>
+          <EnlacesLegales />
           <span>{t.footer.bottomRight}</span>
         </div>
       </div>

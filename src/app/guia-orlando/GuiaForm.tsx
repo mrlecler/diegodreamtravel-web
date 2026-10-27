@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { EMAIL_OK } from '@/lib/email';
 import { CircleNotch, DownloadSimple, CheckCircle } from '@phosphor-icons/react/dist/ssr';
 import { getSgiUrl, GUIA_PDF_PATH } from '@/lib/sgi';
+import { eventoFormularioEnviado } from '@/lib/medicion';
+import AceptoPrivacidad from '@/components/AceptoPrivacidad';
 
 const WA_URL = `https://wa.me/5493624703040?text=${encodeURIComponent(
   'Hola Diego! Bajé la guía de Orlando y me gustaría empezar a planear el viaje.'
@@ -104,6 +106,7 @@ export default function GuiaForm() {
         }
       }
 
+      eventoFormularioEnviado();
       setStatus('success');
     } catch (err) {
       // Sin red, CORS o el SGI caído: el "Failed to fetch" va a consola,
@@ -258,6 +261,7 @@ export default function GuiaForm() {
           'Quiero la guía'
         )}
       </button>
+      <AceptoPrivacidad soloEspanol />
 
       <p className="text-center text-[12px] text-[rgba(240,237,232,.35)]">
         Te escribo yo, no un robot. Sin spam.

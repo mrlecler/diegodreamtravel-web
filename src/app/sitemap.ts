@@ -1,6 +1,6 @@
 /* Sitemap de diegodreamtravel.com.
  *
- * SOLO las páginas indexables. Hoy son dos: la home y /guia-orlando.
+ * SOLO las páginas indexables. Hoy son tres: la home, /guia-orlando y /privacidad.
  *
  * Faltan a propósito /15, /dream15 y /link: las tres declaran
  * `robots: { index: false }` en su metadata. Listar en el sitemap algo
@@ -32,6 +32,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
+    },
+    {
+      url: `${BASE}/privacidad`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.3,
     },
   ]
 }

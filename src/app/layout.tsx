@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { plusJakartaSans, skatynGator } from '@/lib/fonts';
 import { LanguageProvider } from '@/lib/language';
+import Medicion from '@/components/Medicion';
+import AvisoCookies from '@/components/AvisoCookies';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -38,7 +40,13 @@ export default function RootLayout({
       className={`dark ${plusJakartaSans.variable} ${skatynGator.variable}`}
     >
       <body className="bg-[#0C1521] min-h-screen text-[#F0EDE8] antialiased">
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          {children}
+          {/* Aviso de cookies: hoy no aparece (ver src/lib/consentimiento.ts). */}
+          <AvisoCookies />
+        </LanguageProvider>
+        {/* Vercel Web Analytics, sin cookies, + evento «WhatsApp». Solo en esta web, no en el SGI. */}
+        <Medicion />
       </body>
     </html>
   );

@@ -5,6 +5,8 @@ import { EMAIL_OK } from '@/lib/email';
 import { CircleNotch } from '@phosphor-icons/react/dist/ssr';
 import { useLang } from '@/lib/language';
 import { getSgiUrl } from '@/lib/sgi';
+import { eventoFormularioEnviado } from '@/lib/medicion';
+import AceptoPrivacidad from '@/components/AceptoPrivacidad';
 
 const WA_URL = `https://wa.me/5493624703040?text=${encodeURIComponent('Hola Diego! Dejé mis datos en la web y me gustaría empezar a planear mi viaje.')}`;
 
@@ -79,7 +81,7 @@ export default function ContactForm() {
         body: JSON.stringify({ ...form, origen: 'web' }),
         signal: ctrl.signal,
       }).finally(() => clearTimeout(corte));
-      if (res.ok) { setStatus('success'); return; }
+      if (res.ok) { eventoFormularioEnviado(); setStatus('success'); return; }
       // 4xx: el CRM contestó. 429 = esperar; 400/422 = corregir datos.
       if (res.status < 500) {
         const data = await res.json().catch(() => ({}));
@@ -127,6 +129,8 @@ export default function ContactForm() {
         );
         return;
       }
+      // Llegó por mail (el CRM no contestó): para el visitante se envió.
+      eventoFormularioEnviado();
       setStatus('success');
     } catch (err) {
       console.error('[contacto] no se pudo enviar:', err);
@@ -306,6 +310,7 @@ export default function ContactForm() {
           c.submit
         )}
       </button>
+      <AceptoPrivacidad />
       <p className="text-center text-[12px] text-[rgba(240,237,232,.35)]">{c.footnote}</p>
     </form>
   );

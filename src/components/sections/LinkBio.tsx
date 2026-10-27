@@ -7,6 +7,7 @@ import {
   SealCheck,
   ArrowRight,
 } from '@phosphor-icons/react/dist/ssr';
+import EnlacesLegales from '@/components/EnlacesLegales';
 
 // Página "link in bio" para Instagram/TikTok. Server component: sin estado,
 // solo CSS (fade-up escalonado) — no necesita 'use client'.
@@ -173,6 +174,7 @@ export default function LinkBio() {
             <img src="/images/Logo_LT.webp" alt="Livi Travel" />
           </a>
           <p>diegodreamtravel.com</p>
+          <EnlacesLegales soloEspanol />
         </footer>
       </div>
     </div>

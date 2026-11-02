@@ -117,7 +117,7 @@ export default function D15Footer() {
 
         {/* Copyright */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-[11.5px] text-[rgba(240,237,232,.3)]">
-          <p>© {YEAR} Diego Dream Travel · Livi Travel Agency</p>
+          <p>© {YEAR} Diego Dream Travel</p>
           <EnlacesLegales soloEspanol />
         </div>
       </div>

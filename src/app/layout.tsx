@@ -13,10 +13,10 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.diegodreamtravel.com'),
   title: 'Diego Dream Travel — Agencia de viajes a medida',
   description:
-    'Agente certificado Disney & Universal. Viajes a medida para ti. No vendo paquetes, construyo recuerdos que duran para siempre.',
+    'Agente certificado Disney & Universal. Viajes a medida para vos. No vendo paquetes, construyo recuerdos que duran para siempre.',
   openGraph: {
     title: 'Diego Dream Travel',
-    description: 'Agente certificado Disney & Universal. Viajes a medida para ti.',
+    description: 'Agente certificado Disney & Universal. Viajes a medida para vos.',
     url: 'https://www.diegodreamtravel.com',
     siteName: 'Diego Dream Travel',
     locale: 'es',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Diego Dream Travel',
-    description: 'Agente certificado Disney & Universal. Viajes a medida para ti.',
+    description: 'Agente certificado Disney & Universal. Viajes a medida para vos.',
   },
 };
 

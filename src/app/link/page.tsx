@@ -3,7 +3,7 @@ import LinkBio from '@/components/sections/LinkBio';
 
 export const metadata: Metadata = {
   title: 'Diego Dream Travel — Enlaces',
-  description: 'Agente Disney & Universal | Orlando y el mundo | Team Livi Travel',
+  description: 'Agente Disney & Universal | Orlando y el mundo',
   // Página utilitaria de "link in bio": no aporta contenido para indexar,
   // así que no compite en buscadores con la home. Los enlaces igual son
   // rastreables (follow: true).

@@ -1,5 +1,5 @@
 // Diccionario de textos del home institucional DDT.
-// Default: español neutro. Segundo idioma: inglés.
+// Default: español rioplatense (voseo). Segundo idioma: inglés.
 // Única fuente de verdad para el copy traducible. Editá acá.
 
 export type Lang = 'es' | 'en';
@@ -23,7 +23,7 @@ const es = {
     eyebrow: 'Diego Dream Travel · Florida, USA',
     titleA: 'No vendo paquetes. Construyo recuerdos que duran ',
     titleHighlight: 'para siempre.',
-    sub: 'Nada de armar todo solo entre mil pestañas y reseñas. Diseño tu viaje contigo y te acompaño desde el primer mensaje hasta que vuelves a casa.',
+    sub: 'Nada de armar todo solo entre mil pestañas y reseñas. Diseño tu viaje con vos y te acompaño desde el primer mensaje hasta que volvés a casa.',
     ctaWhatsapp: 'Hablemos por WhatsApp',
     ctaDream15: 'Dream 15 · Tu viaje de 15',
     badgeCert: 'Agente certificado Disney & Universal',
@@ -36,15 +36,14 @@ const es = {
     eyebrow: 'Sobre mí',
     titleA: 'Hola, soy ',
     titleHighlight: 'Diego.',
-    body: 'Soy **agente certificado por Disney y Universal** para Livi Travel, agencia de Orlando, Florida (USA). Mis servicios **no tienen costo extra**: los operadores me pagan cuando confirmas tu viaje. Además, **puedes pagar en cuotas**. Cada viaje empieza con **una conversación, no con un formulario**: me cuentas qué quieres vivir y yo diseño cada detalle.',
+    body: 'Soy **agente certificado por Disney y Universal** y armo viajes a Orlando y Estados Unidos para familias de Argentina y Latinoamérica. Mis servicios **no tienen costo extra**: los operadores me pagan cuando confirmás tu viaje. Además, **podés pagar en cuotas**. Cada viaje empieza con **una conversación, no con un formulario**: me contás qué querés vivir y yo diseño cada detalle.',
     certsEyebrow: 'Certificaciones y respaldo',
     closeLine: '¿Armamos tu próximo viaje?',
-    closeSub: 'Sin cargo, sin compromiso. Me cuentas qué quieres vivir y lo diseñamos juntos.',
-    cta: 'Cuéntame de tu viaje',
+    closeSub: 'Sin cargo, sin compromiso. Me contás qué querés vivir y lo diseñamos juntos.',
+    cta: 'Contame de tu viaje',
     galleryEyebrow: 'En persona, en cada destino',
-    liviLabel: 'Parte de la red',
     partnersLabel: 'Trabajo junto a',
-    partners: ['Disney', 'Universal', 'Livi Travel'],
+    partners: ['Disney', 'Universal'],
     stats: [
       { value: '$0', label: 'Costo del servicio' },
       { value: '24 hs', label: 'Respuesta asegurada' },
@@ -60,18 +59,14 @@ const es = {
         title: 'Preferred Travel Agent',
         sub: 'Universal Parks & Resorts · Certificación oficial',
       },
-      {
-        title: 'Team Livi Travel',
-        sub: 'Agencia autorizada · Florida, USA · Respaldo operativo en EE. UU.',
-      },
     ],
   },
   services: {
     eyebrow: '02 · Qué hago',
-    titleA: 'Lo imaginas tú. ',
+    titleA: 'Lo imaginás vos. ',
     titleHighlight: 'Lo armo yo.',
-    sub: 'Cuatro formas de viajar, una sola persona que las arma. Elige tu mundo y desde ahí lo construimos juntos.',
-    hint: 'Pasa el cursor sobre cada uno.',
+    sub: 'Cuatro formas de viajar, una sola persona que las arma. Elegí tu mundo y desde ahí lo construimos juntos.',
+    hint: 'Pasá el cursor sobre cada uno.',
     footerLine: 'Todo a medida · sin costo extra · una sola persona de principio a fin',
     included: {
       title: 'Me encargo de cada detalle',
@@ -100,14 +95,14 @@ const es = {
       {
         category: 'Viaje de 15',
         title: 'Dream 15',
-        desc: 'Viaja junto a otros chicos y chicas de 15, en un grupo acompañado de principio a fin. El viaje de sus 15, premium y seguro.',
-        cta: 'Conoce la experiencia',
+        desc: 'Viajá junto a otros chicos y chicas de 15, en un grupo acompañado de principio a fin. El viaje de sus 15, premium y seguro.',
+        cta: 'Conocé la experiencia',
         wa: '',
       },
       {
         category: 'En grupo',
         title: 'Grupos o entre amigos',
-        desc: 'Orlando, Miami, New York, Las Vegas. Tú eliges el destino, yo armo el itinerario.',
+        desc: 'Orlando, Miami, New York, Las Vegas. Vos elegís el destino, yo armo el itinerario.',
         cta: 'Consultar por WhatsApp',
         wa: 'Hola Diego, quiero consultar por un viaje en grupo',
       },
@@ -129,7 +124,7 @@ const es = {
     app: {
       badge: 'Exclusivo DDT',
       title: 'Tu viaje entero, en tu teléfono',
-      desc: 'Una app propia donde tienes todo tu viaje a mano: itinerario día por día, vouchers y documentos, guías de cada parque y avisos en tiempo real. Casi ningún agente lo ofrece.',
+      desc: 'Una app propia donde tenés todo tu viaje a mano: itinerario día por día, vouchers y documentos, guías de cada parque y avisos en tiempo real. Casi ningún agente lo ofrece.',
       features: [
         'Itinerario día a día',
         'Vouchers y documentos',
@@ -162,7 +157,7 @@ const es = {
       },
       {
         title: 'Una sola persona, siempre',
-        desc: 'El mismo agente, la misma persona, antes, durante y después del viaje. Sin ser transferido a otro operador cuando más lo necesitas.',
+        desc: 'El mismo agente, la misma persona, antes, durante y después del viaje. Sin ser transferido a otro operador cuando más lo necesitás.',
       },
       {
         title: 'Cuotas o pago seguro',
@@ -237,12 +232,12 @@ const es = {
     titleA: '¿Cuándo ',
     titleHighlight: 'planeamos?',
     line1: 'No vendo paquetes. Construyo recuerdos que duran para siempre.',
-    line2: 'Sin cargo, sin compromiso. Cuéntame qué tienes en mente y armamos juntos el viaje de tu familia.',
+    line2: 'Sin cargo, sin compromiso. Contame qué tenés en mente y armamos juntos el viaje de tu familia.',
     cta: 'Hablemos por WhatsApp',
   },
   contact: {
     eyebrow: 'Da el primer paso',
-    title: 'Déjanos tus datos y armamos tu viaje.',
+    title: 'Dejanos tus datos y armamos tu viaje.',
     sub: 'Sin compromiso. Te escribo por WhatsApp con fechas, opciones y cómo empezar. Lo demás lo charlamos.',
     nameLabel: 'Nombre y apellido',
     namePlaceholder: 'Ejemplo: María González',
@@ -250,23 +245,23 @@ const es = {
     whatsappPlaceholder: '+54 9 362 470-3040',
     emailLabel: 'Email (opcional)',
     emailPlaceholder: 'tucorreo@email.com',
-    viajeLabel: '¿Qué viaje te imaginas?',
-    viajePlaceholder: 'Elige una opción',
+    viajeLabel: '¿Qué viaje te imaginás?',
+    viajePlaceholder: 'Elegí una opción',
     viajeOptions: ['Disney & Universal', 'En grupo o con amigos', 'Viaje a medida', 'Dream 15 (viaje de 15)', 'Todavía no sé'],
     fechaLabel: '¿Cuándo viajarías?',
-    fechaPlaceholder: 'Elige cuándo',
+    fechaPlaceholder: 'Elegí cuándo',
     fechaOptions: ['2026', '2027', '2028', 'Todavía no sé'],
     submit: 'Quiero que me escribas',
     sending: 'Enviando...',
     footnote: 'Te respondo personalmente. Diego.',
-    errorGeneric: 'Error al enviar. Prueba de nuevo.',
-    errorWhatsapp: 'Revisa el WhatsApp: tiene que tener entre 8 y 15 números, con código de área.',
-    errorEmail: 'Revisa el email: parece incompleto (ejemplo: nombre@gmail.com).',
-    errorRateLimit: 'Demasiados envíos seguidos. Prueba de nuevo en unos minutos.',
-    errorDatos: 'Revisa los datos del formulario y prueba de nuevo.',
-    errorCaida: 'No pudimos procesar tu solicitud. Escríbeme por WhatsApp.',
+    errorGeneric: 'Error al enviar. Probá de nuevo.',
+    errorWhatsapp: 'Revisá el WhatsApp: tiene que tener entre 8 y 15 números, con código de área.',
+    errorEmail: 'Revisá el email: parece incompleto (ejemplo: nombre@gmail.com).',
+    errorRateLimit: 'Demasiados envíos seguidos. Probá de nuevo en unos minutos.',
+    errorDatos: 'Revisá los datos del formulario y probá de nuevo.',
+    errorCaida: 'No pudimos procesar tu solicitud. Escribime por WhatsApp.',
     successTitle: '¡Listo! Ya casi.',
-    successBody: 'Recibí tus datos. Para arrancar más rápido, escríbeme por WhatsApp y empezamos a planear ahora mismo.',
+    successBody: 'Recibí tus datos. Para arrancar más rápido, escribime por WhatsApp y empezamos a planear ahora mismo.',
     successCta: 'Seguir por WhatsApp',
     successBack: 'Volver al formulario',
   },
@@ -275,7 +270,7 @@ const es = {
     sectionsHeading: 'Secciones',
     contactHeading: 'Contacto',
     certsHeading: 'Certificaciones',
-    bottomLeft: '© 2026 Diego Dream Travel · Livi Travel Agency',
+    bottomLeft: '© 2026 Diego Dream Travel',
     bottomRight: 'Argentina · Latam · USA',
     links: {
       about: 'Quién soy',
@@ -287,7 +282,6 @@ const es = {
     certs: [
       'Authorized Vacation Planner',
       'Preferred Travel Agent',
-      'Team Livi Travel · Florida, USA',
     ],
   },
 };
@@ -326,15 +320,14 @@ const en: Dict = {
     eyebrow: 'About me',
     titleA: "Hi, I'm ",
     titleHighlight: 'Diego.',
-    body: "I'm a **Disney and Universal certified agent** for Livi Travel, an agency in Orlando, Florida (USA). My service has **no extra cost**: the operators pay me when you confirm your trip. Plus, **you can pay in installments**. Every trip starts with **a conversation, not a form**: you tell me what you want to experience and I design every detail.",
+    body: "I'm a **Disney and Universal certified agent** and I plan trips to Orlando and the US for families from Argentina and Latin America. My service has **no extra cost**: the operators pay me when you confirm your trip. Plus, **you can pay in installments**. Every trip starts with **a conversation, not a form**: you tell me what you want to experience and I design every detail.",
     certsEyebrow: 'Certifications & backing',
     closeLine: 'Shall we plan your next trip?',
     closeSub: "No cost, no commitment. Tell me what you want to experience and we'll design it together.",
     cta: 'Tell me about your trip',
     galleryEyebrow: 'In person, at every destination',
-    liviLabel: 'Part of the network',
     partnersLabel: 'I work with',
-    partners: ['Disney', 'Universal', 'Livi Travel'],
+    partners: ['Disney', 'Universal'],
     stats: [
       { value: '$0', label: 'Service cost' },
       { value: '24 hrs', label: 'Guaranteed reply' },
@@ -349,10 +342,6 @@ const en: Dict = {
       {
         title: 'Preferred Travel Agent',
         sub: 'Universal Parks & Resorts · Official certification',
-      },
-      {
-        title: 'Team Livi Travel',
-        sub: 'Authorized agency · Florida, USA · US operational backing',
       },
     ],
   },
@@ -565,7 +554,7 @@ const en: Dict = {
     sectionsHeading: 'Sections',
     contactHeading: 'Contact',
     certsHeading: 'Certifications',
-    bottomLeft: '© 2026 Diego Dream Travel · Livi Travel Agency',
+    bottomLeft: '© 2026 Diego Dream Travel',
     bottomRight: 'Argentina · Latam · USA',
     links: {
       about: 'About',
@@ -577,7 +566,6 @@ const en: Dict = {
     certs: [
       'Authorized Vacation Planner',
       'Preferred Travel Agent',
-      'Team Livi Travel · Florida, USA',
     ],
   },
 };

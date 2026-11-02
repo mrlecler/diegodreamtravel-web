@@ -23,7 +23,6 @@ const PHOTOS = [
 const SEALS = [
   { src: '/cert-disney-avp.png', alt: 'Authorized Disney Vacation Planner' },
   { src: '/cert-universal-pta.png', alt: 'Universal Parks & Resorts · Preferred Travel Agency' },
-  { src: '/images/logos/white/livi-travel.png', alt: 'Team Livi Travel' },
 ];
 
 // Renderiza un texto con marcadores **negrita** resaltando los puntos importantes.

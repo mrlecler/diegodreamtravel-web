@@ -169,10 +169,6 @@ export default function LinkBio() {
         </div>
 
         <footer className="lb-footer">
-          <a href="https://livitravel.com/es/" target="_blank" rel="noopener noreferrer">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/Logo_LT.webp" alt="Livi Travel" />
-          </a>
           <p>diegodreamtravel.com</p>
           <EnlacesLegales soloEspanol />
         </footer>

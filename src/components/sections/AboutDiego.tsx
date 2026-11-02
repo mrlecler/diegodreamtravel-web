@@ -109,11 +109,12 @@ export default function AboutDiego() {
               {t.about.certsEyebrow}
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {/* Sellos centrados: mismo ancho que una columna de 3, sin hueco a la derecha */}
+          <div className="flex flex-col sm:flex-row sm:justify-center gap-3">
             {SEALS.map((s) => (
               <div
                 key={s.src}
-                className="flex items-center justify-center rounded-2xl py-7 px-6"
+                className="flex items-center justify-center rounded-2xl py-7 px-6 sm:w-[calc((100%-1.5rem)/3)]"
                 style={{ backgroundColor: '#0C1521' }}
               >
                 <img

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { EMAIL_OK } from '@/lib/email';
 import { CircleNotch, DownloadSimple, CheckCircle } from '@phosphor-icons/react/dist/ssr';
-import { getSgiUrl, GUIA_PDF_PATH } from '@/lib/sgi';
+import { GUIA_PDF_PATH } from '@/lib/sgi';
 import { eventoFormularioEnviado } from '@/lib/medicion';
 import AceptoPrivacidad from '@/components/AceptoPrivacidad';
 
@@ -59,14 +59,14 @@ export default function GuiaForm() {
     setErrorMsg('');
 
     try {
-      const res = await fetch(`${getSgiUrl()}/api/leads`, {
+      const res = await fetch('/api/consulta', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           nombre_apellido: nombre.trim(),
           whatsapp: whatsapp.trim(),
           email: email.trim() || null,
-          origen: 'guia-orlando',
+          origen: 'Guía de Orlando',
         }),
       });
 

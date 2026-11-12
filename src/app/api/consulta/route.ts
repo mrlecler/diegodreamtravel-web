@@ -86,7 +86,7 @@ async function avisarPorMail(d: Datos, esProd: boolean): Promise<boolean> {
 
 async function altaEnHub(d: Datos, ip: string | null): Promise<boolean> {
   const url = process.env.HUB_SOLICITUDES_URL;
-  const secreto = process.env.HUB_WEB_SECRETO;
+  const secreto = process.env.HUB_WEB_SECRETO?.trim();
   if (!url || !secreto) return false;
   try {
     const res = await fetch(url, {

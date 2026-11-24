@@ -69,14 +69,13 @@ export default function ContactForm() {
     // 1) /api/consulta (servidor de esta web): limita por visitante, avisa
     //    a info@ y da de alta la solicitud en el Hub.
     try {
-      const ctrl = new AbortController();
-      const corte = setTimeout(() => ctrl.abort(), 8000);
+      // Corte a los 8 s con AbortSignal.timeout() (Modern Web Guidance), sin AbortController + setTimeout.
       const res = await fetch('/api/consulta', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...form, origen: 'Contacto' }),
-        signal: ctrl.signal,
-      }).finally(() => clearTimeout(corte));
+        signal: AbortSignal.timeout(8000),
+      });
       if (res.ok) { eventoFormularioEnviado(); setStatus('success'); return; }
       // 4xx: el CRM contestó. 429 = esperar; 400/422 = corregir datos.
       if (res.status < 500) {

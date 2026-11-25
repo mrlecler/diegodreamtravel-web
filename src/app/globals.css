@@ -134,7 +134,7 @@ html, body {
 
 /* Nav link — glass pill, fucsia tint on hover */
 .d15-nav-link {
-  border-radius: 999px;
+  border-radius: 999px; corner-shape: round;
   padding: 9px 16px;
   border: 1px solid transparent;
   color: rgba(240,237,232,.82);
@@ -156,4 +156,19 @@ html, body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+}
+
+/* Esquinas squircle (G2, como Apple). corner-shape solo existe en Chrome y Edge 139 o más;
+   el resto de los navegadores sigue con border-radius normal. Círculos y píldoras quedan redondos:
+   en el CSS llevan "corner-shape: round" al lado (lo puso un script) y acá se cubren los estilos en línea. */
+@supports (corner-shape: squircle) {
+  :where(*, *::before, *::after) { corner-shape: squircle; }
+  :where(
+    input[type="radio"],
+    [style*="border-radius: 50%"],
+    [style*="border-radius:50%"],
+    [style*="border-radius: 999"],
+    [style*="border-radius:999"],
+    .rounded-full
+  ) { corner-shape: round; }
 }

@@ -118,7 +118,7 @@ export default function LinkBio() {
           opacity:0; animation:lbUp .5s cubic-bezier(.22,.88,.36,1) .95s forwards; }
         .lb-badge{ display:inline-flex; align-items:center; gap:6px; background:rgba(12,21,33,.55);
           backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid rgba(240,237,232,.10);
-          border-radius:999px; padding:6px 13px; font-size:11px; color:rgba(240,237,232,.68); font-weight:500; white-space:nowrap; }
+          border-radius:999px; corner-shape: round; padding:6px 13px; font-size:11px; color:rgba(240,237,232,.68); font-weight:500; white-space:nowrap; }
 
         .lb-footer{ margin-top:auto; text-align:center; padding-top:8px; opacity:0;
           animation:lbUp .5s cubic-bezier(.22,.88,.36,1) 1.05s forwards; }

@@ -52,11 +52,11 @@ export default function Services() {
         .cm-world .cm-eyebrow{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px;}
         .cm-world .cm-title{font-size:clamp(24px,2.6vw,34px);line-height:1;letter-spacing:.4px;color:#F0EDE8;}
         .cm-world .cm-tag{font-size:13.5px;line-height:1.6;color:rgba(240,237,232,.82);margin-top:12px;max-width:30ch;}
-        .cm-cta{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:11px 16px;border-radius:999px;font-weight:600;font-size:12px;color:#F0EDE8;background:rgba(240,237,232,.13);border:1px solid rgba(240,237,232,.28);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-self:flex-start;transition:background .25s ease,gap .25s ease;}
+        .cm-cta{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:11px 16px;border-radius:999px; corner-shape: round;font-weight:600;font-size:12px;color:#F0EDE8;background:rgba(240,237,232,.13);border:1px solid rgba(240,237,232,.28);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-self:flex-start;transition:background .25s ease,gap .25s ease;}
         .cm-cta-d15{background:linear-gradient(90deg,#F47B45,#E63957 40%,#C44E92);border:0;font-weight:700;box-shadow:0 10px 26px -10px rgba(196,78,146,.6);}
         .cm-world-locked{cursor:default;}
         .cm-cta-soon{background:rgba(240,237,232,.13);border:1px solid rgba(240,237,232,.30);color:#F0EDE8;cursor:default;}
-        .cm-soon{position:absolute;top:16px;right:16px;z-index:3;font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#fff;padding:6px 12px;border-radius:999px;background:linear-gradient(90deg,#F47B45,#E63957 40%,#C44E92);box-shadow:0 10px 24px -8px rgba(196,78,146,.85);}
+        .cm-soon{position:absolute;top:16px;right:16px;z-index:3;font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#fff;padding:6px 12px;border-radius:999px; corner-shape: round;background:linear-gradient(90deg,#F47B45,#E63957 40%,#C44E92);box-shadow:0 10px 24px -8px rgba(196,78,146,.85);}
         @media (hover:hover) and (min-width:861px){
           .cm-worlds:hover .cm-world{flex:.84;filter:brightness(.7) saturate(.55);}
           .cm-worlds:hover .cm-world:hover{flex:1.95;filter:none;}

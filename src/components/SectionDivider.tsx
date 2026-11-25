@@ -17,7 +17,7 @@ export default function SectionDivider({ className = '' }: { className?: string 
         .ddt-div-plane { position:absolute; top:50%; transform:translate(-50%,-50%);
           animation:ddtFly 60s linear infinite; }
         .ddt-div-plane .glow { position:absolute; top:50%; left:50%; width:62px; height:62px;
-          transform:translate(-50%,-50%); border-radius:50%;
+          transform:translate(-50%,-50%); border-radius:50%; corner-shape: round;
           background:radial-gradient(circle, rgba(255,91,0,.22), transparent 68%); }
         .ddt-div-plane .trail { position:absolute; top:50%; right:52%; transform:translateY(-50%);
           width:62px; height:3px; border-radius:3px;

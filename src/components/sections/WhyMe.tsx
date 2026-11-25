@@ -36,7 +36,7 @@ export default function WhyMe() {
 
         /* Stage + blooms de color (suaves, sobre claro) */
         .ddt-stage { position:relative; display:flex; align-items:center; justify-content:center; width:100%; min-height:560px; }
-        .ddt-bloom { position:absolute; border-radius:50%; pointer-events:none; z-index:0; filter:blur(60px); animation:ddtBloom 6s ease-in-out infinite; }
+        .ddt-bloom { position:absolute; border-radius:50%; corner-shape: round; pointer-events:none; z-index:0; filter:blur(60px); animation:ddtBloom 6s ease-in-out infinite; }
         .ddt-bFu { width:58%; height:46%; top:8%;  left:18%; background:radial-gradient(circle, rgba(196,78,146,.20), transparent 66%); }
         .ddt-bTe { width:56%; height:44%; top:50%; left:34%; background:radial-gradient(circle, rgba(66,194,194,.20), transparent 66%); animation-delay:1.4s; }
         .ddt-bOr { width:40%; height:34%; top:42%; left:8%;  background:radial-gradient(circle, rgba(244,123,69,.16), transparent 66%); animation-delay:.7s; }
@@ -47,7 +47,7 @@ export default function WhyMe() {
         .ddt-phone-img { width:460px; max-width:100%; height:auto; display:block; }
         /* Sombra de contacto suave en el piso: elíptica, no traza el rectángulo del teléfono */
         .ddt-phone-shadow { position:absolute; z-index:1; left:50%; bottom:6%; transform:translateX(-50%);
-          width:60%; height:42px; border-radius:50%; pointer-events:none;
+          width:60%; height:42px; border-radius:50%; corner-shape: round; pointer-events:none;
           background:radial-gradient(ellipse at center, rgba(20,16,30,.26), transparent 70%); filter:blur(16px); }
 
         @media (max-width:1024px){ .ddt-phone-img{ width:400px; } }
